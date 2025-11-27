@@ -1,0 +1,33 @@
+{
+  "test": "discrete_phase_4_levels",
+  "results": [
+    {
+      "seed": 42,
+      "pson": 0.7490716341871694,
+      "random_search": 0.4943735331874691,
+      "simulated_annealing": 0.7077340824482058,
+      "winner": "PSON"
+    },
+    {
+      "seed": 123,
+      "pson": 0.689709606365643,
+      "random_search": 0.4787679589329255,
+      "simulated_annealing": 0.6474345561266821,
+      "winner": "PSON"
+    },
+    {
+      "seed": 456,
+      "pson": 0.6293269119929592,
+      "random_search": 0.4975052599838714,
+      "simulated_annealing": 0.6291746194758352,
+      "winner": "PSON"
+    }
+  ],
+  "summary": {
+    "pson_mean": 0.6893693841819238,
+    "random_search_mean": 0.49021558403475535,
+    "simulated_annealing_mean": 0.6614477526835744,
+    "pson_wins": 3,
+    "total": 3
+  }
+}

@@ -1,0 +1,738 @@
+[
+  {
+    "config": "16-elem, 5-bit, 0deg, SNR=15dB",
+    "runs": [
+      {
+        "seed": 42,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 96.92434807632613,
+            "convergence_iter": 113,
+            "updates_per_iter": 16,
+            "main_gain_db": 21.178189719039693,
+            "null_depth_db": 7.0158538168246345,
+            "sidelobe_db": 16.22247899570086
+          },
+          "Sequential-LMS": {
+            "final_mse": 151.63645572062887,
+            "convergence_iter": 42,
+            "updates_per_iter": 1,
+            "main_gain_db": 22.702454501983734,
+            "null_depth_db": 10.872538591837586,
+            "sidelobe_db": 12.493854934413783
+          },
+          "M-max-LMS": {
+            "final_mse": 32.8381014421657,
+            "convergence_iter": 90,
+            "updates_per_iter": 4,
+            "main_gain_db": 16.819741422405155,
+            "null_depth_db": 8.943814772140357,
+            "sidelobe_db": 17.050284022031587
+          },
+          "Periodic-LMS": {
+            "final_mse": 85.91336228438294,
+            "convergence_iter": 139,
+            "updates_per_iter": 6,
+            "main_gain_db": 20.82483081068254,
+            "null_depth_db": 4.012949196450109,
+            "sidelobe_db": 15.221070752615953
+          },
+          "Stochastic-LMS": {
+            "final_mse": 43.328045335092646,
+            "convergence_iter": 289,
+            "updates_per_iter": 4,
+            "main_gain_db": 17.692392255149798,
+            "null_depth_db": 12.345156864900957,
+            "sidelobe_db": 16.69617710223815
+          },
+          "PSON": {
+            "final_mse": 0.60820947473062,
+            "convergence_iter": 221,
+            "updates_per_iter": 3,
+            "main_gain_db": 0.015737630700883944,
+            "null_depth_db": 1.6869617938180235,
+            "sidelobe_db": 19.554347391621324
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Sequential-LMS",
+          "null": "PSON"
+        }
+      },
+      {
+        "seed": 123,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 129.89624538312458,
+            "convergence_iter": 86,
+            "updates_per_iter": 16,
+            "main_gain_db": 21.776184180003696,
+            "null_depth_db": 7.760744610166214,
+            "sidelobe_db": 14.55956081323075
+          },
+          "Sequential-LMS": {
+            "final_mse": 152.24697655774807,
+            "convergence_iter": 90,
+            "updates_per_iter": 1,
+            "main_gain_db": 22.498394088229293,
+            "null_depth_db": 8.577570213110363,
+            "sidelobe_db": 13.951291658186493
+          },
+          "M-max-LMS": {
+            "final_mse": 28.1260662980915,
+            "convergence_iter": 210,
+            "updates_per_iter": 4,
+            "main_gain_db": 13.597182052350188,
+            "null_depth_db": 13.749484046403273,
+            "sidelobe_db": 16.68253398871617
+          },
+          "Periodic-LMS": {
+            "final_mse": 55.17207060018873,
+            "convergence_iter": 213,
+            "updates_per_iter": 6,
+            "main_gain_db": 18.586773298316764,
+            "null_depth_db": 5.022756402531217,
+            "sidelobe_db": 20.344233072171498
+          },
+          "Stochastic-LMS": {
+            "final_mse": 25.168737056795017,
+            "convergence_iter": 284,
+            "updates_per_iter": 4,
+            "main_gain_db": 15.705989257032327,
+            "null_depth_db": 12.845502776179671,
+            "sidelobe_db": 17.587455684490067
+          },
+          "PSON": {
+            "final_mse": 0.5125186568360215,
+            "convergence_iter": 262,
+            "updates_per_iter": 3,
+            "main_gain_db": 0.22797118351409187,
+            "null_depth_db": -12.216098940342047,
+            "sidelobe_db": 18.63365103578355
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Sequential-LMS",
+          "null": "PSON"
+        }
+      },
+      {
+        "seed": 456,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 152.83161122529643,
+            "convergence_iter": 30,
+            "updates_per_iter": 16,
+            "main_gain_db": 22.26439499082487,
+            "null_depth_db": -0.8348213385762326,
+            "sidelobe_db": 13.937745052668957
+          },
+          "Sequential-LMS": {
+            "final_mse": 125.14123566277296,
+            "convergence_iter": 242,
+            "updates_per_iter": 1,
+            "main_gain_db": 20.934335367274315,
+            "null_depth_db": 11.002019125156943,
+            "sidelobe_db": 18.736008832187625
+          },
+          "M-max-LMS": {
+            "final_mse": 31.28579180612122,
+            "convergence_iter": 181,
+            "updates_per_iter": 4,
+            "main_gain_db": 14.409002408314308,
+            "null_depth_db": 5.72656293551313,
+            "sidelobe_db": 15.581706611093063
+          },
+          "Periodic-LMS": {
+            "final_mse": 89.96839740418612,
+            "convergence_iter": 108,
+            "updates_per_iter": 6,
+            "main_gain_db": 19.00203340366051,
+            "null_depth_db": 12.424739476222847,
+            "sidelobe_db": 16.329414040432976
+          },
+          "Stochastic-LMS": {
+            "final_mse": 56.82895275195629,
+            "convergence_iter": 118,
+            "updates_per_iter": 4,
+            "main_gain_db": 18.647186476096852,
+            "null_depth_db": 9.117057416478943,
+            "sidelobe_db": 16.5128484681864
+          },
+          "PSON": {
+            "final_mse": 0.515810855875184,
+            "convergence_iter": 240,
+            "updates_per_iter": 3,
+            "main_gain_db": 0.9948573727959857,
+            "null_depth_db": -11.144148870215034,
+            "sidelobe_db": 18.212326369775703
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Full-LMS",
+          "null": "PSON"
+        }
+      }
+    ],
+    "summary": {
+      "pson_mse_wins": 3,
+      "pson_gain_wins": 0,
+      "total_runs": 3
+    }
+  },
+  {
+    "config": "16-elem, 4-bit, 30deg, SNR=10dB",
+    "runs": [
+      {
+        "seed": 42,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 2.7180266846986196,
+            "convergence_iter": 300,
+            "updates_per_iter": 16,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Sequential-LMS": {
+            "final_mse": 2.7180266846986196,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "M-max-LMS": {
+            "final_mse": 2.7180266846986196,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Periodic-LMS": {
+            "final_mse": 2.7180266846986196,
+            "convergence_iter": 300,
+            "updates_per_iter": 6,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Stochastic-LMS": {
+            "final_mse": 2.7180266846986196,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "PSON": {
+            "final_mse": 1.5688121733338134,
+            "convergence_iter": 144,
+            "updates_per_iter": 3,
+            "main_gain_db": 21.882339778916947,
+            "null_depth_db": 9.807575046262457,
+            "sidelobe_db": 14.658590356958596
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "PSON",
+          "null": "Full-LMS"
+        }
+      },
+      {
+        "seed": 123,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 2.934683001307387,
+            "convergence_iter": 300,
+            "updates_per_iter": 16,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Sequential-LMS": {
+            "final_mse": 2.934683001307387,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "M-max-LMS": {
+            "final_mse": 2.934683001307387,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Periodic-LMS": {
+            "final_mse": 2.934683001307387,
+            "convergence_iter": 300,
+            "updates_per_iter": 6,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Stochastic-LMS": {
+            "final_mse": 2.934683001307387,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "PSON": {
+            "final_mse": 1.7391312180556158,
+            "convergence_iter": 45,
+            "updates_per_iter": 3,
+            "main_gain_db": 22.191314373018987,
+            "null_depth_db": 11.10163052886342,
+            "sidelobe_db": 14.211232434899056
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "PSON",
+          "null": "Full-LMS"
+        }
+      },
+      {
+        "seed": 456,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 2.759001486579202,
+            "convergence_iter": 300,
+            "updates_per_iter": 16,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Sequential-LMS": {
+            "final_mse": 2.759001486579202,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "M-max-LMS": {
+            "final_mse": 2.759001486579202,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Periodic-LMS": {
+            "final_mse": 2.759001486579202,
+            "convergence_iter": 300,
+            "updates_per_iter": 6,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "Stochastic-LMS": {
+            "final_mse": 2.759001486579202,
+            "convergence_iter": 300,
+            "updates_per_iter": 4,
+            "main_gain_db": -100.0,
+            "null_depth_db": 1.5116429496973338,
+            "sidelobe_db": 24.08239965312019
+          },
+          "PSON": {
+            "final_mse": 1.6967607868811685,
+            "convergence_iter": 36,
+            "updates_per_iter": 3,
+            "main_gain_db": 23.032581252825292,
+            "null_depth_db": 3.646303821382778,
+            "sidelobe_db": 13.95298176857398
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "PSON",
+          "null": "Full-LMS"
+        }
+      }
+    ],
+    "summary": {
+      "pson_mse_wins": 3,
+      "pson_gain_wins": 3,
+      "total_runs": 3
+    }
+  },
+  {
+    "config": "32-elem, 5-bit, 0deg, SNR=15dB",
+    "runs": [
+      {
+        "seed": 42,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 339.0735330663139,
+            "convergence_iter": 83,
+            "updates_per_iter": 32,
+            "main_gain_db": 26.664407123422777,
+            "null_depth_db": 11.394333946965503,
+            "sidelobe_db": 18.62301888285989
+          },
+          "Sequential-LMS": {
+            "final_mse": 480.0911602241183,
+            "convergence_iter": 262,
+            "updates_per_iter": 1,
+            "main_gain_db": 27.91105703745911,
+            "null_depth_db": 11.026841436704116,
+            "sidelobe_db": 17.467411294724116
+          },
+          "M-max-LMS": {
+            "final_mse": 92.52527697321926,
+            "convergence_iter": 87,
+            "updates_per_iter": 9,
+            "main_gain_db": 21.32027394866947,
+            "null_depth_db": 15.38939202325473,
+            "sidelobe_db": 22.142982262210516
+          },
+          "Periodic-LMS": {
+            "final_mse": 98.232466106235,
+            "convergence_iter": 257,
+            "updates_per_iter": 11,
+            "main_gain_db": 21.054037473232036,
+            "null_depth_db": 4.746791429604239,
+            "sidelobe_db": 23.72790994112964
+          },
+          "Stochastic-LMS": {
+            "final_mse": 112.5162604289821,
+            "convergence_iter": 139,
+            "updates_per_iter": 9,
+            "main_gain_db": 21.243068943702657,
+            "null_depth_db": 11.997063082744452,
+            "sidelobe_db": 20.56678483955835
+          },
+          "PSON": {
+            "final_mse": 1.1062419832806143,
+            "convergence_iter": 280,
+            "updates_per_iter": 6,
+            "main_gain_db": 2.2829406463101343,
+            "null_depth_db": 3.5461788236498153,
+            "sidelobe_db": 20.3879860505246
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Sequential-LMS",
+          "null": "PSON"
+        }
+      },
+      {
+        "seed": 123,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 300.56667801085797,
+            "convergence_iter": 77,
+            "updates_per_iter": 32,
+            "main_gain_db": 25.857111112424263,
+            "null_depth_db": 7.016353922081096,
+            "sidelobe_db": 20.070047667031577
+          },
+          "Sequential-LMS": {
+            "final_mse": 445.5859067010107,
+            "convergence_iter": 237,
+            "updates_per_iter": 1,
+            "main_gain_db": 27.102390821000885,
+            "null_depth_db": 18.399992595251295,
+            "sidelobe_db": 20.20373569387205
+          },
+          "M-max-LMS": {
+            "final_mse": 106.24629239016458,
+            "convergence_iter": 86,
+            "updates_per_iter": 9,
+            "main_gain_db": 21.148684582768098,
+            "null_depth_db": 11.445011979450134,
+            "sidelobe_db": 22.656821446452575
+          },
+          "Periodic-LMS": {
+            "final_mse": 96.16949409918585,
+            "convergence_iter": 228,
+            "updates_per_iter": 11,
+            "main_gain_db": 20.923368935184506,
+            "null_depth_db": 4.075207625464916,
+            "sidelobe_db": 23.9812223748497
+          },
+          "Stochastic-LMS": {
+            "final_mse": 53.16869737141597,
+            "convergence_iter": 184,
+            "updates_per_iter": 9,
+            "main_gain_db": 17.62601845915975,
+            "null_depth_db": 11.506198583753177,
+            "sidelobe_db": 22.302695405498746
+          },
+          "PSON": {
+            "final_mse": 1.312336832512615,
+            "convergence_iter": 274,
+            "updates_per_iter": 6,
+            "main_gain_db": 0.7488746329731416,
+            "null_depth_db": 4.997626885668765,
+            "sidelobe_db": 20.752324403803684
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Sequential-LMS",
+          "null": "Periodic-LMS"
+        }
+      },
+      {
+        "seed": 456,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 375.97031348381677,
+            "convergence_iter": 75,
+            "updates_per_iter": 32,
+            "main_gain_db": 25.870026746150856,
+            "null_depth_db": 13.794176219535386,
+            "sidelobe_db": 19.320752652412345
+          },
+          "Sequential-LMS": {
+            "final_mse": 394.6561996789717,
+            "convergence_iter": 242,
+            "updates_per_iter": 1,
+            "main_gain_db": 25.952438576369403,
+            "null_depth_db": 20.108071193295547,
+            "sidelobe_db": 21.833508316871352
+          },
+          "M-max-LMS": {
+            "final_mse": 67.88951857664985,
+            "convergence_iter": 117,
+            "updates_per_iter": 9,
+            "main_gain_db": 17.19047936858089,
+            "null_depth_db": 17.215074742641836,
+            "sidelobe_db": 23.14192805291932
+          },
+          "Periodic-LMS": {
+            "final_mse": 196.35088299776768,
+            "convergence_iter": 102,
+            "updates_per_iter": 11,
+            "main_gain_db": 23.21646304136764,
+            "null_depth_db": 20.082948455486736,
+            "sidelobe_db": 21.094533184879136
+          },
+          "Stochastic-LMS": {
+            "final_mse": 68.16449058495223,
+            "convergence_iter": 236,
+            "updates_per_iter": 9,
+            "main_gain_db": 19.359115115399764,
+            "null_depth_db": 9.75961174514339,
+            "sidelobe_db": 21.966014151350734
+          },
+          "PSON": {
+            "final_mse": 1.0988839255989138,
+            "convergence_iter": 233,
+            "updates_per_iter": 6,
+            "main_gain_db": 1.2895167445615139,
+            "null_depth_db": 1.1559065578933199,
+            "sidelobe_db": 20.930575790629426
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Sequential-LMS",
+          "null": "PSON"
+        }
+      }
+    ],
+    "summary": {
+      "pson_mse_wins": 3,
+      "pson_gain_wins": 0,
+      "total_runs": 3
+    }
+  },
+  {
+    "config": "32-elem, 6-bit, 45deg, SNR=20dB",
+    "runs": [
+      {
+        "seed": 42,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 26.765852688516784,
+            "convergence_iter": 300,
+            "updates_per_iter": 32,
+            "main_gain_db": 27.256597182789196,
+            "null_depth_db": 16.310105881381784,
+            "sidelobe_db": 18.600314709520582
+          },
+          "Sequential-LMS": {
+            "final_mse": 11.40443073660747,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": 2.101301968994597,
+            "null_depth_db": 13.079245695417383,
+            "sidelobe_db": 30.08796475334645
+          },
+          "M-max-LMS": {
+            "final_mse": 16.77222144002434,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": 7.8675978884971665,
+            "null_depth_db": 18.528017353004813,
+            "sidelobe_db": 29.470735043300635
+          },
+          "Periodic-LMS": {
+            "final_mse": 11.44874301946063,
+            "convergence_iter": 300,
+            "updates_per_iter": 11,
+            "main_gain_db": -6.571941482612804,
+            "null_depth_db": 17.521763583675977,
+            "sidelobe_db": 30.048219823449358
+          },
+          "Stochastic-LMS": {
+            "final_mse": 11.435739959674395,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": 5.348173483716227,
+            "null_depth_db": 14.949940193171265,
+            "sidelobe_db": 29.9524948716249
+          },
+          "PSON": {
+            "final_mse": 4.2005788622206275,
+            "convergence_iter": 265,
+            "updates_per_iter": 6,
+            "main_gain_db": 25.92993944805454,
+            "null_depth_db": 9.167168530710446,
+            "sidelobe_db": 18.47565027443987
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Full-LMS",
+          "null": "PSON"
+        }
+      },
+      {
+        "seed": 123,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 23.90832119130213,
+            "convergence_iter": 300,
+            "updates_per_iter": 32,
+            "main_gain_db": 25.524893564697972,
+            "null_depth_db": 19.150534177903168,
+            "sidelobe_db": 23.432693877836563
+          },
+          "Sequential-LMS": {
+            "final_mse": 13.33241572681971,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": -2.497416965793808,
+            "null_depth_db": 16.66598576158939,
+            "sidelobe_db": 30.083551373302374
+          },
+          "M-max-LMS": {
+            "final_mse": 28.615023308430064,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": 17.00136067890022,
+            "null_depth_db": 21.058482322068738,
+            "sidelobe_db": 27.376726522005704
+          },
+          "Periodic-LMS": {
+            "final_mse": 16.063576286764157,
+            "convergence_iter": 300,
+            "updates_per_iter": 11,
+            "main_gain_db": 8.804199559775153,
+            "null_depth_db": 17.45040959072679,
+            "sidelobe_db": 29.96043751637118
+          },
+          "Stochastic-LMS": {
+            "final_mse": 12.647261926146102,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": -4.830957053597413,
+            "null_depth_db": 16.812709485962948,
+            "sidelobe_db": 29.960621244545802
+          },
+          "PSON": {
+            "final_mse": 4.354178090563599,
+            "convergence_iter": 268,
+            "updates_per_iter": 6,
+            "main_gain_db": 26.111524795827844,
+            "null_depth_db": 2.922351527654708,
+            "sidelobe_db": 18.867830497247514
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "PSON",
+          "null": "PSON"
+        }
+      },
+      {
+        "seed": 456,
+        "results": {
+          "Full-LMS": {
+            "final_mse": 26.332086949064283,
+            "convergence_iter": 300,
+            "updates_per_iter": 32,
+            "main_gain_db": 27.247591873525835,
+            "null_depth_db": 15.344115976014,
+            "sidelobe_db": 18.497063948925977
+          },
+          "Sequential-LMS": {
+            "final_mse": 12.009478759177496,
+            "convergence_iter": 300,
+            "updates_per_iter": 1,
+            "main_gain_db": 3.093503321354264,
+            "null_depth_db": 11.451379783601713,
+            "sidelobe_db": 30.082772166945055
+          },
+          "M-max-LMS": {
+            "final_mse": 34.64740645043605,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": 18.754261672921302,
+            "null_depth_db": 21.046314065522395,
+            "sidelobe_db": 25.852671906313383
+          },
+          "Periodic-LMS": {
+            "final_mse": 14.650576925393167,
+            "convergence_iter": 300,
+            "updates_per_iter": 11,
+            "main_gain_db": 8.354822858559189,
+            "null_depth_db": 13.802732540977136,
+            "sidelobe_db": 29.993083851293004
+          },
+          "Stochastic-LMS": {
+            "final_mse": 11.199286502865661,
+            "convergence_iter": 300,
+            "updates_per_iter": 9,
+            "main_gain_db": 0.9364671528183313,
+            "null_depth_db": 14.181722212638526,
+            "sidelobe_db": 29.966937402050277
+          },
+          "PSON": {
+            "final_mse": 3.8253289947560627,
+            "convergence_iter": 274,
+            "updates_per_iter": 6,
+            "main_gain_db": 25.133473170943248,
+            "null_depth_db": 0.36551310392588765,
+            "sidelobe_db": 20.64481152395512
+          }
+        },
+        "winners": {
+          "mse": "PSON",
+          "gain": "Full-LMS",
+          "null": "PSON"
+        }
+      }
+    ],
+    "summary": {
+      "pson_mse_wins": 3,
+      "pson_gain_wins": 1,
+      "total_runs": 3
+    }
+  }
+]

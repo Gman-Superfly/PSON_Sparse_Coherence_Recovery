@@ -1,0 +1,152 @@
+{
+  "moving_target": {
+    "problem_name": "Moving Target",
+    "problem_description": "Minimum shifts during optimization (online learning)",
+    "results": {
+      "Baseline": {
+        "mean_energy": 0.9921826275472769,
+        "std_energy": 0.007333673588961647,
+        "mean_steps_90": 120.0,
+        "energies": [
+          0.9912805790385105,
+          1.0023445264896809,
+          0.9813975375578864,
+          0.9880793139106429,
+          0.997811180739664
+        ]
+      },
+      "PSON+Momentum": {
+        "mean_energy": 0.016525301251436898,
+        "std_energy": 8.648811268893546e-13,
+        "mean_steps_90": 29.6,
+        "energies": [
+          0.0165253012507412,
+          0.016525301253014903,
+          0.016525301250703815,
+          0.01652530125103255,
+          0.016525301251692034
+        ]
+      }
+    }
+  },
+  "variable_curvature": {
+    "problem_name": "Variable Curvature",
+    "problem_description": "1000x curvature variation across dimensions",
+    "results": {
+      "Baseline": {
+        "mean_energy": 3.7995653651934234,
+        "std_energy": 2.8480721423173305,
+        "mean_steps_90": 87.2,
+        "energies": [
+          2.8829933783267725,
+          2.4351942449600052,
+          0.44990664428395244,
+          4.29280794024249,
+          8.936924618153894
+        ]
+      },
+      "PSON+Momentum": {
+        "mean_energy": 0.55805859544802,
+        "std_energy": 0.1213564741304532,
+        "mean_steps_90": 65.8,
+        "energies": [
+          0.5742448225830037,
+          0.6454820820961771,
+          0.5661073089430257,
+          0.3298438761533786,
+          0.6746148874645146
+        ]
+      }
+    }
+  },
+  "sequential_chain": {
+    "problem_name": "Sequential Chain",
+    "problem_description": "x[i] depends on x[i-1] (deep network analogy)",
+    "results": {
+      "Baseline": {
+        "mean_energy": 0.24773808541344744,
+        "std_energy": 0.06473840684846324,
+        "mean_steps_90": 54.4,
+        "energies": [
+          0.1492237701519494,
+          0.2460220566937428,
+          0.2775808603777055,
+          0.3456992794062699,
+          0.22016446043756976
+        ]
+      },
+      "PSON+Momentum": {
+        "mean_energy": 0.028173780112906492,
+        "std_energy": 0.010119133025515792,
+        "mean_steps_90": 22.0,
+        "energies": [
+          0.026230032759734432,
+          0.02241160745986233,
+          0.013381005503732928,
+          0.04066443079767601,
+          0.03818182404352676
+        ]
+      }
+    }
+  },
+  "flat_regions": {
+    "problem_name": "Flat Regions",
+    "problem_description": "Plateau with distant minimum (saddle point analogy)",
+    "results": {
+      "Baseline": {
+        "mean_energy": 5.463151211444119,
+        "std_energy": 0.5127207265020474,
+        "mean_steps_90": 410.2,
+        "energies": [
+          5.000753267487312,
+          5.00002175179723,
+          6.18697728513423,
+          5.977430264249121,
+          5.150573488552704
+        ]
+      },
+      "PSON+Momentum": {
+        "mean_energy": 5.022052074124348,
+        "std_energy": 0.007490760917214432,
+        "mean_steps_90": 61.4,
+        "energies": [
+          5.021595149927733,
+          5.029740466755547,
+          5.007988678952277,
+          5.025713638167323,
+          5.0252224368188605
+        ]
+      }
+    }
+  },
+  "quadratic_basin": {
+    "problem_name": "Quadratic Basin",
+    "problem_description": "Well-conditioned quadratic (final training stage)",
+    "results": {
+      "Baseline": {
+        "mean_energy": 2.1768498487077638e-05,
+        "std_energy": 1.7874187850021642e-05,
+        "mean_steps_90": 33.2,
+        "energies": [
+          3.879194477954072e-06,
+          4.1850717032059223e-05,
+          4.302074217704264e-05,
+          1.8637039001300397e-05,
+          1.4547997470318445e-06
+        ]
+      },
+      "PSON+Momentum": {
+        "mean_energy": 5.914171336422773e-22,
+        "std_energy": 2.7504649738346817e-22,
+        "mean_steps_90": 16.8,
+        "energies": [
+          3.597560679383317e-22,
+          4.573974543428158e-22,
+          3.9748509051167184e-22,
+          1.1083225377637119e-21,
+          6.341245176548555e-22
+        ]
+      }
+    }
+  }
+}

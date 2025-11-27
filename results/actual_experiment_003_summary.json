@@ -1,0 +1,17 @@
+{
+  "best": {
+    "zeta_gain": 0.3,
+    "lr": 0.1,
+    "noise": 0.03,
+    "baseline_V": 0.40290248473221896,
+    "final_V_no_pson": 0.40655494991191365,
+    "final_V_pson": 0.5936361419074588,
+    "deltaF90_no_pson": 0,
+    "deltaF90_pson": 182,
+    "accept_rate_no_pson": 0.0,
+    "accept_rate_pson": 0.2987012987012987
+  },
+  "grid_size": 27,
+  "note": "Score = final_V_pson - 0.2 * (\u0394F90_pson/steps); higher is better",
+  "mpmath": true
+}

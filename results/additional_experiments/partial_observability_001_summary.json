@@ -1,0 +1,149 @@
+{
+  "summary": {
+    "Clean": {
+      "pson_mean": 0.5371269706253881,
+      "pson_std": 0.017102306024935683,
+      "cma_mean": 0.9461681672761824,
+      "cma_std": 0.02136033925989019,
+      "pson_advantage": -0.4090411966507943,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.0,
+      "quantize_levels": 0,
+      "stale_period": 1
+    },
+    "Noise-Low": {
+      "pson_mean": 0.420237209950671,
+      "pson_std": 0.016628415088514214,
+      "cma_mean": 0.9359646452741395,
+      "cma_std": 0.020753143043780002,
+      "pson_advantage": -0.5157274353234684,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.01,
+      "quantize_levels": 0,
+      "stale_period": 1
+    },
+    "Noise-Med": {
+      "pson_mean": 0.403214386779981,
+      "pson_std": 0.010279201131707149,
+      "cma_mean": 0.8298321084848232,
+      "cma_std": 0.02391982199282158,
+      "pson_advantage": -0.42661772170484225,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.05,
+      "quantize_levels": 0,
+      "stale_period": 1
+    },
+    "Noise-High": {
+      "pson_mean": 0.39450341677089484,
+      "pson_std": 0.008261371740932904,
+      "cma_mean": 0.6356376538072448,
+      "cma_std": 0.06273722943074155,
+      "pson_advantage": -0.24113423703634995,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.1,
+      "quantize_levels": 0,
+      "stale_period": 1
+    },
+    "Quant-10": {
+      "pson_mean": 0.42268206370908035,
+      "pson_std": 0.01932026717776484,
+      "cma_mean": 0.7280409420049854,
+      "cma_std": 0.1319348617220996,
+      "pson_advantage": -0.305358878295905,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.0,
+      "quantize_levels": 10,
+      "stale_period": 1
+    },
+    "Quant-5": {
+      "pson_mean": 0.411193321548814,
+      "pson_std": 0.011228250714839745,
+      "cma_mean": 0.43522490239974465,
+      "cma_std": 0.013144765717606503,
+      "pson_advantage": -0.024031580850930656,
+      "pson_win_rate": 0.2,
+      "noise_std": 0.0,
+      "quantize_levels": 5,
+      "stale_period": 1
+    },
+    "Quant-3": {
+      "pson_mean": 0.4107547402062077,
+      "pson_std": 0.011063642936448414,
+      "cma_mean": 0.43522490239974465,
+      "cma_std": 0.013144765717606503,
+      "pson_advantage": -0.024470162193536926,
+      "pson_win_rate": 0.2,
+      "noise_std": 0.0,
+      "quantize_levels": 3,
+      "stale_period": 1
+    },
+    "Stale-2": {
+      "pson_mean": 0.4728772763361384,
+      "pson_std": 0.012086901056287973,
+      "cma_mean": 0.5920967861539845,
+      "cma_std": 0.0365646842832978,
+      "pson_advantage": -0.11921950981784613,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.0,
+      "quantize_levels": 0,
+      "stale_period": 2
+    },
+    "Stale-5": {
+      "pson_mean": 0.43831586179397164,
+      "pson_std": 0.011181217213532518,
+      "cma_mean": 0.5334687434926593,
+      "cma_std": 0.04662218477301729,
+      "pson_advantage": -0.09515288169868763,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.0,
+      "quantize_levels": 0,
+      "stale_period": 5
+    },
+    "Stale-10": {
+      "pson_mean": 0.42585883036004135,
+      "pson_std": 0.01022695851651973,
+      "cma_mean": 0.4893863786061595,
+      "cma_std": 0.0243150168341307,
+      "pson_advantage": -0.06352754824611817,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.0,
+      "quantize_levels": 0,
+      "stale_period": 10
+    },
+    "Combined-Mild": {
+      "pson_mean": 0.40356160240718325,
+      "pson_std": 0.014886513964332675,
+      "cma_mean": 0.5803263562607495,
+      "cma_std": 0.0907478192126924,
+      "pson_advantage": -0.17676475385356621,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.02,
+      "quantize_levels": 10,
+      "stale_period": 2
+    },
+    "Combined-Severe": {
+      "pson_mean": 0.3990522727531897,
+      "pson_std": 0.014463023527442123,
+      "cma_mean": 0.43522490239974465,
+      "cma_std": 0.013144765717606503,
+      "pson_advantage": -0.03617262964655493,
+      "pson_win_rate": 0.0,
+      "noise_std": 0.05,
+      "quantize_levels": 5,
+      "stale_period": 5
+    }
+  },
+  "params": {
+    "steps": 200,
+    "w": 0.2,
+    "lr": 0.1,
+    "noise": 0.02,
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1000
+    ]
+  }
+}

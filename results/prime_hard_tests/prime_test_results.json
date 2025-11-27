@@ -1,0 +1,107 @@
+{
+  "Uniform Dense": {
+    "results": {
+      "Prime": {
+        "mean_mse": 0.0006867911474255697,
+        "std_mse": 4.445677853267092e-05,
+        "mean_improvement": 56.60067556831708,
+        "irregularity": 0.4639551441794233
+      },
+      "Uniform": {
+        "mean_mse": 0.00011268949092047528,
+        "std_mse": 0.0,
+        "mean_improvement": 0.0,
+        "irregularity": 0.33334401298645827
+      },
+      "Random": {
+        "mean_mse": 0.0019455153331787436,
+        "std_mse": 0.00011586799124203963,
+        "mean_improvement": 54.56637297059489,
+        "irregularity": 0.19068615859322222
+      },
+      "Fibonacci": {
+        "mean_mse": 0.00838458849135935,
+        "std_mse": 7.144621780019573e-05,
+        "mean_improvement": 25.482751926246937,
+        "irregularity": 4.901768298672154
+      },
+      "Logarithmic": {
+        "mean_mse": 0.00469355846934057,
+        "std_mse": 0.0003062146007981867,
+        "mean_improvement": 61.41859850916911,
+        "irregularity": 1.1032960224615567
+      }
+    },
+    "best": "Uniform"
+  },
+  "Random Dense": {
+    "results": {
+      "Prime": {
+        "mean_mse": 0.0010150597940422506,
+        "std_mse": 4.1922042924587695e-05,
+        "mean_improvement": 53.46054005898183,
+        "irregularity": 0.4639551441794233
+      },
+      "Uniform": {
+        "mean_mse": 0.000868240346803438,
+        "std_mse": 0.0,
+        "mean_improvement": 0.0,
+        "irregularity": 0.33334401298645827
+      },
+      "Random": {
+        "mean_mse": 0.0021411127073865457,
+        "std_mse": 0.00015231823774317232,
+        "mean_improvement": 52.29406386201743,
+        "irregularity": 0.19068615859322222
+      },
+      "Fibonacci": {
+        "mean_mse": 0.008798126714705586,
+        "std_mse": 0.00011527224471606095,
+        "mean_improvement": 27.407404180805333,
+        "irregularity": 4.901768298672154
+      },
+      "Logarithmic": {
+        "mean_mse": 0.005628956469947644,
+        "std_mse": 0.00046903116070370947,
+        "mean_improvement": 59.459032326619244,
+        "irregularity": 1.1032960224615567
+      }
+    },
+    "best": "Uniform"
+  },
+  "Prime Dense": {
+    "results": {
+      "Prime": {
+        "mean_mse": 0.004604215631155517,
+        "std_mse": 0.000170830617088324,
+        "mean_improvement": 40.57121525648535,
+        "irregularity": 0.4639551441794233
+      },
+      "Uniform": {
+        "mean_mse": 0.004262447668627723,
+        "std_mse": 0.0001549906172252138,
+        "mean_improvement": 35.52726560945485,
+        "irregularity": 0.33334401298645827
+      },
+      "Random": {
+        "mean_mse": 0.005940605677809833,
+        "std_mse": 0.0003258495325002495,
+        "mean_improvement": 48.37135303161113,
+        "irregularity": 0.19068615859322222
+      },
+      "Fibonacci": {
+        "mean_mse": 0.004965000582804034,
+        "std_mse": 0.00014294844562762996,
+        "mean_improvement": 41.16142295283665,
+        "irregularity": 4.901768298672154
+      },
+      "Logarithmic": {
+        "mean_mse": 0.0073488279555341185,
+        "std_mse": 0.0002980636875939354,
+        "mean_improvement": 56.61098180730617,
+        "irregularity": 1.1032960224615567
+      }
+    },
+    "best": "Uniform"
+  }
+}

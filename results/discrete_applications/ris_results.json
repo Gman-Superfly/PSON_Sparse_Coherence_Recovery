@@ -1,0 +1,177 @@
+[
+  {
+    "config": "16-element, 1-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 33.33341521201805,
+        "greedy": 33.33341521201805,
+        "rs": 28.41790320150558,
+        "optimal": 33.33341521201805,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson": 70.46995657309088,
+        "greedy": 69.17058804666763,
+        "rs": 69.8855440579034,
+        "optimal": 70.46995657309088,
+        "winner": "PSON"
+      },
+      {
+        "seed": 456,
+        "pson": 48.66918303146216,
+        "greedy": 48.66918303146216,
+        "rs": 40.926898590367664,
+        "optimal": 48.66918303146217,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 50.82418493885703,
+      "greedy_mean": 50.39106209671595,
+      "rs_mean": 46.41011528325888,
+      "pson_wins": 3
+    }
+  },
+  {
+    "config": "16-element, 2-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 57.10761541656739,
+        "greedy": 56.71882293148137,
+        "rs": 32.04806359185262,
+        "optimal": null,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson": 115.83092976095705,
+        "greedy": 116.71811848393227,
+        "rs": 68.29121503569084,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 456,
+        "pson": 70.05144431552175,
+        "greedy": 70.05144431552175,
+        "rs": 42.40885872648475,
+        "optimal": null,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 80.99666316434873,
+      "greedy_mean": 81.16279524364512,
+      "rs_mean": 47.58271245134273,
+      "pson_wins": 2
+    }
+  },
+  {
+    "config": "64-element, 1-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 609.6396095801092,
+        "greedy": 859.075323446592,
+        "rs": 223.28866173559462,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 123,
+        "pson": 733.5320517808914,
+        "greedy": 1014.4679981807565,
+        "rs": 300.08072380178504,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 456,
+        "pson": 582.9503535975234,
+        "greedy": 1087.8684596245935,
+        "rs": 291.9146378635027,
+        "optimal": null,
+        "winner": "Greedy"
+      }
+    ],
+    "summary": {
+      "pson_mean": 642.0406716528413,
+      "greedy_mean": 987.137260417314,
+      "rs_mean": 271.76134113362747,
+      "pson_wins": 0
+    }
+  },
+  {
+    "config": "64-element, 2-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 765.6009185197123,
+        "greedy": 1570.61450515787,
+        "rs": 251.45425637912354,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 123,
+        "pson": 1038.698763663054,
+        "greedy": 2093.830604075545,
+        "rs": 372.48080229796335,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 456,
+        "pson": 949.503814550459,
+        "greedy": 1768.3009196074702,
+        "rs": 281.2889099270165,
+        "optimal": null,
+        "winner": "Greedy"
+      }
+    ],
+    "summary": {
+      "pson_mean": 917.9344989110751,
+      "greedy_mean": 1810.9153429469618,
+      "rs_mean": 301.7413228680345,
+      "pson_wins": 0
+    }
+  },
+  {
+    "config": "256-element, 2-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 4823.740107473632,
+        "greedy": 32939.06058321009,
+        "rs": 1331.878745276586,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 123,
+        "pson": 5331.7843625190235,
+        "greedy": 36905.02932617331,
+        "rs": 2122.5777673542516,
+        "optimal": null,
+        "winner": "Greedy"
+      },
+      {
+        "seed": 456,
+        "pson": 5929.270516934542,
+        "greedy": 34682.14120376013,
+        "rs": 1735.128359246029,
+        "optimal": null,
+        "winner": "Greedy"
+      }
+    ],
+    "summary": {
+      "pson_mean": 5361.598328975732,
+      "greedy_mean": 34842.07703771451,
+      "rs_mean": 1729.8616239589555,
+      "pson_wins": 0
+    }
+  }
+]

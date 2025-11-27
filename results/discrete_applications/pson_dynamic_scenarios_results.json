@@ -1,0 +1,260 @@
+{
+  "moving_target_v0.2": {
+    "scenario": "Moving Target (Radar)",
+    "target_velocity_deg_per_iter": 0.2,
+    "total_target_movement_deg": 40.0,
+    "Full-LMS": {
+      "mean_tracking_error": -0.200966246898699,
+      "final_tracking_error": -0.4799181812826796
+    },
+    "M-max-LMS": {
+      "mean_tracking_error": -0.030972360442015852,
+      "final_tracking_error": 0.23004392636681192
+    },
+    "PSON": {
+      "mean_tracking_error": -0.5134965691069073,
+      "final_tracking_error": -0.6656804841361681
+    },
+    "winner_mean": "PSON"
+  },
+  "moving_target_v0.5": {
+    "scenario": "Moving Target (Radar)",
+    "target_velocity_deg_per_iter": 0.5,
+    "total_target_movement_deg": 100.0,
+    "Full-LMS": {
+      "mean_tracking_error": -0.23131441940870087,
+      "final_tracking_error": -0.18223822060261874
+    },
+    "M-max-LMS": {
+      "mean_tracking_error": -0.05238021785909282,
+      "final_tracking_error": 0.04761618633044151
+    },
+    "PSON": {
+      "mean_tracking_error": -0.3909369870610247,
+      "final_tracking_error": -0.1355892456184853
+    },
+    "winner_mean": "PSON"
+  },
+  "moving_target_v1.0": {
+    "scenario": "Moving Target (Radar)",
+    "target_velocity_deg_per_iter": 1.0,
+    "total_target_movement_deg": 200.0,
+    "Full-LMS": {
+      "mean_tracking_error": -0.24325088256032898,
+      "final_tracking_error": 0.07950544142569238
+    },
+    "M-max-LMS": {
+      "mean_tracking_error": -0.04416180279631435,
+      "final_tracking_error": -0.06829758712876544
+    },
+    "PSON": {
+      "mean_tracking_error": -0.3035870137342296,
+      "final_tracking_error": -0.13419825161464627
+    },
+    "winner_mean": "PSON"
+  },
+  "massive_mimo_256": {
+    "scenario": "Massive MIMO (256 elements)",
+    "n_elements": 256,
+    "Full-LMS": {
+      "mse": 0.7731694469346815,
+      "time_sec": 0.004307900031562895
+    },
+    "M-max-LMS": {
+      "mse": 0.9311849471285449,
+      "time_sec": 0.00798719999147579,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.0345538052239207,
+      "time_sec": 0.020746199996210635,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 2.1474488171107495,
+      "time_sec": 0.08565490000182763,
+      "subspace_dim": 32
+    },
+    "winner_mse": "Full-LMS",
+    "winner_speed": "Full-LMS"
+  },
+  "massive_mimo_512": {
+    "scenario": "Massive MIMO (512 elements)",
+    "n_elements": 512,
+    "Full-LMS": {
+      "mse": 0.8829165953514525,
+      "time_sec": 0.004920999985188246
+    },
+    "M-max-LMS": {
+      "mse": 2.4755290812297113,
+      "time_sec": 0.011130900005809963,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.055225891495221,
+      "time_sec": 0.02556069998536259,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 2.7763752063166702,
+      "time_sec": 0.11653130000922829,
+      "subspace_dim": 32
+    },
+    "winner_mse": "Full-LMS",
+    "winner_speed": "Full-LMS"
+  },
+  "massive_mimo_1024": {
+    "scenario": "Massive MIMO (1024 elements)",
+    "n_elements": 1024,
+    "Full-LMS": {
+      "mse": 1.9740712091821822,
+      "time_sec": 0.006756500049959868
+    },
+    "M-max-LMS": {
+      "mse": 1.4705741222430695,
+      "time_sec": 0.016226200037635863,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.1029461442699893,
+      "time_sec": 0.028186900017317384,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 0.6662420233248721,
+      "time_sec": 0.14125620003324002,
+      "subspace_dim": 32
+    },
+    "winner_mse": "PSON-Subspace",
+    "winner_speed": "Full-LMS"
+  },
+  "massive_mimo_2048": {
+    "scenario": "Massive MIMO (2048 elements)",
+    "n_elements": 2048,
+    "Full-LMS": {
+      "mse": 0.971019764529089,
+      "time_sec": 0.009041799989063293
+    },
+    "M-max-LMS": {
+      "mse": 0.8721239297441632,
+      "time_sec": 0.02772110002115369,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.1142992985808449,
+      "time_sec": 0.038824699993710965,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 0.7273100017494272,
+      "time_sec": 0.1717950999736786,
+      "subspace_dim": 32
+    },
+    "winner_mse": "PSON-Subspace",
+    "winner_speed": "Full-LMS"
+  },
+  "massive_mimo_4096": {
+    "scenario": "Massive MIMO (4096 elements)",
+    "n_elements": 4096,
+    "Full-LMS": {
+      "mse": 2.1191426926165513,
+      "time_sec": 0.013099600037094206
+    },
+    "M-max-LMS": {
+      "mse": 1.312005603389233,
+      "time_sec": 0.0523049000184983,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.101555236361914,
+      "time_sec": 0.05227870005182922,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 3.069592631008408,
+      "time_sec": 0.2735487999743782,
+      "subspace_dim": 32
+    },
+    "winner_mse": "PSON",
+    "winner_speed": "Full-LMS"
+  },
+  "massive_mimo_8192": {
+    "scenario": "Massive MIMO (8192 elements)",
+    "n_elements": 8192,
+    "Full-LMS": {
+      "mse": 0.7897291987342406,
+      "time_sec": 0.022529700014274567
+    },
+    "M-max-LMS": {
+      "mse": 4.676885254912276,
+      "time_sec": 0.10242309997556731,
+      "updates_pct": 10
+    },
+    "PSON": {
+      "mse": 1.0853898030741567,
+      "time_sec": 0.09509439999237657,
+      "updates_pct": 10
+    },
+    "PSON-Subspace": {
+      "mse": 1.5280234041097438,
+      "time_sec": 0.4407798000029288,
+      "subspace_dim": 32
+    },
+    "winner_mse": "Full-LMS",
+    "winner_speed": "Full-LMS"
+  },
+  "jammer_interval_25": {
+    "scenario": "Adaptive Jammer Nulling",
+    "jammer_power_db": 20.0,
+    "jammer_change_interval": 25,
+    "Full-LMS": {
+      "mean_sinr_db": -38.68670032992406,
+      "min_sinr_db": -51.13133761866926
+    },
+    "Stochastic-LMS": {
+      "mean_sinr_db": -28.86311943921606,
+      "min_sinr_db": -47.932749984845856
+    },
+    "PSON": {
+      "mean_sinr_db": 4.225235809510644,
+      "min_sinr_db": -6.826796974740576
+    },
+    "winner_mean_sinr": "PSON"
+  },
+  "jammer_interval_50": {
+    "scenario": "Adaptive Jammer Nulling",
+    "jammer_power_db": 20.0,
+    "jammer_change_interval": 50,
+    "Full-LMS": {
+      "mean_sinr_db": -39.40284407460314,
+      "min_sinr_db": -66.87959612030721
+    },
+    "Stochastic-LMS": {
+      "mean_sinr_db": -29.200759984735598,
+      "min_sinr_db": -55.62227245173091
+    },
+    "PSON": {
+      "mean_sinr_db": 2.4171869445961405,
+      "min_sinr_db": -6.826796974740576
+    },
+    "winner_mean_sinr": "PSON"
+  },
+  "jammer_interval_100": {
+    "scenario": "Adaptive Jammer Nulling",
+    "jammer_power_db": 20.0,
+    "jammer_change_interval": 100,
+    "Full-LMS": {
+      "mean_sinr_db": -38.4451263485741,
+      "min_sinr_db": -66.77158176577892
+    },
+    "Stochastic-LMS": {
+      "mean_sinr_db": -28.8509113102265,
+      "min_sinr_db": -55.72834964275512
+    },
+    "PSON": {
+      "mean_sinr_db": -1.6250294677296988,
+      "min_sinr_db": -6.826796974740576
+    },
+    "winner_mean_sinr": "PSON"
+  }
+}

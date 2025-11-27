@@ -1,0 +1,205 @@
+{
+  "config": {
+    "n_elements": 16,
+    "snr_db": 15.0,
+    "interferers": [
+      -30.0,
+      30.0
+    ],
+    "multipath_taps": 3
+  },
+  "results": [
+    {
+      "seed": 42,
+      "results": {
+        "Full-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 4.1392437879208295,
+          "null_depth_db": -2.486363910011787,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -8.807654968983861,
+          "updates_per_iter": 16,
+          "complexity_reduction": 0.0
+        },
+        "M-max-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 3.6767299177788697,
+          "null_depth_db": -3.765481739567961,
+          "sidelobe_db": -0.21606677066811564,
+          "main_gain_db": -15.54440829555579,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "Periodic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 4.786789990973014,
+          "null_depth_db": -14.94056826499615,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -17.343510212005345,
+          "updates_per_iter": 6,
+          "complexity_reduction": 62.5
+        },
+        "Stochastic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 3.2404177488991204,
+          "null_depth_db": -7.110137353064156,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -11.198274499887908,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "PSON": {
+          "convergence_iter": 8,
+          "steady_mse_db": -3.1720075691332115,
+          "null_depth_db": -13.555604471057514,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -8.17116550546602,
+          "updates_per_iter": 3,
+          "complexity_reduction": 81.25
+        }
+      },
+      "winners": {
+        "mse": "PSON",
+        "null": "Periodic-NLMS",
+        "convergence": "Full-NLMS"
+      }
+    },
+    {
+      "seed": 123,
+      "results": {
+        "Full-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 2.156624630457471,
+          "null_depth_db": -4.381096181984377,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -8.889488768013258,
+          "updates_per_iter": 16,
+          "complexity_reduction": 0.0
+        },
+        "M-max-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 1.703029645046243,
+          "null_depth_db": -9.301551732353657,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -17.834210234222102,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "Periodic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 2.080575631315945,
+          "null_depth_db": -17.403389438560595,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -24.412481102654986,
+          "updates_per_iter": 6,
+          "complexity_reduction": 62.5
+        },
+        "Stochastic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 1.8924285234117668,
+          "null_depth_db": -10.970831895148923,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -16.997909355756537,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "PSON": {
+          "convergence_iter": 2,
+          "steady_mse_db": -0.8117755705006641,
+          "null_depth_db": -9.197137885667171,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -13.035907608215087,
+          "updates_per_iter": 3,
+          "complexity_reduction": 81.25
+        }
+      },
+      "winners": {
+        "mse": "PSON",
+        "null": "Periodic-NLMS",
+        "convergence": "Full-NLMS"
+      }
+    },
+    {
+      "seed": 456,
+      "results": {
+        "Full-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 5.4278746639586135,
+          "null_depth_db": -16.67340320090369,
+          "sidelobe_db": -2.40100733022882,
+          "main_gain_db": -0.017455502013723034,
+          "updates_per_iter": 16,
+          "complexity_reduction": 0.0
+        },
+        "M-max-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 5.011929794848184,
+          "null_depth_db": -17.131366504829515,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -5.5931703573863905,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "Periodic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 5.247628668515473,
+          "null_depth_db": -10.905857126511822,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -1.3824595977212972,
+          "updates_per_iter": 6,
+          "complexity_reduction": 62.5
+        },
+        "Stochastic-NLMS": {
+          "convergence_iter": 0,
+          "steady_mse_db": 5.111980832314291,
+          "null_depth_db": -15.961091662672175,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -4.667058878756287,
+          "updates_per_iter": 4,
+          "complexity_reduction": 75.0
+        },
+        "PSON": {
+          "convergence_iter": 8,
+          "steady_mse_db": -3.1997918261817313,
+          "null_depth_db": -6.5077176446551,
+          "sidelobe_db": 0.0,
+          "main_gain_db": -3.847969887120623,
+          "updates_per_iter": 3,
+          "complexity_reduction": 81.25
+        }
+      },
+      "winners": {
+        "mse": "PSON",
+        "null": "M-max-NLMS",
+        "convergence": "Full-NLMS"
+      }
+    }
+  ],
+  "summary": {
+    "Full-NLMS": {
+      "mse": 0,
+      "null": 0,
+      "conv": 3
+    },
+    "M-max-NLMS": {
+      "mse": 0,
+      "null": 1,
+      "conv": 0
+    },
+    "Periodic-NLMS": {
+      "mse": 0,
+      "null": 2,
+      "conv": 0
+    },
+    "Stochastic-NLMS": {
+      "mse": 0,
+      "null": 0,
+      "conv": 0
+    },
+    "PSON": {
+      "mse": 3,
+      "null": 0,
+      "conv": 0
+    }
+  }
+}

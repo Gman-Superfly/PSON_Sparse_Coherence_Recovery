@@ -1,0 +1,45 @@
+{
+  "params": {
+    "dense": 10000,
+    "sparse_primes": 100,
+    "steps": 200,
+    "w": 0.2,
+    "lr": 0.1,
+    "noise": 0.02,
+    "seed": 42,
+    "use_pson": true,
+    "objective": "hybrid",
+    "lambda_vis": 0.2,
+    "amp_dof": true,
+    "lr_amp": 0.05,
+    "cv_lambda_scale": 1.01
+  },
+  "metrics": {
+    "init_mse": 0.0005607682482827273,
+    "final_mse": 0.0005636809180515303,
+    "mse_improvement": -2.9126697688030157e-06,
+    "target_visibility": 0.42338666824957755,
+    "init_visibility": 0.3783552014353785,
+    "final_visibility": 0.41881919896902847,
+    "accept_rate": 0.23076923076923078,
+    "cv_mse": 0.0005672790751004486,
+    "cv_vis_error": 0.006722198276211677
+  },
+  "sweep": {
+    "sparse_counts": [
+      20,
+      50,
+      100
+    ],
+    "final_mse": [
+      0.0013005776052593106,
+      0.0010041811427780735,
+      0.0005636809180515303
+    ],
+    "rand_mse": [
+      0.00999591585574276,
+      0.004846923943176549,
+      0.0023807954274174515
+    ]
+  }
+}

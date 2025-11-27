@@ -1,0 +1,32 @@
+{
+  "summary": {
+    "0.5": {
+      "mean_final_V": 0.5950944211190998,
+      "std_final_V": 0.04673715886865371,
+      "mean_deltaF90": 177.9506172839506,
+      "std_deltaF90": 4.604077634466813,
+      "mean_accept_rate": 0.29230327183563276
+    },
+    "0.6": {
+      "mean_final_V": 0.596570413543717,
+      "std_final_V": 0.04650676253860205,
+      "mean_deltaF90": 178.11111111111111,
+      "std_deltaF90": 4.671723450719232,
+      "mean_accept_rate": 0.2945173998839803
+    }
+  },
+  "grid_size_per_sigma": 81,
+  "seeds": [
+    41,
+    42,
+    43
+  ],
+  "params": {
+    "steps": 200,
+    "w": 0.2,
+    "base_zeta_gain": 0.3,
+    "base_lr": 0.1,
+    "base_noise": 0.03
+  },
+  "mpmath": true
+}

@@ -1,0 +1,62 @@
+{
+  "config": {
+    "n_elements": 16,
+    "spacing_lambda": 0.5,
+    "desired_angle_deg": 0.0,
+    "interferer_angles_deg": [
+      -30.0,
+      30.0
+    ],
+    "snr_db": 15.0,
+    "n_iterations": 300,
+    "n_samples": 2000,
+    "channel": "ETU (9 taps)"
+  },
+  "results": {
+    "Full-LMS": {
+      "convergence_iter": 0,
+      "steady_mse_db": 2.585185519638567,
+      "null_depth_db": -8.851065021524477,
+      "sidelobe_db": -1.682232373306349,
+      "main_gain_db": 0.0,
+      "updates_per_iter": 16,
+      "complexity_reduction": 0.0
+    },
+    "Sequential-LMS": {
+      "convergence_iter": 0,
+      "steady_mse_db": 0.13601114797322117,
+      "null_depth_db": -19.61518900355216,
+      "sidelobe_db": -3.152006862925673,
+      "main_gain_db": -20.731118222388965,
+      "updates_per_iter": 1,
+      "complexity_reduction": 93.75
+    },
+    "M-max-LMS": {
+      "convergence_iter": 0,
+      "steady_mse_db": 1.888022757162037,
+      "null_depth_db": -19.653397599907297,
+      "sidelobe_db": 0.0,
+      "main_gain_db": -12.206036909562343,
+      "updates_per_iter": 4,
+      "complexity_reduction": 75.0
+    },
+    "Periodic-LMS": {
+      "convergence_iter": 0,
+      "steady_mse_db": 0.7586654180046598,
+      "null_depth_db": -26.54957921493502,
+      "sidelobe_db": 0.0,
+      "main_gain_db": -21.578164991355397,
+      "updates_per_iter": 6,
+      "complexity_reduction": 62.5
+    },
+    "Stochastic-LMS": {
+      "convergence_iter": 0,
+      "steady_mse_db": 0.6393133955315901,
+      "null_depth_db": -24.502428599210344,
+      "sidelobe_db": 0.0,
+      "main_gain_db": -37.277043250973676,
+      "updates_per_iter": 4,
+      "complexity_reduction": 75.0
+    }
+  }
+}

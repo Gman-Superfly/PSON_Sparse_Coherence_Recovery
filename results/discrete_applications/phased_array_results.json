@@ -1,0 +1,118 @@
+[
+  {
+    "config": "8-element ULA, 3-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson_gain": 1.0,
+        "rs_gain": 0.5464150429449554,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson_gain": 1.0,
+        "rs_gain": 0.6218592167691149,
+        "winner": "PSON"
+      },
+      {
+        "seed": 456,
+        "pson_gain": 1.0,
+        "rs_gain": 0.7377063036811942,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 1.0,
+      "rs_mean": 0.6353268544650882,
+      "pson_wins": 3,
+      "total": 3
+    }
+  },
+  {
+    "config": "16-element ULA, 4-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson_gain": 1.0,
+        "rs_gain": 0.2598522043876208,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson_gain": 1.0,
+        "rs_gain": 0.3336362133658321,
+        "winner": "PSON"
+      },
+      {
+        "seed": 456,
+        "pson_gain": 1.0,
+        "rs_gain": 0.3713567201378709,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 1.0,
+      "rs_mean": 0.3216150459637746,
+      "pson_wins": 3,
+      "total": 3
+    }
+  },
+  {
+    "config": "8-element sparse, 3-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson_gain": 0.951914373006091,
+        "rs_gain": 0.6640607903737686,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson_gain": 0.951914373006091,
+        "rs_gain": 0.5771217585134496,
+        "winner": "PSON"
+      },
+      {
+        "seed": 456,
+        "pson_gain": 0.951914373006091,
+        "rs_gain": 0.7167266044296018,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.9519143730060909,
+      "rs_mean": 0.65263638443894,
+      "pson_wins": 3,
+      "total": 3
+    }
+  },
+  {
+    "config": "16-element sparse, 4-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson_gain": 0.9913387306687448,
+        "rs_gain": 0.2767252981930488,
+        "winner": "PSON"
+      },
+      {
+        "seed": 123,
+        "pson_gain": 0.9913387306687448,
+        "rs_gain": 0.3362200301811506,
+        "winner": "PSON"
+      },
+      {
+        "seed": 456,
+        "pson_gain": 0.9913387306687448,
+        "rs_gain": 0.463682502130848,
+        "winner": "PSON"
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.9913387306687448,
+      "rs_mean": 0.35887594350168245,
+      "pson_wins": 3,
+      "total": 3
+    }
+  }
+]

@@ -1,0 +1,59 @@
+{
+  "config": {
+    "n_gaps": 25,
+    "n_evals": 1000
+  },
+  "results": [
+    {
+      "name": "Original (for-loop, 200 pts)",
+      "total_time": 1.1239081000094302,
+      "time_per_eval_ms": 1.1239081000094302,
+      "evals_per_sec": 889.7524628495955,
+      "mean_energy": 0.3958365996969478
+    },
+    {
+      "name": "Vectorized (200 pts)",
+      "total_time": 0.6747900999616832,
+      "time_per_eval_ms": 0.6747900999616832,
+      "evals_per_sec": 1481.942310737492,
+      "mean_energy": 0.3958365996969478
+    },
+    {
+      "name": "Reduced (for-loop, 50 pts)",
+      "total_time": 0.6683558000368066,
+      "time_per_eval_ms": 0.6683558000368066,
+      "evals_per_sec": 1496.2090550346531,
+      "mean_energy": 0.46006845227687293
+    },
+    {
+      "name": "Fast (vectorized, 50 pts)",
+      "total_time": 0.2440111999749206,
+      "time_per_eval_ms": 0.2440111999749206,
+      "evals_per_sec": 4098.172543320879,
+      "mean_energy": 0.46006845227687293
+    },
+    {
+      "name": "Ultra (vectorized, 20 pts)",
+      "total_time": 0.15345990000059828,
+      "time_per_eval_ms": 0.15345990000059828,
+      "evals_per_sec": 6516.360299961758,
+      "mean_energy": 0.5429885350904262
+    },
+    {
+      "name": "Cached (precomputed, 200 pts)",
+      "total_time": 0.6415692999726161,
+      "time_per_eval_ms": 0.6415692999726161,
+      "evals_per_sec": 1558.6780727236833,
+      "mean_energy": 0.3958365996969478
+    },
+    {
+      "name": "Cached Fast (precomputed, 50 pts)",
+      "total_time": 0.2290019000065513,
+      "time_per_eval_ms": 0.2290019000065513,
+      "evals_per_sec": 4366.775996056766,
+      "mean_energy": 0.46006845227687293
+    }
+  ],
+  "best": "Ultra (vectorized, 20 pts)",
+  "best_speedup": 7.3237901237069
+}

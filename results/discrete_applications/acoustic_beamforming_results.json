@@ -1,0 +1,182 @@
+[
+  {
+    "config": "16-linear, 8-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 0.9959203496422132,
+        "geometric": 0.9461009239314238,
+        "rs": 0.3708583474386894,
+        "winner": "PSON",
+        "pson_improvement_pct": 5.265762292938502
+      },
+      {
+        "seed": 123,
+        "pson": 0.9975204601411773,
+        "geometric": 0.9461009239314238,
+        "rs": 0.4117571186044735,
+        "winner": "PSON",
+        "pson_improvement_pct": 5.434889122679447
+      },
+      {
+        "seed": 456,
+        "pson": 0.9987647071560315,
+        "geometric": 0.9461009239314238,
+        "rs": 0.445439517077357,
+        "winner": "PSON",
+        "pson_improvement_pct": 5.566402260786564
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.9974018389798074,
+      "geometric_mean": 0.9461009239314238,
+      "rs_mean": 0.4093516610401733,
+      "pson_wins": 3,
+      "avg_improvement_pct": 5.422351225468172
+    }
+  },
+  {
+    "config": "32-linear, 8-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 0.6163163930426913,
+        "geometric": 0.3809834116486854,
+        "rs": 0.2227904426986515,
+        "winner": "PSON",
+        "pson_improvement_pct": 61.769876098763746
+      },
+      {
+        "seed": 123,
+        "pson": 0.6064355185879448,
+        "geometric": 0.3809834116486854,
+        "rs": 0.1512838219065417,
+        "winner": "PSON",
+        "pson_improvement_pct": 59.1763578116042
+      },
+      {
+        "seed": 456,
+        "pson": 0.5880996734069182,
+        "geometric": 0.3809834116486854,
+        "rs": 0.1697282722934902,
+        "winner": "PSON",
+        "pson_improvement_pct": 54.363590479591906
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.6036171950125181,
+      "geometric_mean": 0.3809834116486854,
+      "rs_mean": 0.18126751229956115,
+      "pson_wins": 3,
+      "avg_improvement_pct": 58.43660812998661
+    }
+  },
+  {
+    "config": "16-ring, 8-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 0.21340588517856202,
+        "geometric": 0.04760605486795456,
+        "rs": 0.372296773086098,
+        "winner": "RS",
+        "pson_improvement_pct": 348.2746688886815
+      },
+      {
+        "seed": 123,
+        "pson": 0.18043106835850858,
+        "geometric": 0.04760605486795456,
+        "rs": 0.38950528251691974,
+        "winner": "RS",
+        "pson_improvement_pct": 279.0086546342972
+      },
+      {
+        "seed": 456,
+        "pson": 0.2166833867642733,
+        "geometric": 0.04760605486795456,
+        "rs": 0.28183169641846917,
+        "winner": "RS",
+        "pson_improvement_pct": 355.1593006606641
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.20350678010044798,
+      "geometric_mean": 0.04760605486795456,
+      "rs_mean": 0.3478779173404956,
+      "pson_wins": 0,
+      "avg_improvement_pct": 327.4808747278809
+    }
+  },
+  {
+    "config": "16-sparse, 8-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 0.24342548145383533,
+        "geometric": 0.0638559194847787,
+        "rs": 0.3498220898273287,
+        "winner": "RS",
+        "pson_improvement_pct": 281.21051757879707
+      },
+      {
+        "seed": 123,
+        "pson": 0.2427101053315945,
+        "geometric": 0.0638559194847787,
+        "rs": 0.3180068321688552,
+        "winner": "RS",
+        "pson_improvement_pct": 280.09022031130405
+      },
+      {
+        "seed": 456,
+        "pson": 0.19748003509306886,
+        "geometric": 0.0638559194847787,
+        "rs": 0.5220401899253073,
+        "winner": "RS",
+        "pson_improvement_pct": 209.25877581464204
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.22787187395949957,
+      "geometric_mean": 0.0638559194847787,
+      "rs_mean": 0.39662303730716375,
+      "pson_wins": 0,
+      "avg_improvement_pct": 256.8531712349144
+    }
+  },
+  {
+    "config": "32-sparse, 6-bit",
+    "runs": [
+      {
+        "seed": 42,
+        "pson": 0.49089722279535275,
+        "geometric": 0.006300146651199998,
+        "rs": 0.19244182491213693,
+        "winner": "PSON",
+        "pson_improvement_pct": 7691.837909201891
+      },
+      {
+        "seed": 123,
+        "pson": 0.5983799483947546,
+        "geometric": 0.006300146651199998,
+        "rs": 0.13785959303775583,
+        "winner": "PSON",
+        "pson_improvement_pct": 9397.87317860144
+      },
+      {
+        "seed": 456,
+        "pson": 0.47577654278320736,
+        "geometric": 0.006300146651199998,
+        "rs": 0.19560553272317027,
+        "winner": "PSON",
+        "pson_improvement_pct": 7451.832706001421
+      }
+    ],
+    "summary": {
+      "pson_mean": 0.5216845713244384,
+      "geometric_mean": 0.006300146651199999,
+      "rs_mean": 0.17530231689102102,
+      "pson_wins": 3,
+      "avg_improvement_pct": 8180.514597934917
+    }
+  }
+]

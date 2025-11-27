@@ -1,0 +1,147 @@
+{
+  "summary": {
+    "Clean": {
+      "description": "Perfect observations",
+      "pson_mean": 0.40564194063534087,
+      "pson_std": 0.004444808439357758,
+      "cma_mean": 0.5069574592501722,
+      "cma_std": 0.048691259891926575,
+      "pson_advantage": -0.10131551861483135,
+      "pson_win_rate": 0.0
+    },
+    "Binary": {
+      "description": "Pass/fail only (no magnitude)",
+      "pson_mean": 0.4026355916398862,
+      "pson_std": 0.004947390042909825,
+      "cma_mean": 0.4175881228219723,
+      "cma_std": 0.025988677762880493,
+      "pson_advantage": -0.01495253118208606,
+      "pson_win_rate": 0.3
+    },
+    "Adversarial-10%": {
+      "description": "10% chance of flipped feedback",
+      "pson_mean": 0.4035001866808193,
+      "pson_std": 0.0028028444472680894,
+      "cma_mean": 0.46541449745287533,
+      "cma_std": 0.05362443383351872,
+      "pson_advantage": -0.06191431077205606,
+      "pson_win_rate": 0.0
+    },
+    "Adversarial-20%": {
+      "description": "20% chance of flipped feedback",
+      "pson_mean": 0.4026793682981677,
+      "pson_std": 0.00257536883057849,
+      "cma_mean": 0.4528561077233452,
+      "cma_std": 0.034364703888596616,
+      "pson_advantage": -0.05017673942517753,
+      "pson_win_rate": 0.0
+    },
+    "Adversarial-30%": {
+      "description": "30% chance of flipped feedback",
+      "pson_mean": 0.4014726759399724,
+      "pson_std": 0.0034107120652013263,
+      "cma_mean": 0.45189581066072193,
+      "cma_std": 0.02791409241703611,
+      "pson_advantage": -0.05042313472074955,
+      "pson_win_rate": 0.1
+    },
+    "Delay-5": {
+      "description": "Feedback delayed by 5 steps",
+      "pson_mean": 0.4000240960197089,
+      "pson_std": 0.002729802513671701,
+      "cma_mean": 0.4524955539796901,
+      "cma_std": 0.02821970110528724,
+      "pson_advantage": -0.052471457959981205,
+      "pson_win_rate": 0.0
+    },
+    "Delay-10": {
+      "description": "Feedback delayed by 10 steps",
+      "pson_mean": 0.40191499648022966,
+      "pson_std": 0.0052775459045091904,
+      "cma_mean": 0.4398258238542338,
+      "cma_std": 0.02779395192265045,
+      "pson_advantage": -0.03791082737400414,
+      "pson_win_rate": 0.1
+    },
+    "Binary+Adversarial": {
+      "description": "Binary feedback + 15% adversarial flip",
+      "pson_mean": 0.4040021790591176,
+      "pson_std": 0.0036724944386447023,
+      "cma_mean": 0.432173091171783,
+      "cma_std": 0.03793097710026112,
+      "pson_advantage": -0.02817091211266537,
+      "pson_win_rate": 0.4
+    },
+    "Nightmare": {
+      "description": "Binary + 20% adversarial + delay",
+      "pson_mean": 0.40219947697971437,
+      "pson_std": 0.003676177102687947,
+      "cma_mean": 0.4442247784676601,
+      "cma_std": 0.04197886431745761,
+      "pson_advantage": -0.042025301487945754,
+      "pson_win_rate": 0.2
+    }
+  },
+  "budget_comparison": {
+    "50": {
+      "pson_mean": 0.409653489844112,
+      "pson_std": 0.006332418365027386,
+      "cma_mean": 0.49411024173745144,
+      "cma_std": 0.03515543532091663,
+      "pson_wins": 0.0
+    },
+    "75": {
+      "pson_mean": 0.41602762427155743,
+      "pson_std": 0.00755546766087964,
+      "cma_mean": 0.5230034718670413,
+      "cma_std": 0.02662065819038214,
+      "pson_wins": 0.0
+    },
+    "100": {
+      "pson_mean": 0.42122726935263294,
+      "pson_std": 0.008323199797914765,
+      "cma_mean": 0.5461898355684853,
+      "cma_std": 0.06811276226565195,
+      "pson_wins": 0.0
+    },
+    "150": {
+      "pson_mean": 0.4370416204378066,
+      "pson_std": 0.010150089984596026,
+      "cma_mean": 0.602792852866074,
+      "cma_std": 0.05666015977522751,
+      "pson_wins": 0.0
+    },
+    "200": {
+      "pson_mean": 0.4508743525346303,
+      "pson_std": 0.010210322043257034,
+      "cma_mean": 0.6560689884678049,
+      "cma_std": 0.07406662209730955,
+      "pson_wins": 0.0
+    },
+    "300": {
+      "pson_mean": 0.4799125290123311,
+      "pson_std": 0.013035951952473514,
+      "cma_mean": 0.7626102327834858,
+      "cma_std": 0.11079881634985994,
+      "pson_wins": 0.1
+    }
+  },
+  "params": {
+    "budget": 40,
+    "w": 0.2,
+    "lr": 0.1,
+    "noise": 0.02,
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1000,
+      2024,
+      3141,
+      4242,
+      5555,
+      6789
+    ]
+  }
+}

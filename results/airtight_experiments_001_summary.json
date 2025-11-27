@@ -1,0 +1,211 @@
+{
+  "summary": {
+    "zeta|phase|per_gap": {
+      "mean_final_V_no_pson": 0.4415043358249139,
+      "mean_final_V_pson": 0.5740093879051993,
+      "mean_pson_gain": 0.1325050520802854,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 184.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.31511254019292606
+    },
+    "zeta|phase|per_screen": {
+      "mean_final_V_no_pson": 0.4430525080101138,
+      "mean_final_V_pson": 0.5596836083994007,
+      "mean_pson_gain": 0.11663110038928687,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 173.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.4174757281553398
+    },
+    "zeta|amplitude|per_gap": {
+      "mean_final_V_no_pson": 0.42110385393271904,
+      "mean_final_V_pson": 0.5514404937519878,
+      "mean_pson_gain": 0.13033663981926874,
+      "mean_deltaF90_no_pson": 178.0,
+      "mean_deltaF90_pson": 185.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.65
+    },
+    "zeta|amplitude|per_screen": {
+      "mean_final_V_no_pson": 0.6026312098665367,
+      "mean_final_V_pson": 0.6287348533379076,
+      "mean_pson_gain": 0.02610364347137084,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 183.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.2698412698412698
+    },
+    "sinmix|phase|per_gap": {
+      "mean_final_V_no_pson": 0.3965005355157015,
+      "mean_final_V_pson": 0.5390433745649333,
+      "mean_pson_gain": 0.14254283904923182,
+      "mean_deltaF90_no_pson": 179.0,
+      "mean_deltaF90_pson": 187.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6896551724137931
+    },
+    "sinmix|phase|per_screen": {
+      "mean_final_V_no_pson": 0.3994023637142323,
+      "mean_final_V_pson": 0.4953747094676181,
+      "mean_pson_gain": 0.09597234575338576,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.28205128205128205
+    },
+    "sinmix|amplitude|per_gap": {
+      "mean_final_V_no_pson": 0.39309357664291106,
+      "mean_final_V_pson": 0.5280271321944738,
+      "mean_pson_gain": 0.13493355555156278,
+      "mean_deltaF90_no_pson": 175.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6437908496732027
+    },
+    "sinmix|amplitude|per_screen": {
+      "mean_final_V_no_pson": 0.5198312171088871,
+      "mean_final_V_pson": 0.5944040254354813,
+      "mean_pson_gain": 0.07457280832659419,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 174.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.5098684210526315
+    },
+    "one_over_f|phase|per_gap": {
+      "mean_final_V_no_pson": 0.4111765992606212,
+      "mean_final_V_pson": 0.5253438152687969,
+      "mean_pson_gain": 0.1141672160081757,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 182.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.3225806451612903
+    },
+    "one_over_f|phase|per_screen": {
+      "mean_final_V_no_pson": 0.507337170583526,
+      "mean_final_V_pson": 0.6360585072110831,
+      "mean_pson_gain": 0.12872133662755714,
+      "mean_deltaF90_no_pson": 178.0,
+      "mean_deltaF90_pson": 165.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6493506493506493
+    },
+    "one_over_f|amplitude|per_gap": {
+      "mean_final_V_no_pson": 0.39717456956057895,
+      "mean_final_V_pson": 0.516559468424379,
+      "mean_pson_gain": 0.1193848988638001,
+      "mean_deltaF90_no_pson": 178.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6524590163934426
+    },
+    "one_over_f|amplitude|per_screen": {
+      "mean_final_V_no_pson": 0.6017483269622016,
+      "mean_final_V_pson": 0.6738609904240068,
+      "mean_pson_gain": 0.07211266346180523,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 179.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.35135135135135137
+    },
+    "chirp|phase|per_gap": {
+      "mean_final_V_no_pson": 0.4042179225268521,
+      "mean_final_V_pson": 0.5373375196713004,
+      "mean_pson_gain": 0.13311959714444827,
+      "mean_deltaF90_no_pson": 178.0,
+      "mean_deltaF90_pson": 170.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.5852090032154341
+    },
+    "chirp|phase|per_screen": {
+      "mean_final_V_no_pson": 0.46291045361373556,
+      "mean_final_V_pson": 0.5917324453261572,
+      "mean_pson_gain": 0.12882199171242165,
+      "mean_deltaF90_no_pson": 177.0,
+      "mean_deltaF90_pson": 167.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6557377049180327
+    },
+    "chirp|amplitude|per_gap": {
+      "mean_final_V_no_pson": 0.4293732975994921,
+      "mean_final_V_pson": 0.5646026250589485,
+      "mean_pson_gain": 0.13522932745945643,
+      "mean_deltaF90_no_pson": 175.0,
+      "mean_deltaF90_pson": 185.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6666666666666666
+    },
+    "chirp|amplitude|per_screen": {
+      "mean_final_V_no_pson": 0.5847972683937435,
+      "mean_final_V_pson": 0.6774504669511002,
+      "mean_pson_gain": 0.09265319855735676,
+      "mean_deltaF90_no_pson": 180.0,
+      "mean_deltaF90_pson": 185.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6666666666666666
+    },
+    "turbulence|phase|per_gap": {
+      "mean_final_V_no_pson": 0.43043700002134827,
+      "mean_final_V_pson": 0.590349709283191,
+      "mean_pson_gain": 0.1599127092618427,
+      "mean_deltaF90_no_pson": 181.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6622516556291391
+    },
+    "turbulence|phase|per_screen": {
+      "mean_final_V_no_pson": 0.4309759783250125,
+      "mean_final_V_pson": 0.5522043105159131,
+      "mean_pson_gain": 0.12122833219090062,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 173.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.2861736334405145
+    },
+    "turbulence|amplitude|per_gap": {
+      "mean_final_V_no_pson": 0.39855984514849246,
+      "mean_final_V_pson": 0.53253891830229,
+      "mean_pson_gain": 0.1339790731537976,
+      "mean_deltaF90_no_pson": 172.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 1.0,
+      "mean_accept_pson": 0.6896551724137931
+    },
+    "turbulence|amplitude|per_screen": {
+      "mean_final_V_no_pson": 0.5667372052171179,
+      "mean_final_V_pson": 0.6389797558070556,
+      "mean_pson_gain": 0.07224255058993767,
+      "mean_deltaF90_no_pson": 0.0,
+      "mean_deltaF90_pson": 186.0,
+      "mean_accept_no_pson": 0.0,
+      "mean_accept_pson": 0.30718954248366015
+    }
+  },
+  "params": {
+    "steps": 200,
+    "w": 0.2,
+    "lr": 0.1,
+    "noise": 0.02,
+    "seeds": [
+      42
+    ],
+    "signals": [
+      "zeta",
+      "sinmix",
+      "one_over_f",
+      "chirp",
+      "turbulence"
+    ],
+    "couplings": [
+      "phase",
+      "amplitude"
+    ],
+    "dependencies": [
+      "per_gap",
+      "per_screen"
+    ],
+    "phase_gain": 0.5,
+    "amp_gain": 0.2,
+    "mpmath": true
+  }
+}

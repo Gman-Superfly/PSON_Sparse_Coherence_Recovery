@@ -1,0 +1,47 @@
+{
+  "summary": {
+    "PSON": {
+      "mean_visibility": 0.5371269706253881,
+      "std_visibility": 0.017102306024935683,
+      "mean_energy": 0.21454393019380094,
+      "mean_func_evals": 503.8
+    },
+    "Random Search": {
+      "mean_visibility": 0.511881679953217,
+      "std_visibility": 0.02787808268984095,
+      "mean_energy": 0.23903668185975527,
+      "mean_func_evals": 600.0
+    },
+    "Simulated Annealing": {
+      "mean_visibility": 0.593588371187289,
+      "std_visibility": 0.07009577700914062,
+      "mean_energy": 0.170083829988716,
+      "mean_func_evals": 600.0
+    },
+    "Finite-Diff GD": {
+      "mean_visibility": 0.4062004868025902,
+      "std_visibility": 5.551115123125783e-17,
+      "mean_energy": 0.3525978618734809,
+      "mean_func_evals": 10201.0
+    },
+    "CMA-ES": {
+      "mean_visibility": 0.9461681672761824,
+      "std_visibility": 0.02136033925989019,
+      "mean_energy": 0.0033541303077026957,
+      "mean_func_evals": 611.0
+    }
+  },
+  "params": {
+    "steps": 200,
+    "w": 0.2,
+    "lr": 0.1,
+    "noise": 0.02,
+    "seeds": [
+      42,
+      123,
+      456,
+      789,
+      1000
+    ]
+  }
+}
