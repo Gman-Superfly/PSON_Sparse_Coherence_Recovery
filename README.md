@@ -88,7 +88,7 @@ for iteration in range(steps):
 - **Monotonic:** Energy never increases
 - **No local gradients:** Only needs global scalar feedback
 
-See [paper](Sparse_Coherence_Recovery_via_PSON.md) Section 4 for full details.
+See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 4 for full details.
 
 ---
 
@@ -117,7 +117,7 @@ In **9/20 scenarios**, deterministic gradient descent achieved **0% acceptance r
 
 **PSON solves this** by regenerating orthogonal noise each iteration, providing continuous exploration even when the deterministic gradient is trapped.
 
-See [paper](Sparse_Coherence_Recovery_via_PSON.md) Section 6.1.1 for detailed analysis.
+See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 6.1.1 for detailed analysis.
 
 ### Where PSON Excels
 
@@ -311,7 +311,7 @@ If you use this repository in your research, please cite:
 - Shubber, Jamel & Nahar (2025). *Beamforming Array Antenna: New Innovative Research Using Partial Update Adaptive Algorithms.* AIP Conf. Proc. (PU-BAA)
 - Hansen & Ostermeier (2001). *CMA-ES.* (Black-box optimization baseline)
 
-See [paper](Sparse_Coherence_Recovery_via_PSON.md) Section 10 for complete references.
+See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 10 for complete references.
 
 ---
 
