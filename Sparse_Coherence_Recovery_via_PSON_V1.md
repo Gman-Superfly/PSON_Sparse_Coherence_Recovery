@@ -3,7 +3,7 @@
 
 **Authors:** Oscar Goldman, Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業  
 **Date:** November 2025  
-**Status:** Draft with working code and reproducible experiments
+**Status:** V1.0 working code and reproducible experiments
 
 ---
 
