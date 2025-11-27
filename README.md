@@ -27,7 +27,7 @@ Validation that **PSON (Precision-Scaled Orthogonal Noise)** improves optical co
 | **Optical coherence** | 20/20 wins (+0.03 to +0.16 visibility) | Core validation |
 | **Static beamforming** | PSON-Subspace wins 3/3 (MSE: 0.05 vs 127) | Massive advantage |
 | **Moving target tracking** | PSON wins 2/3 (67%) | Better than LMS |
-| **Adaptive jammer nulling** | LMS wins 3/3 ⚠️ | **PSON limitation identified** |
+| **Adaptive jammer nulling** | LMS wins 3/3  | **PSON limitation identified** |
 | **Massive MIMO (1024-2048)** | PSON-Subspace wins 2/3 | Scale advantage |
 
 ### Experimental Suite
@@ -121,17 +121,17 @@ See [paper](Sparse_Coherence_Recovery_via_PSON.md) Section 6.1.1 for detailed an
 
 ### Where PSON Excels
 
-✅ **Static beamforming:** PSON-Subspace achieves MSE 0.03-0.06 vs LMS's 25-150  
-✅ **Moving target tracking:** 67% win rate vs LMS  
-✅ **Optical coherence:** 100% win rate vs deterministic descent  
-✅ **Massive MIMO (1024-2048 elements):** 25-66% better MSE than LMS
+ **Static beamforming:** PSON-Subspace achieves MSE 0.03-0.06 vs LMS's 25-150  
+ **Moving target tracking:** 67% win rate vs LMS  
+ **Optical coherence:** 100% win rate vs deterministic descent  
+ **Massive MIMO (1024-2048 elements):** 25-66% better MSE than LMS
 
 ### Known Limitations
 
-⚠️ **Adaptive jammer nulling:** LMS wins 3/3 when jammer moves  
+ **Adaptive jammer nulling:** LMS wins 3/3 when jammer moves  
 - PSON's monotonic constraint prevents adaptation to moving adversaries
 - See [`docs/SVD-Jammer-problem.md`](docs/SVD-Jammer-problem.md) for ongoing research
-⚠️ **Some Smooth Landscapes, algo is built for noisy landscapes**
+ **Some Smooth Landscapes, algo is built for noisy landscapes**
 
 *Other limitation but also many wins, study main paper for full report*
 
