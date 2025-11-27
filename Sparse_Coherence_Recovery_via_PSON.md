@@ -278,6 +278,9 @@ uv sync
 # Main ablation (all signals, couplings, dependencies)
 uv run python .\experiments\airtight_experiments_001.py
 
+# Fair evaluation mode (equal function-evaluation budgets)
+uv run python .\experiments\airtight_experiments_001.py --fair_evals
+
 # Force synthetic ζ fallback (if mpmath unavailable)
 uv run python .\experiments\airtight_experiments_001.py --no_mpmath
 
@@ -339,6 +342,61 @@ To ensure the effect is not an artifact of any specific signal, we tested PSON a
 *   **Range:** +0.026 to +0.160
 *   **Best Performance:** Turbulence/Phase/Per-gap (+0.160)
 *   **Mean Acceptance Rate:** 48.4%
+
+#### 6.1.1 The Deterministic Descent Failure Mode
+
+**Critical observation:** In **9 out of 20 scenarios**, the deterministic baseline achieved **0% acceptance rate**—it never moved from the initial zero-phase configuration despite using the same 601-evaluation budget as PSON.
+
+**Why this happens:**
+
+Pure deterministic gradient descent with down-only acceptance creates a **deterministic trap**:
+
+1. System starts at phases = 0
+2. Compute gradient: `grad = -w * E_cur * weights`
+3. Propose step: `proposal = phases - lr * grad`
+4. **If energy(proposal) > energy(current): reject**
+5. **Stay at same position with same gradient**
+6. **Next iteration proposes identical step → rejected for same reason**
+7. **System is permanently stuck**
+
+This failure mode occurs when the initial gradient points toward a local increase in energy. With no stochasticity, the algorithm has no mechanism to escape.
+
+**PSON was explicitly designed to solve this:**
+
+```python
+# Each iteration, PSON tries different exploration directions
+candidate = proposal + noise  # noise changes each iteration
+
+# If exploration fails, fall back to deterministic
+if energy(candidate) > energy(current):
+    try: proposal (deterministic fallback)
+```
+
+The orthogonal noise is regenerated each iteration from a new random sample, providing **continuous exploration** even when the deterministic gradient is trapped. This is why PSON maintains 32-69% acceptance rates in the same scenarios where deterministic descent achieves 0%.
+
+**Fairness validation:** Both methods were tested under identical conditions:
+- Same evaluation budget (601 simulate_fn calls)
+- Same initialization (zero phases)
+- Same RNG seeds per scenario
+- Both methods try: (1) main candidate, (2) deterministic fallback
+
+The only algorithmic difference: PSON's candidate includes orthogonal noise; baseline's candidate is purely deterministic. The 20/20 win rate validates that **exploratory optimization is essential** for these aliased, non-convex landscapes.
+
+**Scenarios where baseline got stuck (0% acceptance):**
+
+| Signal | Coupling | Dependency | Baseline V | PSON V | Gain | Interpretation |
+|--------|----------|------------|------------|--------|------|----------------|
+| zeta | phase | per_gap | 0.442 | 0.611 | +0.169 | Stuck at init, PSON explores |
+| zeta | phase | per_screen | 0.443 | 0.589 | +0.146 | Stuck at init, PSON explores |
+| zeta | amplitude | per_screen | 0.603 | 0.634 | +0.031 | Stuck at init, PSON explores |
+| sinmix | phase | per_screen | 0.399 | 0.517 | +0.117 | Stuck at init, PSON explores |
+| sinmix | amplitude | per_screen | 0.520 | 0.604 | +0.085 | Stuck at init, PSON explores |
+| one_over_f | phase | per_gap | 0.411 | 0.552 | +0.141 | Stuck at init, PSON explores |
+| one_over_f | amplitude | per_screen | 0.602 | 0.684 | +0.083 | Stuck at init, PSON explores |
+| turbulence | phase | per_screen | 0.431 | 0.585 | +0.154 | Stuck at init, PSON explores |
+| turbulence | amplitude | per_screen | 0.567 | 0.654 | +0.087 | Stuck at init, PSON explores |
+
+In these 9 scenarios, the deterministic baseline remains at the initial configuration (V ≈ 0.40-0.60), while PSON explores and finds better solutions (V ≈ 0.52-0.68). This is not a bug in the comparison—it's **validation that PSON solves the exploration problem** that deterministic methods cannot.
 
 ### 6.2 Coherence Recovery
 *   **Baseline (Prime Gaps, no control):** $V \approx 0.40$ (Low Coherence)

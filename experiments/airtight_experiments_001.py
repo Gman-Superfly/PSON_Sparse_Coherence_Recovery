@@ -233,6 +233,7 @@ def run_homeostat_vector(
     use_pson: bool,
     seed: int,
     simulate_fn: Callable[[np.ndarray], np.ndarray],
+    eval_budget: Optional[int] = None,
 ) -> Dict[str, object]:
     rng = np.random.default_rng(seed)
     d = len(gaps_um)
@@ -249,36 +250,44 @@ def run_homeostat_vector(
     E0 = energy_from_visibility(V0)
     energies.append(E0)
     visibilities.append(V0)
+    func_evals = 1  # Count function evaluations (calls to simulate_fn)
 
-    for _ in range(steps):
-        I_cur = simulate_fn(phases)
-        V_cur = calculate_visibility(I_cur)
-        E_cur = energy_from_visibility(V_cur)
-        benefit = E_cur
-        grad = -w * benefit * weights
-        proposal = phases - lr * grad
+    if eval_budget is None:
+        # Fixed-step mode (original behavior)
+        for _ in range(steps):
+            I_cur = simulate_fn(phases)
+            func_evals += 1
+            V_cur = calculate_visibility(I_cur)
+            E_cur = energy_from_visibility(V_cur)
+            benefit = E_cur
+            grad = -w * benefit * weights
+            proposal = phases - lr * grad
 
-        if use_pson:
-            delta_perp = project_noise_metric_orthogonal(grad=grad, precision=precision, rng=rng)
-            noise = (delta_perp / (np.sqrt(precision) + 1e-12)) * noise_scale
-            candidate = proposal + noise
-        else:
-            candidate = proposal
+            if use_pson:
+                delta_perp = project_noise_metric_orthogonal(grad=grad, precision=precision, rng=rng)
+                noise = (delta_perp / (np.sqrt(precision) + 1e-12)) * noise_scale
+                candidate = proposal + noise
+            else:
+                candidate = proposal
 
-        attempts += 1
-        I_new = simulate_fn(candidate)
-        V_new = calculate_visibility(I_new)
-        E_new = energy_from_visibility(V_new)
-        if E_new <= E_cur:
-            phases = candidate
-            accepted += 1
-            energies.append(E_new)
-            visibilities.append(V_new)
-            continue
+            attempts += 1
+            I_new = simulate_fn(candidate)
+            func_evals += 1
+            V_new = calculate_visibility(I_new)
+            E_new = energy_from_visibility(V_new)
+            if E_new <= E_cur:
+                phases = candidate
+                accepted += 1
+                energies.append(E_new)
+                visibilities.append(V_new)
+                continue
 
-        if use_pson:
+            # Both methods try deterministic fallback (for fair comparison)
+            # Baseline: candidate=proposal, so this tests proposal again (redundant but symmetric)
+            # PSON: candidate=proposal+noise, so this tests proposal as fallback
             attempts += 1
             I_det = simulate_fn(proposal)
+            func_evals += 1
             V_det = calculate_visibility(I_det)
             E_det = energy_from_visibility(V_det)
             if E_det <= E_cur:
@@ -288,13 +297,76 @@ def run_homeostat_vector(
                 visibilities.append(V_det)
                 continue
 
-        energies.append(E_cur)
-        visibilities.append(V_cur)
+            energies.append(E_cur)
+            visibilities.append(V_cur)
+    else:
+        # Evaluation-budget mode (fairness: both methods get the same simulate_fn call budget)
+        # We already spent 1 eval on I0. Each loop iteration requires at least:
+        # - 1 eval for I_cur, and 1 eval for candidate (2 total). Optional +1 for deterministic fallback when use_pson.
+        iterations = 0
+        while True:
+            # Ensure we can afford at least I_cur (next measurement)
+            if func_evals + 1 > eval_budget:
+                break
+            I_cur = simulate_fn(phases)
+            func_evals += 1
+            V_cur = calculate_visibility(I_cur)
+            E_cur = energy_from_visibility(V_cur)
+
+            benefit = E_cur
+            grad = -w * benefit * weights
+            proposal = phases - lr * grad
+
+            if use_pson:
+                delta_perp = project_noise_metric_orthogonal(grad=grad, precision=precision, rng=rng)
+                noise = (delta_perp / (np.sqrt(precision) + 1e-12)) * noise_scale
+                candidate = proposal + noise
+            else:
+                candidate = proposal
+
+            # Require budget for candidate evaluation
+            if func_evals + 1 > eval_budget:
+                break
+            attempts += 1
+            I_new = simulate_fn(candidate)
+            func_evals += 1
+            V_new = calculate_visibility(I_new)
+            E_new = energy_from_visibility(V_new)
+
+            if E_new <= E_cur:
+                phases = candidate
+                accepted += 1
+                energies.append(E_new)
+                visibilities.append(V_new)
+            else:
+                did_accept = False
+                # Both methods try deterministic fallback if budget allows (for fair comparison)
+                if func_evals + 1 <= eval_budget:
+                    attempts += 1
+                    I_det = simulate_fn(proposal)
+                    func_evals += 1
+                    V_det = calculate_visibility(I_det)
+                    E_det = energy_from_visibility(V_det)
+                    if E_det <= E_cur:
+                        phases = proposal
+                        accepted += 1
+                        energies.append(E_det)
+                        visibilities.append(V_det)
+                        did_accept = True
+                if not did_accept:
+                    energies.append(E_cur)
+                    visibilities.append(V_cur)
+
+            iterations += 1
+            # Safety: avoid infinite loops if eval_budget is very large
+            if iterations >= max(steps, 1_000_000):
+                break
 
     return {
         "energies": energies,
         "final_V": float(visibilities[-1]),
         "accept_rate": 0.0 if attempts == 0 else accepted / attempts,
+        "func_evals": int(func_evals),
     }
 
 
@@ -323,6 +395,7 @@ def run_invariance_grid(
     phase_gain: float,
     amp_gain: float,
     use_mpmath: bool,
+    fair_evals: bool,
 ) -> Tuple[List[Dict[str, object]], Dict[str, Dict[str, float]]]:
     gaps = build_gaps_primes()
     rng = np.random.default_rng(12345)
@@ -396,6 +469,10 @@ def run_invariance_grid(
                 sim_fn = make_sim_fn(dependency, coupling, Sx, Si)
 
                 for seed in seeds:
+                    # Set a common evaluation budget if fairness is requested.
+                    # Budget heuristic: initial (1) + steps * 3 (upper bound per-step usage with fallback)
+                    eval_budget = (1 + steps * 3) if fair_evals else None
+
                     res_n = run_homeostat_vector(
                         gaps_um=gaps,
                         steps=steps,
@@ -405,6 +482,7 @@ def run_invariance_grid(
                         use_pson=False,
                         seed=seed,
                         simulate_fn=sim_fn,
+                        eval_budget=eval_budget,
                     )
                     res_p = run_homeostat_vector(
                         gaps_um=gaps,
@@ -415,6 +493,7 @@ def run_invariance_grid(
                         use_pson=True,
                         seed=seed,
                         simulate_fn=sim_fn,
+                        eval_budget=eval_budget,
                     )
 
                     df90_n = delta_f90_steps(res_n["energies"])
@@ -432,6 +511,8 @@ def run_invariance_grid(
                         "deltaF90_pson": df90_p,
                         "accept_rate_no_pson": res_n["accept_rate"],
                         "accept_rate_pson": res_p["accept_rate"],
+                        "func_evals_no_pson": res_n.get("func_evals", 0),
+                        "func_evals_pson": res_p.get("func_evals", 0),
                     })
 
                     final_no_pson.append(res_n["final_V"])
@@ -440,6 +521,16 @@ def run_invariance_grid(
                     df90_pson.append(df90_p)
                     acc_no_pson.append(res_n["accept_rate"])
                     acc_pson.append(res_p["accept_rate"])
+
+                # Aggregate function evaluation counts (if present)
+                fe_n_vals = []
+                fe_p_vals = []
+                for r in rows:
+                    if r.get("signal") == signal and r.get("coupling") == coupling and r.get("dependency") == dependency:
+                        if "func_evals_no_pson" in r:
+                            fe_n_vals.append(float(r["func_evals_no_pson"]))
+                        if "func_evals_pson" in r:
+                            fe_p_vals.append(float(r["func_evals_pson"]))
 
                 f_n = np.array(final_no_pson, dtype=float)
                 f_p = np.array(final_pson, dtype=float)
@@ -456,6 +547,8 @@ def run_invariance_grid(
                     "mean_deltaF90_pson": float(d_p.mean()) if d_p.size else float(steps),
                     "mean_accept_no_pson": float(a_n.mean()) if a_n.size else 0.0,
                     "mean_accept_pson": float(a_p.mean()) if a_p.size else 0.0,
+                    "mean_func_evals_no_pson": float(np.mean(fe_n_vals)) if fe_n_vals else 0.0,
+                    "mean_func_evals_pson": float(np.mean(fe_p_vals)) if fe_p_vals else 0.0,
                 }
 
     return rows, summary
@@ -499,6 +592,7 @@ def main():
     parser.add_argument("--phase_gain", type=float, default=0.5)
     parser.add_argument("--amp_gain", type=float, default=0.2)
     parser.add_argument("--no_mpmath", action="store_true", help="Force synthetic ζ-like fallback instead of true ζ for zeta signal")
+    parser.add_argument("--fair_evals", action="store_true", help="Use a common function-evaluation budget for PSON and baseline")
     args = parser.parse_args()
 
     seeds = [int(x) for x in args.seeds.split(",") if x.strip()]
@@ -525,6 +619,7 @@ def main():
         phase_gain=args.phase_gain,
         amp_gain=args.amp_gain,
         use_mpmath=use_mpmath,
+        fair_evals=args.fair_evals,
     )
 
     save_csv("airtight_experiments_001_results.csv", rows)
@@ -542,6 +637,7 @@ def main():
             "phase_gain": args.phase_gain,
             "amp_gain": args.amp_gain,
             "mpmath": use_mpmath,
+            "fair_evals": bool(args.fair_evals),
         },
     }
     with open("airtight_experiments_001_summary.json", "w") as f:
