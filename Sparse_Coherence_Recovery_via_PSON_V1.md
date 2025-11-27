@@ -585,7 +585,7 @@ Aperiodic arrays (sparse sensor placement, radar apertures) trade hardware cost 
 
 #### 7.1.1 Optical Scaling: The "Smile Curve" Phenomenon
 
-We tested PSON's optical coherence recovery at large scales (100 to 4096 elements) against gradient descent (GD) and PSON-Subspace variants. The results reveal a **characteristic "smile curve"**—PSON's advantage is non-monotonic across array sizes.
+We tested PSON's optical coherence recovery at large scales (**100 to 4096 elements**) against gradient descent (GD) and PSON-Subspace variants. The results reveal a **characteristic "smile curve"**—PSON's advantage is non-monotonic across array sizes.
 
 **Full Results (3 signal types × 3 runs each):**
 
@@ -1053,7 +1053,7 @@ This work suggests that precision-scaled orthogonal exploration has value for **
 - **Precision proxy:** Using irregularity as precision is a heuristic; curvature-based or SNR-based precision may improve efficiency.
 - **Acceptance rate:** Down-only acceptance can slow early descent; line-search or small-gain capping [Goldman 2025] could smooth progress.
 - **Stale subspace (PSON-Sub):** One-shot SVD becomes stale when scene changes. Need adaptive subspace update for non-stationary scenarios.
-- **Scale:** For optical coherence, tested up to 100 sparse elements. For beamforming, tested up to 8192 antenna elements.
+- **Scale:** For optical coherence, tested up to **4096 elements**. For beamforming, tested up to **8192 antenna elements**.
 - **Zeta computation:** Accurate $\zeta(s)$ is expensive; we provide synthetic fallback for reproducibility.
 
 ### 9.2 Algorithm Variants and Optimization
