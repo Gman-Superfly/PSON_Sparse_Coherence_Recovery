@@ -249,8 +249,8 @@ Visibility is $V = \frac{I_{\max} - I_{\min}}{I_{\max} + I_{\min} + \varepsilon}
 
 We ablate coupling and dependency:
 - **Coupling:** phase vs amplitude
-  - Phase: $\Phi_i(\theta) \leftarrow \Phi_i(\theta) + \text{phase\_gain}\cdot S$
-  - Amplitude: $\tfrac{1}{2} \leftarrow \tfrac{1}{2}\,(1 + \text{amp\_gain}\cdot S)$, clipped $\ge 0$
+  - Phase: $\Phi_i(\theta) \leftarrow \Phi_i(\theta) + \text{phase_gain} \cdot S$
+  - Amplitude: $\tfrac{1}{2} \leftarrow \tfrac{1}{2}\,(1 + \text{amp_gain} \cdot S)$, clipped $\ge 0$
 - **Dependency:** per-gap ($S = S_i$) vs per-screen ($S = S(\theta)$)
 
 ### 5.2 Precision and Weights from Irregularity
