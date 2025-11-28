@@ -10,31 +10,15 @@
 
 **Abstract**
 
-We present empirical validation of Precision-Scaled Orthogonal Noise (PSON) for optimizing interference visibility in sparse, irregularly sampled optical systems. Building on the Neuro-Symbolic Homeostat [Goldman 2025], we apply a controller combining non-local credit assignment with PSON for safe null-space exploration. Across 20 test scenarios, PSON achieves **100% win rate** over deterministic baselines on the core optical coherence recovery task.
+Sparse, irregular sampling arrays (e.g., prime-gap interferometers, aperiodic antenna arrays) create highly non-convex optimization landscapes where standard gradient descent fails—local gradients are unreliable due to aliasing, and deterministic methods get trapped in local minima. We present **Precision-Scaled Orthogonal Noise (PSON)**, an exploration algorithm designed for optimization under partial observability where only global scalar feedback is available. PSON combines non-local credit assignment (updates from global energy rather than per-parameter derivatives) with orthogonal exploration (noise perpendicular to descent direction) scaled by parameter uncertainty. Exploration intensity adapts automatically: irregular parameters receive more noise; regular parameters stay conservative. Monotonic acceptance guards ensure energy never increases, providing safe descent with exploratory capabilities.
 
-We further validate PSON on **discrete phase optimization** for phased array antennas. In a **fair comparison with matched initialization** (all algorithms start from steering vector), PSON-Subspace wins 100% on static beamforming (3/3), and standard PSON wins 67% on moving target tracking (2/3). However, **PSON loses to Full-LMS on adaptive jammer nulling (0/3 vs 3/3)**—a significant finding.
+We validate PSON across two domains:
 
-**Where PSON excels:** Static beamforming MSE (PSON-Subspace achieves 0.03-0.06 vs LMS's 25-150) and moving target tracking. **Where PSON struggles:** Adaptive jammer nulling, where LMS's ability to accept temporarily worse steps allows it to track moving interference, while PSON's monotonic constraint prevents necessary adaptation.
+**Optical coherence recovery (core contribution):** Tested on 20 scenarios (5 signal types × 2 coupling modes × 2 dependencies) with **fair evaluation budgets** (both methods use 601 function evaluations). PSON achieves **100% win rate** (mean gain: +0.11 visibility, 95% CI: [+0.10, +0.19]). In 9/20 scenarios, deterministic descent achieved **0% acceptance rate** (stuck at initialization)—PSON's continuous exploration solves this trap.
 
-**Open problem:** The "SVD-Jammer Problem"—PSON-Subspace's one-shot SVD becomes stale when adversaries move, and standard PSON's monotonic descent rejects valid adaptation steps. See Appendix E.9 and `docs/SVD-Jammer-problem.md`.
+**Discrete phase optimization:** Validated on phased array antennas (5G/radar), holographic beam steering, and acoustic beamforming. PSON achieves 100% win rate vs random search on quantized phase problems. On beamforming: PSON-Subspace dominates static MSE (0.03-0.06 vs LMS's 25-150) and wins at 1024-2048 elements; standard PSON wins moving target tracking (67%). **Limitation identified:** PSON loses to LMS on adaptive jammer nulling (0/3 vs 3/3)—monotonic constraint prevents tracking moving adversaries.
 
----
-
-> ## **Summary: Beamforming Results**
->
-> | Scenario | PSON-Sub | PSON | Full-LMS | Winner |
-> |----------|----------|------|----------|--------|
-> | **Static beamforming (MSE)** | **3/3** ✅ | 0/3 | 0/3 | **PSON-Sub** |
-> | **Moving target tracking** | 0/3 | **2/3** ✅ | 1/3 | **PSON** |
-> | **Adaptive jammer nulling** | 0/3 | 0/3 | **3/3** ✅ | **Full-LMS** |
-> | **5G Massive MIMO (1024-2048)** | **2/3** ✅ | 1/3 | 0/3 | **PSON-Sub** | *see notes on optimal setups*
-> | **Optical coherence (core paper)** | — | **20/20** ✅ | — | **PSON** |
->
-> **Key Findings:**
-> - **PSON-Subspace dominates static MSE**: 0.03-0.06 vs LMS's 25-150
-> - **PSON-Subspace wins at 5G scale**: 25-66% better MSE at 1024-2048 elements
-> - **Standard PSON wins moving target**: 67% win rate
-> - **LMS wins jammer nulling**: PSON's monotonic constraint prevents adaptation to moving adversaries (see Appendix E.9)
+**Key findings:** PSON is not a universal optimizer—it excels on irregular, aliased, or discrete landscapes where gradient information is unreliable or unavailable. It loses to domain-specific algorithms (Gerchberg-Saxton for Fourier optics) and adaptive methods on non-stationary adversaries. Its value is **robustness under partial observability** and **guaranteed monotonic descent** for safety-critical applications.
 
 ---
 
@@ -686,6 +670,23 @@ PSON's non-local credit mechanism does not require explicit gradients, making it
 - The orthogonal exploration "tunnels" between discrete configurations
 
 We extensively validated PSON on five discrete phase applications:
+
+**Summary: Beamforming Results**
+
+| Scenario | PSON-Sub | PSON | Full-LMS | Winner |
+|----------|----------|------|----------|--------|
+| **Static beamforming (MSE)** | **3/3** ✅ | 0/3 | 0/3 | **PSON-Sub** |
+| **Moving target tracking** | 0/3 | **2/3** ✅ | 1/3 | **PSON** |
+| **Adaptive jammer nulling** | 0/3 | 0/3 | **3/3** ✅ | **Full-LMS** |
+| **5G Massive MIMO (1024-2048)** | **2/3** ✅ | 1/3 | 0/3 | **PSON-Sub** |
+
+**Key Findings:**
+- **PSON-Subspace dominates static MSE**: 0.03-0.06 vs LMS's 25-150
+- **PSON-Subspace wins at 5G scale**: 25-66% better MSE at 1024-2048 elements
+- **Standard PSON wins moving target**: 67% win rate
+- **LMS wins jammer nulling**: PSON's monotonic constraint prevents adaptation to moving adversaries (see Section 7.2.1.2 and Appendix E.9)
+
+---
 
 #### 7.2.1 Phased Array Antennas (5G/Radar) — PSON Wins 100%
 
