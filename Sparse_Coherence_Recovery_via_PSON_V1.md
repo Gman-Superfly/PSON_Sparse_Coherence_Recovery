@@ -249,16 +249,36 @@ Visibility is $V = \frac{I_{\max} - I_{\min}}{I_{\max} + I_{\min} + \varepsilon}
 
 We ablate coupling and dependency:
 - **Coupling:** phase vs amplitude
-  - Phase: $\Phi_i(\theta) \leftarrow \Phi_i(\theta) + \text{phase_gain} \cdot S$
-  - Amplitude: $\tfrac{1}{2} \leftarrow \tfrac{1}{2}\,(1 + \text{amp_gain} \cdot S)$, clipped $\ge 0$
+  - Phase: $\Phi_i(\theta) \leftarrow \Phi_i(\theta) + \text{phase\_gain} \cdot S$
+  - Amplitude: $\tfrac{1}{2} \leftarrow \tfrac{1}{2}\,(1 + \text{amp\_gain} \cdot S)$, clipped $\ge 0$
 - **Dependency:** per-gap ($S = S_i$) vs per-screen ($S = S(\theta)$)
 
 ### 5.2 Precision and Weights from Irregularity
-Let gaps (in $\mu$m) be $g \in \mathbb{R}^N$. Define:
-$$ \bar g = \tfrac{1}{N}\sum_i g_i,\quad \mathrm{var}(g) = \tfrac{1}{N}\sum_i (g_i - \bar g)^2 + \varepsilon, $$
-$$ \text{irregularity}_i = \frac{(g_i - \bar g)^2}{\mathrm{var}(g)}. $$
+Let gaps (in $\mu$m) be $g \in \mathbb{R}^N$.
+
+- Mean gap:
+
+$$\bar g = \tfrac{1}{N}\sum_i g_i$$
+
+- Gap variance:
+
+$$\mathrm{var}(g) = \tfrac{1}{N}\sum_i (g_i - \bar g)^2 + \varepsilon$$
+
+- Irregularity per gap:
+
+$$\text{irregularity}_i = \frac{(g_i - \bar g)^2}{\mathrm{var}(g)}$$
+
 Then:
-$$ \text{precision}_i = \frac{1}{1 + \text{irregularity}_i} \in (0,1], \qquad \text{weights}_i = \frac{\text{irregularity}_i}{\sum_j \text{irregularity}_j} \;\;\text{(or uniform if denominator $\approx 0$)}. $$
+
+- Precision:
+
+$$\text{precision}_i = \frac{1}{1 + \text{irregularity}_i} \in (0,1]$$
+
+- Weights (non-local credit):
+
+$$\text{weights}_i = \frac{\text{irregularity}_i}{\sum_j \text{irregularity}_j}$$
+
+(Use uniform weights if denominator $\approx 0$.)
 
 ### 5.3 Structured Signal Probes
 To validate robustness across landscape types, we test with 5 distinct signal families:
