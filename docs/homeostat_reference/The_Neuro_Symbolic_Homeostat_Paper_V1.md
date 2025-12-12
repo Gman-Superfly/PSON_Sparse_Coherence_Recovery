@@ -62,7 +62,7 @@ $$
 $$
 
 (Eq. 3)
-This provides a non‑local correction akin to the “nudge” in Equilibrium Propagation—enabling credit assignment without backprop through inactive paths.
+This provides a non‑local correction akin to the “nudge” in Equilibrium Propagation - enabling credit assignment without backprop through inactive paths.
 
 Explicit sign check. From (Eq. 3), $\mathrm{sign}\big(\partial F/\partial \eta_{\text{gate}}\big) = -\,\mathrm{sign}(\Delta_{\text{benefit}})$. Thus when downstream benefit is positive, the gradient pushes the gate upward (reducing energy), irrespective of the current $\eta_{\text{gate}}$; conversely for negative benefit.
 
@@ -138,7 +138,7 @@ We retain Dynamic Gradient‑Based Energy Minimization as the default inner solv
 Augmented kernels:
 - Quadratic/Gaussian blocks: GaBP‑style updates (Jacobi/GS schedule) = precision‑weighted linear solves with per‑iteration cost $O(\mathrm{nnz}(J))$; no global factorization required.
 - Non‑Gaussian/gated/hinge terms: gradient with line search, proximal updates, or ADMM blocks (production‑ready) with acceptance guards.
-- Mixed graphs: hybrid passes—GaBP on quadratic stars, prox/gradient on others—under a common stability projector.
+- Mixed graphs: hybrid passes - GaBP on quadratic stars, prox/gradient on others - under a common stability projector.
 
 **Pseudocode Sketch (Conceptual):**
 
@@ -228,7 +228,7 @@ Walk‑summability vs diagonal dominance. Following Malioutov et al., walk‑s
 
 ## 11. Conclusion
 
-By unifying precision‑aware null‑space exploration (PSON), stability projection (Small‑Gain), non‑local correction (Wormhole), and stiffness‑based per‑coordinate updates, the Homeostat delivers a fast, controllable, and observable “System‑2” layer for neuro‑symbolic systems. In Gaussian regions, message passing and precision‑scaled iterations (Jacobi/GS) collapse to the same sparse matrix update, reducing tuning to stability budgeting; in mixed regimes, proximal and ADMM updates preserve efficiency and guarantees. The resulting architecture is both special and fast: matrix‑math heavy inner loops, explicit stability mechanisms, and non‑local credit assignment—all in a modular, typed stack.
+By unifying precision‑aware null‑space exploration (PSON), stability projection (Small‑Gain), non‑local correction (Wormhole), and stiffness‑based per‑coordinate updates, the Homeostat delivers a fast, controllable, and observable “System‑2” layer for neuro‑symbolic systems. In Gaussian regions, message passing and precision‑scaled iterations (Jacobi/GS) collapse to the same sparse matrix update, reducing tuning to stability budgeting; in mixed regimes, proximal and ADMM updates preserve efficiency and guarantees. The resulting architecture is both special and fast: matrix‑math heavy inner loops, explicit stability mechanisms, and non‑local credit assignment - all in a modular, typed stack.
 
 ---
 

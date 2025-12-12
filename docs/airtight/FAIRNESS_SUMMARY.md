@@ -19,13 +19,13 @@
 
 ## Key Results
 
-✅ **PSON wins 20/20 scenarios under fair conditions**
+ **PSON wins 20/20 scenarios under fair conditions**
 - Equal budget: 601 evaluations each
 - Same initialization: zero phases
 - Same scenarios: identical signals/couplings
 - Same structure: candidate + fallback
 
-✅ **Baseline failure mode validated**
+ **Baseline failure mode validated**
 - 9/20 scenarios: 0% acceptance (stuck at initialization)
 - Deterministic gradient points toward energy increase
 - No exploration mechanism → permanent trap
@@ -45,5 +45,5 @@ uv run python .\experiments\airtight_experiments_001.py --fair_evals
 
 ## Conclusion
 
-The test is fair. The 20/20 win rate is valid. The baseline getting stuck is not a bug—it's validation that PSON solves the exploration problem that pure deterministic descent cannot.
+The test is fair. The 20/20 win rate is valid. The baseline getting stuck is not a bug - it's validation that PSON solves the exploration problem that pure deterministic descent cannot.
 

@@ -307,7 +307,7 @@ def plot_finalV_bar(summary: Dict[str, Dict[str, float]]) -> None:
     plt.bar(x, means, yerr=stds, capsize=6, color=["#4C78A8", "#F58518"])
     plt.xticks(x, labels)
     plt.ylabel("Final Visibility (mean ± sd)")
-    plt.title("Experiment 004: Final V — On-line vs Off-line")
+    plt.title("Experiment 004: Final V - On-line vs Off-line")
     plt.tight_layout()
     plt.savefig("actual_experiment_004_finalV_bar.png")
 

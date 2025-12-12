@@ -65,7 +65,7 @@ Jammer at -30°                     Jammer at +45°
 Subspace contains                  Subspace does NOT contain
 jammer direction                   new jammer direction
      ↓                                  ↓
-Can null jammer ✅                 Cannot null jammer ❌
+Can null jammer                  Cannot null jammer 
 ```
 
 ### Empirical Evidence (Fair Comparison Test)
@@ -133,7 +133,7 @@ w = w + mu * gradient
 - No rejection of "worse" steps
 - Naturally tracks moving interference
 
-**Tradeoff:** LMS can diverge or amplify interference if learning rate is wrong. PSON's monotonic constraint prevents this—but also prevents adaptation.
+**Tradeoff:** LMS can diverge or amplify interference if learning rate is wrong. PSON's monotonic constraint prevents this - but also prevents adaptation.
 
 ---
 
@@ -264,9 +264,9 @@ A solution should achieve:
 
 | Metric | Target | Current PSON-Sub |
 |--------|--------|------------------|
-| Static MSE | < 0.1 | ✅ 0.03 |
-| Moving target tracking | < 5° error | ✅ ~75° (bad but workable) |
-| Moving jammer SINR | > 0 dB | ❌ -5 dB (fails) |
+| Static MSE | < 0.1 |  0.03 |
+| Moving target tracking | < 5° error |  ~75° (bad but workable) |
+| Moving jammer SINR | > 0 dB |  -5 dB (fails) |
 
 **Goal:** Maintain PSON-Sub's static performance while achieving positive SINR on moving jammer.
 

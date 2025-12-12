@@ -1,4 +1,4 @@
-## ACTUAL EXPERIMENT 02 — Zeta‑Coupled Vector Homeostat (Wormhole + PSON)
+## ACTUAL EXPERIMENT 02  -  Zeta‑Coupled Vector Homeostat (Wormhole + PSON)
 
 ### TL;DR
 - We add a zeta‑driven phase term to the optical interference model and optimize per‑gap phases with a vector Homeostat.
@@ -79,7 +79,7 @@ Summary:
 
 Interpretation:
 - Uniform is already optimal; updates cannot materially improve visibility.
-- For primes, PSON raises final visibility notably (≈0.40 → ≈0.53), at the cost of more steps to reach 90% of the total energy drop due to exploration and rejections—consistent with “explore to find better minima.”
+- For primes, PSON raises final visibility notably (≈0.40 → ≈0.53), at the cost of more steps to reach 90% of the total energy drop due to exploration and rejections - consistent with “explore to find better minima.”
 
 ---
 
@@ -117,11 +117,11 @@ Goal: higher V_final with fewer steps on primes by co‑tuning these three.
 ## Citation
 If you use this repository in your research, please cite it as below.
 
-**Authors:** Oscar Goldman — Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
 
 ```bibtex
 @software{actual_experiment_02_2025,
-  title        = {ACTUAL EXPERIMENT 02 — Zeta-Coupled Vector Homeostat (Wormhole + PSON)},
+  title        = {ACTUAL EXPERIMENT 02  -  Zeta-Coupled Vector Homeostat (Wormhole + PSON)},
   author       = {Goldman, Oscar},
   organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
   year         = {2025},

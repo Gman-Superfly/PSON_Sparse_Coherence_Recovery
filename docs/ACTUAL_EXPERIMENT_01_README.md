@@ -1,4 +1,4 @@
-## ACTUAL EXPERIMENT 01 — Homeostat Wormhole + PSON on Optical Interference
+## ACTUAL EXPERIMENT 01  -  Homeostat Wormhole + PSON on Optical Interference
 
 ### TL;DR
 - We implement a dynamic “Homeostat” that optimizes interference visibility in a double‑slit proxy by adjusting phase “gates.”
@@ -128,11 +128,11 @@ Not yet established:
 ## Citation
 If you use this repository in your research, please cite it as below.
 
-**Authors:** Oscar Goldman — Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
 
 ```bibtex
 @software{homeostat_actual_experiment_01_2025,
-  title        = {ACTUAL EXPERIMENT 01 — Homeostat Wormhole + PSON on Optical Interference},
+  title        = {ACTUAL EXPERIMENT 01  -  Homeostat Wormhole + PSON on Optical Interference},
   author       = {Goldman, Oscar},
   organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
   year         = {2025},

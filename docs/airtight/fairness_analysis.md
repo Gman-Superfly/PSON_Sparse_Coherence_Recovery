@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-✅ **The test IS fair** with one caveat explained below.
+ **The test IS fair** with one caveat explained below.
 
 Both PSON and baseline:
 - Use identical evaluation budgets (601 simulate_fn calls)
@@ -20,15 +20,15 @@ In **9 out of 20 scenarios**, the baseline achieved **0% acceptance rate**:
 
 | Scenario | Baseline V | PSON V | Gain | Baseline Stuck? |
 |----------|------------|--------|------|----------------|
-| zeta\|phase\|per_gap | 0.442 | 0.611 | +0.169 | ✅ Stuck at init |
-| zeta\|phase\|per_screen | 0.443 | 0.589 | +0.146 | ✅ Stuck at init |
-| zeta\|amplitude\|per_screen | 0.603 | 0.634 | +0.031 | ✅ Stuck at init |
-| sinmix\|phase\|per_screen | 0.399 | 0.517 | +0.117 | ✅ Stuck at init |
-| sinmix\|amplitude\|per_screen | 0.520 | 0.604 | +0.085 | ✅ Stuck at init |
-| one_over_f\|phase\|per_gap | 0.411 | 0.552 | +0.141 | ✅ Stuck at init |
-| one_over_f\|amplitude\|per_screen | 0.602 | 0.684 | +0.083 | ✅ Stuck at init |
-| turbulence\|phase\|per_screen | 0.431 | 0.585 | +0.154 | ✅ Stuck at init |
-| turbulence\|amplitude\|per_screen | 0.567 | 0.654 | +0.087 | ✅ Stuck at init |
+| zeta\|phase\|per_gap | 0.442 | 0.611 | +0.169 |  Stuck at init |
+| zeta\|phase\|per_screen | 0.443 | 0.589 | +0.146 |  Stuck at init |
+| zeta\|amplitude\|per_screen | 0.603 | 0.634 | +0.031 |  Stuck at init |
+| sinmix\|phase\|per_screen | 0.399 | 0.517 | +0.117 |  Stuck at init |
+| sinmix\|amplitude\|per_screen | 0.520 | 0.604 | +0.085 |  Stuck at init |
+| one_over_f\|phase\|per_gap | 0.411 | 0.552 | +0.141 |  Stuck at init |
+| one_over_f\|amplitude\|per_screen | 0.602 | 0.684 | +0.083 |  Stuck at init |
+| turbulence\|phase\|per_screen | 0.431 | 0.585 | +0.154 |  Stuck at init |
+| turbulence\|amplitude\|per_screen | 0.567 | 0.654 | +0.087 |  Stuck at init |
 
 **Interpretation:** These are cases where the deterministic non-local gradient step **immediately increases energy** from the zero-phase initialization, causing rejection. The baseline never escapes the initial state.
 
@@ -156,11 +156,11 @@ rng = np.random.default_rng(12345)  # All runs share same signals
 
 ## Conclusion
 
-✅ **The test is fair for evaluation-budget comparison.**
+ **The test is fair for evaluation-budget comparison.**
 
 The 20/20 win rate demonstrates that PSON's orthogonal exploration + deterministic fallback is effective at escaping local minima that trap pure deterministic descent, even when both methods have the same computational budget.
 
-The baseline getting stuck (0% acceptance) in 9/20 scenarios is **not a bug**—it's evidence that deterministic descent fails on these landscapes, which is exactly what PSON is designed to solve.
+The baseline getting stuck (0% acceptance) in 9/20 scenarios is **not a bug** - it's evidence that deterministic descent fails on these landscapes, which is exactly what PSON is designed to solve.
 
 ---
 

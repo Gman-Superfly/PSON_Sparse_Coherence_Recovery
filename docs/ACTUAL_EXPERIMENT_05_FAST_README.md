@@ -1,4 +1,4 @@
-## ACTUAL EXPERIMENT 05 (FAST) — x‑Dependent ζ With Caching and Progress Logging
+## ACTUAL EXPERIMENT 05 (FAST)  -  x‑Dependent ζ With Caching and Progress Logging
 
 ### TL;DR
 - This is the fast version of Experiment 005. It evaluates x‑dependent zeta modulation
@@ -64,10 +64,10 @@ python .\actual_experiment_005_fast.py --steps 50 --zeta_gains 0.5 --lrs 0.12 --
 ---
 
 ## Artifacts
-- `actual_experiment_005_fast_results.csv` — full grid results (σ, zeta_gain, lr, noise, seed; final_V, ΔF90, accept_rate)
-- `actual_experiment_005_fast_summary.json` — aggregated metrics per σ and per zeta_gain, base‑config mean energy curves, run parameters, and whether true ζ was used
-- `actual_experiment_005_fast_finalV_vs_sigma.png` — error‑bar plot of mean Final‑V vs σ broken out by zeta_gain
-- `actual_experiment_005_fast_energy_mean.png` — mean energy curve across seeds for the base config at each σ
+- `actual_experiment_005_fast_results.csv`  -  full grid results (σ, zeta_gain, lr, noise, seed; final_V, ΔF90, accept_rate)
+- `actual_experiment_005_fast_summary.json`  -  aggregated metrics per σ and per zeta_gain, base‑config mean energy curves, run parameters, and whether true ζ was used
+- `actual_experiment_005_fast_finalV_vs_sigma.png`  -  error‑bar plot of mean Final‑V vs σ broken out by zeta_gain
+- `actual_experiment_005_fast_energy_mean.png`  -  mean energy curve across seeds for the base config at each σ
 
 ---
 
@@ -125,11 +125,11 @@ The summary JSON includes "mpmath": true/false so you can see which path ran.
 ## Citation
 If you use this repository in your research, please cite it as below.
 
-**Authors:** Oscar Goldman — Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
 
 ```bibtex
 @software{actual_experiment_05_fast_2025,
-  title        = {ACTUAL EXPERIMENT 05 (FAST) — x-Dependent ζ With Caching and Progress Logging},
+  title        = {ACTUAL EXPERIMENT 05 (FAST)  -  x-Dependent ζ With Caching and Progress Logging},
   author       = {Goldman, Oscar},
   organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
   year         = {2025},

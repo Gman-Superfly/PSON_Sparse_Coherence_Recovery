@@ -34,9 +34,9 @@ python .\experiments\baseline_comparison_001.py --no_cma
 ```
 
 ### Artifacts
-- `baseline_comparison_001_results.csv` — Per-run results
-- `baseline_comparison_001_summary.json` — Summary statistics
-- `baseline_comparison_001_bar.png` — Bar chart comparison
+- `baseline_comparison_001_results.csv`  -  Per-run results
+- `baseline_comparison_001_summary.json`  -  Summary statistics
+- `baseline_comparison_001_bar.png`  -  Bar chart comparison
 
 ### Expected Outcome
 PSON should outperform Random Search and Simulated Annealing significantly, and compete favorably with CMA-ES while using fewer function evaluations.
@@ -70,10 +70,10 @@ python .\experiments\multi_seed_validation_001.py --signals "turbulence"
 ```
 
 ### Artifacts
-- `multi_seed_validation_001_results.csv` — Per-run results (seed × signal)
-- `multi_seed_validation_001_summary.json` — Summary with confidence intervals
-- `multi_seed_validation_001_box.png` — Box plot of gains per signal
-- `multi_seed_validation_001_gain_dist.png` — Histogram of all gains
+- `multi_seed_validation_001_results.csv`  -  Per-run results (seed × signal)
+- `multi_seed_validation_001_summary.json`  -  Summary with confidence intervals
+- `multi_seed_validation_001_box.png`  -  Box plot of gains per signal
+- `multi_seed_validation_001_gain_dist.png`  -  Histogram of all gains
 
 ### Key Metrics Computed
 | Metric | Description |
@@ -116,9 +116,9 @@ uv run python .\experiments\additional_experiments\partial_observability_test_00
 ```
 
 ### Artifacts
-- `partial_observability_001_results.csv` — Per-run results
-- `partial_observability_001_summary.json` — Summary statistics
-- `partial_observability_001_degradation.png` — Comparison plot
+- `partial_observability_001_results.csv`  -  Per-run results
+- `partial_observability_001_summary.json`  -  Summary statistics
+- `partial_observability_001_degradation.png`  -  Comparison plot
 
 ### Key Finding
 The performance gap between CMA-ES and PSON closes from **-0.41 to -0.04** as observability degrades, validating PSON's robustness.
@@ -153,16 +153,16 @@ uv run python .\experiments\additional_experiments\extreme_partial_observability
 ```
 
 ### Artifacts
-- `extreme_partial_obs_001_results.csv` — Per-run results
-- `extreme_partial_obs_001_summary.json` — Summary statistics
-- `extreme_partial_obs_001_comparison.png` — 4-panel comparison plot
+- `extreme_partial_obs_001_results.csv`  -  Per-run results
+- `extreme_partial_obs_001_summary.json`  -  Summary statistics
+- `extreme_partial_obs_001_comparison.png`  -  4-panel comparison plot
 
 ### Key Findings
 | Scenario | Gap (Clean) | Gap (Extreme) | Interpretation |
 |----------|-------------|---------------|----------------|
-| Clean | -0.10 | — | CMA-ES dominates |
-| Binary+Adversarial | — | **-0.03** | Nearly tied |
-| Nightmare | — | **-0.04** | Gap closed 60% |
+| Clean | -0.10 |  -  | CMA-ES dominates |
+| Binary+Adversarial |  -  | **-0.03** | Nearly tied |
+| Nightmare |  -  | **-0.04** | Gap closed 60% |
 
 - CMA-ES remains superior in most scenarios (it's a state-of-the-art optimizer)
 - Under extreme degradation, **PSON achieves up to 40% win rate**
@@ -258,8 +258,8 @@ Core (required):
 - matplotlib
 
 Optional:
-- `cma` — For CMA-ES baseline (`pip install cma`)
-- `mpmath` — For accurate ζ function (`pip install mpmath`)
+- `cma`  -  For CMA-ES baseline (`pip install cma`)
+- `mpmath`  -  For accurate ζ function (`pip install mpmath`)
 
 ---
 

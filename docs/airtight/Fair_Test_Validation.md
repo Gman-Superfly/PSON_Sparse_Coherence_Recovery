@@ -7,33 +7,33 @@
 
 ## Executive Summary
 
-✅ **The test is fair and correctly validates PSON's 20/20 win rate.**
+ **The test is fair and correctly validates PSON's 20/20 win rate.**
 
-We verified that both PSON and the deterministic baseline operate under identical conditions with equal computational budgets. The baseline's failure to improve in 9/20 scenarios (0% acceptance rate) is not a test artifact—it's **evidence of the deterministic descent failure mode** that PSON was designed to solve.
+We verified that both PSON and the deterministic baseline operate under identical conditions with equal computational budgets. The baseline's failure to improve in 9/20 scenarios (0% acceptance rate) is not a test artifact - it's **evidence of the deterministic descent failure mode** that PSON was designed to solve.
 
 ---
 
 ## Test Fairness Criteria
 
-### ✅ Equal Computational Budget
+###  Equal Computational Budget
 - Both methods: **601 function evaluations** (simulate_fn calls)
 - Budget enforced: stops when `func_evals + 1 > eval_budget`
 - Verified in results: `func_evals_no_pson = func_evals_pson = 601`
 
-### ✅ Identical Initialization
+###  Identical Initialization
 ```python
 rng = np.random.default_rng(seed)      # Same seed per scenario
 phases = np.zeros(d, dtype=float)      # Same initial phases (zero)
 precision, weights = compute_precision_and_weights(gaps)  # Same weights
 ```
 
-### ✅ Identical Scenarios
+###  Identical Scenarios
 ```python
 rng = np.random.default_rng(12345)     # Fixed RNG for signal generation
 # All runs within same (signal, coupling, dependency, seed) share identical signals
 ```
 
-### ✅ Identical Algorithm Structure
+###  Identical Algorithm Structure
 Both methods follow the same pattern:
 1. Compute deterministic proposal: `proposal = phases - lr * grad`
 2. Construct candidate (differs: baseline=deterministic, PSON=+noise)
@@ -125,7 +125,7 @@ Even when `proposal` is rejected 1000 times in a row, the `noise` term changes e
 Both algorithms get the same number of `simulate_fn` calls. If PSON uses more evaluations per iteration, it gets fewer iterations. This is the standard definition of fairness in optimization benchmarks.
 
 #### 2. PSON's Fallback is Part of Its Design
-The fallback mechanism is not a separate advantage—it's intrinsic to how PSON works:
+The fallback mechanism is not a separate advantage - it's intrinsic to how PSON works:
 ```python
 # PSON guarantees: never worse than deterministic descent
 if exploratory_step improves:
@@ -159,7 +159,7 @@ The results are identical because `candidate == proposal` for the baseline, maki
 # Fixed-step mode
 if E_new <= E_cur:
     accept candidate
-elif use_pson:  # ❌ Only PSON gets fallback
+elif use_pson:  #  Only PSON gets fallback
     try deterministic proposal
 ```
 
@@ -169,7 +169,7 @@ elif use_pson:  # ❌ Only PSON gets fallback
 if E_new <= E_cur:
     accept candidate
 else:
-    # ✅ Both methods try fallback (symmetric structure)
+    #  Both methods try fallback (symmetric structure)
     try deterministic proposal
 ```
 
@@ -178,7 +178,7 @@ For baseline: `candidate = proposal`, so testing the fallback is redundant (test
 
 For PSON: `candidate = proposal + noise`, so the fallback provides a genuine alternative.
 
-The results remaining identical after the fix **validates that the original test was already fair**—the structural asymmetry had no practical effect because the baseline's candidate and fallback were identical.
+The results remaining identical after the fix **validates that the original test was already fair** - the structural asymmetry had no practical effect because the baseline's candidate and fallback were identical.
 
 ---
 
@@ -207,10 +207,10 @@ type airtight_experiments_001_summary.json
 
 The 20/20 win rate is valid under rigorous fairness criteria:
 
-1. ✅ **Equal budget:** Both methods use 601 evaluations
-2. ✅ **Same initialization:** Both start at zero phases
-3. ✅ **Same scenarios:** Identical signals, couplings, dependencies
-4. ✅ **Same structure:** Both try candidate + fallback
+1.  **Equal budget:** Both methods use 601 evaluations
+2.  **Same initialization:** Both start at zero phases
+3.  **Same scenarios:** Identical signals, couplings, dependencies
+4.  **Same structure:** Both try candidate + fallback
 
 The baseline getting stuck (0% acceptance in 9/20 scenarios) is **not a test artifact**. It's evidence that:
 

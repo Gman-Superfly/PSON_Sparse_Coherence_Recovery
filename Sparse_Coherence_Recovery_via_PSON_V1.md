@@ -10,15 +10,15 @@
 
 **Abstract**
 
-Sparse, irregular sampling arrays (e.g., prime-gap interferometers, aperiodic antenna arrays) create highly non-convex optimization landscapes where standard gradient descent fails—local gradients are unreliable due to aliasing, and deterministic methods get trapped in local minima. We present **Precision-Scaled Orthogonal Noise (PSON)**, an exploration algorithm designed for optimization under partial observability where only global scalar feedback is available. PSON combines non-local credit assignment (updates from global energy rather than per-parameter derivatives) with orthogonal exploration (noise perpendicular to descent direction) scaled by parameter uncertainty. Exploration intensity adapts automatically: irregular parameters receive more noise; regular parameters stay conservative. Monotonic acceptance guards ensure energy never increases, providing safe descent with exploratory capabilities.
+Sparse, irregular sampling arrays (e.g., prime-gap interferometers, aperiodic antenna arrays) create highly non-convex optimization landscapes where standard gradient descent fails because local gradients are unreliable due to aliasing, and deterministic methods get trapped in local minima. We present **Precision-Scaled Orthogonal Noise (PSON)**, an exploration algorithm designed for optimization under partial observability where only global scalar feedback is available. PSON combines non-local credit assignment (updates from global energy rather than per-parameter derivatives) with orthogonal exploration (noise perpendicular to descent direction) scaled by parameter uncertainty. Exploration intensity adapts automatically: irregular parameters receive more noise; regular parameters stay conservative. Monotonic acceptance guards ensure energy never increases, providing safe descent with exploratory capabilities.
 
 We validate PSON across two domains:
 
-**Optical coherence recovery (core contribution):** Tested on 20 scenarios (5 signal types × 2 coupling modes × 2 dependencies) with **fair evaluation budgets** (both methods use 601 function evaluations). PSON achieves **100% win rate** (mean gain: +0.11 visibility, 95% CI: [+0.10, +0.19]). In 9/20 scenarios, deterministic descent achieved **0% acceptance rate** (stuck at initialization)—PSON's continuous exploration solves this trap.
+**Optical coherence recovery (core contribution):** Tested on 20 scenarios (5 signal types × 2 coupling modes × 2 dependencies) with **fair evaluation budgets** (both methods use 601 function evaluations). PSON achieves **100% win rate** (mean gain: +0.11 visibility, 95% CI: [+0.10, +0.19]). In 9/20 scenarios, deterministic descent achieved **0% acceptance rate** (stuck at initialization). PSON's continuous exploration solves this trap.
 
-**Discrete phase optimization:** Validated on phased array antennas (5G/radar), holographic beam steering, and acoustic beamforming. PSON achieves 100% win rate vs random search on quantized phase problems. On beamforming: PSON-Subspace dominates static MSE (0.03-0.06 vs LMS's 25-150) and wins at 1024-2048 elements; standard PSON wins moving target tracking (67%). **Limitation identified:** PSON loses to LMS on adaptive jammer nulling (0/3 vs 3/3)—monotonic constraint prevents tracking moving adversaries.
+**Discrete phase optimization:** Validated on phased array antennas (5G/radar), holographic beam steering, and acoustic beamforming. PSON achieves 100% win rate vs random search on quantized phase problems. On beamforming: PSON-Subspace dominates static MSE (0.03-0.06 vs LMS's 25-150) and wins at 1024-2048 elements; standard PSON wins moving target tracking (67%). **Limitation identified:** PSON loses to LMS on adaptive jammer nulling (0/3 vs 3/3). The monotonic constraint prevents tracking moving adversaries.
 
-**Key findings:** PSON is not a universal optimizer—it excels on irregular, aliased, or discrete landscapes where gradient information is unreliable or unavailable. It loses to domain-specific algorithms (Gerchberg-Saxton for Fourier optics) and adaptive methods on non-stationary adversaries. Its value is **robustness under partial observability** and **guaranteed monotonic descent** for safety-critical applications.
+**Key findings:** PSON is not a universal optimizer. It excels on irregular, aliased, or discrete landscapes where gradient information is unreliable or unavailable. It loses to domain-specific algorithms (Gerchberg-Saxton for Fourier optics) and adaptive methods on non-stationary adversaries. Its value is **robustness under partial observability** and **guaranteed monotonic descent** for safety-critical applications.
 
 ---
 
@@ -28,18 +28,18 @@ In optical interferometry and signal processing, coherence (fringe visibility) d
 
 When sampling is **sparse and irregular** (e.g., prime-gap arrays, aperiodic gratings):
 *   **Benefit:** Computational efficiency; suppression of predictable side-lobes (no grating structure).
-*   **Cost:** The objective function (visibility) becomes highly non-convex with many local minima caused by aliasing—undersampling folds high-frequency components into the observable band.
+*   **Cost:** The objective function (visibility) becomes highly non-convex with many local minima caused by aliasing; undersampling folds high-frequency components into the observable band.
 
 **The Problem:** Standard gradient descent gets trapped in local minima. The local gradient at each parameter is noisy and misleading due to the irregular spacing.
 
-**Why Not Just Use Uniform Spacing?** In many real-world scenarios, uniform spacing is impossible: legacy hardware, physical constraints, cost limitations, or existing infrastructure. When you're stuck with irregular arrays, you need algorithmic correction—that's what PSON provides.
+**Why Not Just Use Uniform Spacing?** In many real-world scenarios, uniform spacing is impossible: legacy hardware, physical constraints, cost limitations, or existing infrastructure. When you're stuck with irregular arrays, you need algorithmic correction, and PSON provides that.
 
 **Our Approach:** We apply the PSON framework from the Neuro-Symbolic Homeostat [Goldman 2025] to this domain:
 1. **Non-local credit assignment**: updates parameters based on their contribution to global energy (visibility deficit), not local derivative.
 2. **PSON (Precision-Scaled Orthogonal Noise)**: injects exploration noise in directions orthogonal to the current descent, scaled by uncertainty (gap irregularity).
 3. **Monotonic descent**: accept/reject guards preserve energy non-increase while allowing safe exploration.
 
-This paper validates that PSON—originally developed for neuro-symbolic coordination—generalizes effectively to physical optimization problems with partial observability.
+This paper validates that PSON, originally developed for neuro-symbolic coordination, generalizes effectively to physical optimization problems with partial observability.
 
 ---
 
@@ -71,7 +71,7 @@ Where:
 - **Precision-aware**: Low-precision (uncertain) parameters explore more
 - **Monotonicity**: Under down-only acceptance, energy never increases
 
-**Intuition:** PSON explores the "null space" of the objective—directions where small perturbations don't immediately change the energy—allowing the optimizer to escape shallow local minima without fighting the descent direction.
+**Intuition:** PSON explores the "null space" of the objective: directions where small perturbations don't immediately change the energy, allowing the optimizer to escape shallow local minima without fighting the descent direction.
 
 ### 2.2 Non-Local Credit Assignment
 
@@ -88,12 +88,12 @@ Where:
 - $\text{weight}_i$ reflects how "irregular" (uncertain) parameter $i$ is
 - $w$ is a gain parameter
 
-**Key Insight:** This is NOT a true gradient—it's a "pseudo-gradient" that:
+**Key Insight:** This is NOT a true gradient. It is a "pseudo-gradient" that:
 - Points all parameters toward reducing global energy
 - Weights uncertain parameters more heavily (they need more correction)
 - Requires only scalar feedback (global $E$), not per-parameter derivatives
 
-This mechanism is analogous to the "nudge" in Equilibrium Propagation [Scellier & Bengio 2017]—enabling credit assignment without backprop through problematic paths.
+This mechanism is analogous to the "nudge" in Equilibrium Propagation [Scellier & Bengio 2017], enabling credit assignment without backprop through problematic paths.
 
 ---
 
@@ -125,7 +125,7 @@ We use **prime-number spacing** (gaps ∝ first $N$ primes) as our irregular lat
 
 **Why We Test With Primes (The Hard Case):**
 
-Uniform gaps are trivial—they achieve optimal MSE with **0% improvement needed** because evenly-spaced samples already minimize approximation error. There is nothing to optimize.
+Uniform gaps are trivial; they achieve optimal MSE with **0% improvement needed** because evenly-spaced samples already minimize approximation error. There is nothing to optimize.
 
 **PSON exists for when uniform spacing is not possible:** hardware constraints, existing sensor placements, legacy systems, or physical limitations. In these cases, you're stuck with irregular arrays and need algorithmic correction.
 
@@ -350,7 +350,7 @@ To ensure the effect is not an artifact of any specific signal, we tested PSON a
 
 #### 6.1.1 The Deterministic Descent Failure Mode
 
-**Critical observation:** In **9 out of 20 scenarios**, the deterministic baseline achieved **0% acceptance rate**—it never moved from the initial zero-phase configuration despite using the same 601-evaluation budget as PSON.
+**Critical observation:** In **9 out of 20 scenarios**, the deterministic baseline achieved **0% acceptance rate**. It never moved from the initial zero-phase configuration despite using the same 601-evaluation budget as PSON.
 
 **Why this happens:**
 
@@ -401,7 +401,7 @@ The only algorithmic difference: PSON's candidate includes orthogonal noise; bas
 | turbulence | phase | per_screen | 0.431 | 0.585 | +0.154 | Stuck at init, PSON explores |
 | turbulence | amplitude | per_screen | 0.567 | 0.654 | +0.087 | Stuck at init, PSON explores |
 
-In these 9 scenarios, the deterministic baseline remains at the initial configuration (V ≈ 0.40-0.60), while PSON explores and finds better solutions (V ≈ 0.52-0.68). This is not a bug in the comparison—it's **validation that PSON solves the exploration problem** that deterministic methods cannot.
+In these 9 scenarios, the deterministic baseline remains at the initial configuration (V ≈ 0.40-0.60), while PSON explores and finds better solutions (V ≈ 0.52-0.68). This is not a bug in the comparison. It is **validation that PSON solves the exploration problem** that deterministic methods cannot.
 
 ### 6.2 Coherence Recovery
 *   **Baseline (Prime Gaps, no control):** $V \approx 0.40$ (Low Coherence)
@@ -454,9 +454,9 @@ We compared PSON against standard black-box optimization methods on the same tas
 | Finite-Diff GD | 0.406 | 0.000 | 10,201 |
 
 **Analysis:**
-- **CMA-ES** achieves the highest visibility on this clean continuous optimization task—it is a state-of-the-art black-box optimizer with covariance adaptation.
+- **CMA-ES** achieves the highest visibility on this clean continuous optimization task. It is a state-of-the-art black-box optimizer with covariance adaptation.
 - **PSON** outperforms Random Search (+0.025) and Finite-Diff GD (+0.131), while using fewer function evaluations than most baselines.
-- **Key distinction:** PSON's design goal is optimization under **partial observability** (no local gradient access, only global scalar feedback). On the full 20-scenario ablation with structured signals and coupling modes (Section 6.1), PSON achieves 100% win rate against deterministic non-local descent—demonstrating its value for safe exploration in aliased landscapes.
+- **Key distinction:** PSON's design goal is optimization under **partial observability** (no local gradient access, only global scalar feedback). On the full 20-scenario ablation with structured signals and coupling modes (Section 6.1), PSON achieves 100% win rate against deterministic non-local descent, demonstrating its value for safe exploration in aliased landscapes.
 
 #### 6.5.1 When to Use PSON vs CMA-ES
 
@@ -480,7 +480,7 @@ We compared PSON against standard black-box optimization methods on the same tas
 | You want maximum performance | You need monotonic descent guarantees |
 | Standard black-box optimization applies | You have true partial observability (no local gradients) |
 
-**Key Insight:** CMA-ES is a superior optimizer under ideal conditions. PSON's value is **robustness**—it degrades gracefully when assumptions break, and it guarantees non-increasing energy at every step.
+**Key Insight:** CMA-ES is a superior optimizer under ideal conditions. PSON's value is **robustness**; it degrades gracefully when assumptions break, and it guarantees non-increasing energy at every step.
 
 ### 6.6 Partial Observability Validation
 To validate PSON's robustness under degraded observability, we tested both methods under progressively worsening conditions:
@@ -494,7 +494,7 @@ To validate PSON's robustness under degraded observability, we tested both metho
 | Combined-Severe | 0.399 | 0.435 | **-0.036** | Noise + quantization + staleness |
 
 **Key Finding:** The performance gap closes from **-0.41 to -0.04** as observability degrades.
-- Under clean conditions, CMA-ES dominates (as expected—it's a state-of-the-art black-box optimizer).
+- Under clean conditions, CMA-ES dominates (as expected; it is a state-of-the-art black-box optimizer).
 - Under severe degradation (noise + quantization + stale feedback), PSON is nearly competitive.
 - **PSON's relative advantage increases by +0.37** as conditions worsen.
 
@@ -512,7 +512,7 @@ We tested even more extreme scenarios with budget=40 evaluations:
 | Nightmare (all combined) | 0.402 | 0.444 | -0.042 | 20% |
 
 **Key Findings:**
-- CMA-ES remains superior in most scenarios—it is a state-of-the-art optimizer.
+- CMA-ES remains superior in most scenarios. It is a state-of-the-art optimizer.
 - Under extreme degradation (binary feedback + adversarial noise), **the gap closes to -0.03** and **PSON achieves 40% win rate**.
 - PSON's value is not outperforming CMA-ES, but providing **robust, guaranteed-monotonic optimization** when observation quality cannot be assured.
 
@@ -532,7 +532,7 @@ While baseline PSON is optimal for the well-conditioned sparse optical problem, 
 | **Average** | | | | **+76.1%** |
 
 **Interpretation:**
-- On the sparse optical problem (well-conditioned, 25 dimensions), baseline PSON is already near-optimal. Full validation shows momentum provides only +1.2% mean improvement, winning only 9/20 scenarios vs baseline PSON—essentially negligible. *(Note: this is PSON+Momentum vs PSON, not the main PSON vs deterministic result which is 20/20.)*
+- On the sparse optical problem (well-conditioned, 25 dimensions), baseline PSON is already near-optimal. Full validation shows momentum provides only +1.2% mean improvement, winning only 9/20 scenarios vs baseline PSON. The gain is essentially negligible. *(Note: this is PSON+Momentum vs PSON, not the main PSON vs deterministic result which is 20/20.)*
 - On ML-style problems (high-dimensional, moving targets, variable curvature), momentum transforms PSON's performance (+76-100%).
 - This validates PSON's **extensibility**: the core mechanism can be augmented with standard gradient tricks, but the optimal configuration is problem-dependent.
 
@@ -559,7 +559,7 @@ We tested whether prime-based gaps offer any advantage over other distributions 
 
 **Key Finding:** Uniform sparse gaps win in ALL scenarios. This is expected and important:
 
-1. **Uniform is trivial:** 0% improvement needed—already optimal by construction
+1. **Uniform is trivial:** 0% improvement needed; already optimal by construction
 2. **Even coverage minimizes error:** No clusters, no gaps, consistent sampling
 3. **Nothing to optimize:** If you can use uniform, you don't need PSON
 
@@ -567,10 +567,10 @@ We tested whether prime-based gaps offer any advantage over other distributions 
 
 | Distribution | Improvement | Interpretation |
 |--------------|-------------|----------------|
-| Uniform | 0% | Trivial case—already optimal |
-| Prime | +57% | **Hard case—PSON recovers performance** |
-| Random | +55% | Hard case—PSON recovers performance |
-| Logarithmic | +61% | Hard case—PSON recovers performance |
+| Uniform | 0% | Trivial case; already optimal |
+| Prime | +57% | **Hard case; PSON recovers performance** |
+| Random | +55% | Hard case; PSON recovers performance |
+| Logarithmic | +61% | Hard case; PSON recovers performance |
 
 **Conclusion:** We test with primes *because* they are hard. PSON is designed for scenarios where uniform spacing is impossible. The +51-61% improvement on irregular distributions demonstrates PSON solving the actual problem: recovering coherence from constrained systems.
 
@@ -590,7 +590,7 @@ Aperiodic arrays (sparse sensor placement, radar apertures) trade hardware cost 
 
 #### 7.1.1 Optical Scaling: The "Smile Curve" Phenomenon
 
-We tested PSON's optical coherence recovery at large scales (**100 to 4096 elements**) against gradient descent (GD) and PSON-Subspace variants. The results reveal a **characteristic "smile curve"**—PSON's advantage is non-monotonic across array sizes.
+We tested PSON's optical coherence recovery at large scales (**100 to 4096 elements**) against gradient descent (GD) and PSON-Subspace variants. The results reveal a **characteristic "smile curve"**: PSON's advantage is non-monotonic across array sizes.
 
 **Full Results (3 signal types × 3 runs each):**
 
@@ -649,7 +649,7 @@ LOW  |
    - PSON's safe exploration through the null-space becomes valuable again
    - *Result: PSON wins 3/6 (50%), and wins the hardest cases*
 
-**Key Insight:** The "smile curve" reveals that PSON is not universally better or worse than GD—it excels in regimes where local gradient information is either **too noisy** (small, irregular arrays) or **insufficient** (large, high-dimensional arrays). In the "Goldilocks zone" (512-1024 elements), the problem is just smooth enough for GD to work efficiently.
+**Key Insight:** The "smile curve" reveals that PSON is not universally better or worse than GD. It excels in regimes where local gradient information is either **too noisy** (small, irregular arrays) or **insufficient** (large, high-dimensional arrays). In the "Goldilocks zone" (512-1024 elements), the problem is just smooth enough for GD to work efficiently.
 
 **Practical Guidance:**
 - **< 500 elements:** Use PSON or PSON-Subspace
@@ -675,10 +675,10 @@ We extensively validated PSON on five discrete phase applications:
 
 | Scenario | PSON-Sub | PSON | Full-LMS | Winner |
 |----------|----------|------|----------|--------|
-| **Static beamforming (MSE)** | **3/3** ✅ | 0/3 | 0/3 | **PSON-Sub** |
-| **Moving target tracking** | 0/3 | **2/3** ✅ | 1/3 | **PSON** |
-| **Adaptive jammer nulling** | 0/3 | 0/3 | **3/3** ✅ | **Full-LMS** |
-| **5G Massive MIMO (1024-2048)** | **2/3** ✅ | 1/3 | 0/3 | **PSON-Sub** |
+| **Static beamforming (MSE)** | **3/3** | 0/3 | 0/3 | **PSON-Sub** |
+| **Moving target tracking** | 0/3 | **2/3** | 1/3 | **PSON** |
+| **Adaptive jammer nulling** | 0/3 | 0/3 | **3/3** | **Full-LMS** |
+| **5G Massive MIMO (1024-2048)** | **2/3** | 1/3 | 0/3 | **PSON-Sub** |
 
 **Key Findings:**
 - **PSON-Subspace dominates static MSE**: 0.03-0.06 vs LMS's 25-150
@@ -688,7 +688,7 @@ We extensively validated PSON on five discrete phase applications:
 
 ---
 
-#### 7.2.1 Phased Array Antennas (5G/Radar) — PSON Wins 100%
+#### 7.2.1 Phased array antennas (5G/radar): PSON wins 100%
 
 **The standout result.** PSON achieves **perfect beam gain (1.0)** on phased arrays with discrete phase shifters:
 
@@ -705,7 +705,7 @@ We extensively validated PSON on five discrete phase applications:
 uv run python experiments/discrete_applications/phased_array_antenna_test.py
 ```
 
-#### 7.2.1.1 PSON vs LMS: Comprehensive Comparison
+#### 7.2.1.1 PSON vs LMS: comprehensive comparison
 
 We compared PSON and PSON-Subspace against LMS algorithms across three scenarios: static beamforming, moving target tracking, and adaptive jammer nulling.
 
@@ -720,11 +720,11 @@ We compared PSON and PSON-Subspace against LMS algorithms across three scenarios
 
 | Scenario | PSON-Sub | PSON | Full-LMS | Winner |
 |----------|----------|------|----------|--------|
-| **Static (MSE)** | **3/3** ✅ | 0/3 | 0/3 | **PSON-Sub** |
-| **Moving Target** | 0/3 | **2/3** ✅ | 1/3 | **PSON** |
-| **Moving Jammer** | 0/3 | 0/3 | **3/3** ✅ | **Full-LMS** |
+| **Static (MSE)** | **3/3** | 0/3 | 0/3 | **PSON-Sub** |
+| **Moving Target** | 0/3 | **2/3** | 1/3 | **PSON** |
+| **Moving Jammer** | 0/3 | 0/3 | **3/3** | **Full-LMS** |
 
-**Static Beamforming — PSON-Sub Dominates:**
+**Static beamforming: PSON-Sub dominates:**
 
 | Algorithm | MSE (avg) |
 |-----------|-----------|
@@ -732,9 +732,9 @@ We compared PSON and PSON-Subspace against LMS algorithms across three scenarios
 | PSON | 0.55 |
 | Full-LMS | 126.5 |
 
-PSON-Subspace achieves MSE ~0.05 vs LMS's ~127—a **2500× improvement** on static scenarios. THIS CLAIM NEED TO BE INVESTIFATED EXTREMELY WELL
+PSON-Subspace achieves MSE ~0.05 vs LMS's ~127, a **2500× improvement** on static scenarios. This ratio comes directly from the reported MSE values; re-verification is recommended for publication.
 
-**Moving Jammer — LMS Wins:**
+**Moving jammer: LMS wins:**
 
 | Algorithm | Mean SINR |
 |-----------|-----------|
@@ -742,7 +742,7 @@ PSON-Subspace achieves MSE ~0.05 vs LMS's ~127—a **2500× improvement** on sta
 | PSON | -3 dB |
 | PSON-Sub | -5 dB |
 
-LMS wins on jammer nulling because it can track moving interference. PSON's monotonic constraint prevents adaptation—see "SVD-Jammer Problem" in Appendix E.9.
+LMS wins on jammer nulling because it can track moving interference. PSON's monotonic constraint prevents adaptation; see "SVD-Jammer Problem" in Appendix E.9.
 
 **Computational Efficiency:**
 | Algorithm | Updates/Iteration | Relative Cost |
@@ -756,9 +756,9 @@ LMS wins on jammer nulling because it can track moving interference. PSON's mono
 uv run python experiments/discrete_applications/pson_vs_lms_fair_comparison.py
 ```
 
-#### 7.2.1.1a Comparison with PU-BAA (November 2025 Research)
+#### 7.2.1.1a Comparison with PU-BAA (November 2025 research)
 
-Shubber, Jamel & Nahar recently published **PU-BAA** [AIP Conf. Proc. 2025, DOI: 10.1063/5.0298348]—the first systematic application of Partial Update algorithms to Beamforming Array Antennas. This is well-executed research on a standard benchmark.
+Shubber, Jamel & Nahar recently published **PU-BAA** [AIP Conf. Proc. 2025, DOI: 10.1063/5.0298348], the first systematic application of Partial Update algorithms to Beamforming Array Antennas. This is well-executed research on a standard benchmark.
 
 **Exact PU-BAA Replication (ETU channel, static scenario):**
 
@@ -779,14 +779,14 @@ We replicated their setup: ETU multipath channel, 16 elements, static target/int
 - **Periodic-LMS wins null depth** (-26.5 dB vs PSON's -20.5 dB)
 - **Sequential-LMS achieves 94% complexity reduction** while beating PSON on MSE
 
-PU-LMS variants are well-optimized for this static benchmark—and perform accordingly.
+PU-LMS variants are well-optimized for this static benchmark, and they perform accordingly.
 
 **But How Realistic Is the Static Benchmark?**
 
 | Benchmark Assumption | Real-World Reality |
 |---------------------|-------------------|
 | Target at fixed angle | 5G users are mobile; radar tracks *moving* targets |
-| Interferers stationary | Jammers are adversarial—they move deliberately |
+| Interferers stationary | Jammers are adversarial; they move deliberately |
 | 300 iterations to converge | Systems need real-time adaptation |
 | Channel model known | Channels change with weather, movement, multipath |
 | Nothing moves during optimization | LEO satellites move at 7.5 km/s (Starlink) |
@@ -809,7 +809,7 @@ uv run python experiments/discrete_applications/pson_vs_pu_baa_exact.py
 
 #### 7.2.1.2 Dynamic Beamforming Scenarios
 
-**⚠️ Important Update: Fair Comparison Results**
+**Important update: fair comparison results**
 
 We conducted a **fair initialization** (all algorithms start with steering vector toward target).
 
@@ -821,11 +821,11 @@ We conducted a **fair initialization** (all algorithms start with steering vecto
 | Moving Target | 0/3 | **2/3** | 1/3 | **PSON** |
 | Moving Jammer | 0/3 | 0/3 | **3/3** | **Full-LMS** |
 
-**Scenario 1: Moving Target (Radar Tracking) — PSON Wins 2/3** ✅
+**Scenario 1: Moving target (radar tracking): PSON wins 2/3**
 
 With matched initialization, PSON still wins on moving target tracking (67% win rate). Standard PSON slightly outperforms LMS variants on tracking error.
 
-**Scenario 2: Adaptive Jammer Nulling — ⚠️ PSON LOSES 0/3** ❌
+**Scenario 2: Adaptive jammer nulling: PSON loses 0/3**
 
 **Critical finding:** With matched initialization, **Full-LMS wins 3/3** on jammer nulling:
 
@@ -850,7 +850,7 @@ With matched initialization, PSON still wins on moving target tracking (67% win 
 
 The original results showing PSON +4.2 dB vs LMS -38 dB were obtained with **unequal initialization** (PSON started near target, LMS started from zero). This gave PSON an unfair advantage. With matched initialization, the advantage reverses.
 
-**Scenario 3: Massive MIMO (256–8192 elements, large-scale) — PSON Wins 3/6** ✅
+**Scenario 3: Massive MIMO (256–8192 elements, large-scale): PSON wins 3/6**
 
 We tested arrays up to 8192 elements (matching large-scale phased array systems). Standard PSON struggles at very high dimensions; **PSON-Subspace** projects to the dominant signal subspace (64-128 dim via SVD), optimizes there, then lifts back:
 
@@ -858,9 +858,9 @@ We tested arrays up to 8192 elements (matching large-scale phased array systems)
 |----------|----------|-----------|------|---------------|--------|
 | 256 | **0.77** | 0.93 | 1.03 | 2.15 | Full-LMS |
 | 512 | **0.88** | 2.48 | 1.06 | 2.78 | Full-LMS |
-| 1024 | 1.97 | 1.47 | 1.10 | **0.67** | **PSON-Sub** ✅ |
-| 2048 | 0.97 | 0.87 | 1.11 | **0.73** | **PSON-Sub** ✅ |
-| 4096 | 2.12 | 1.31 | **1.10** | 3.07 | **PSON** ✅ |
+| 1024 | 1.97 | 1.47 | 1.10 | **0.67** | **PSON-Sub** |
+| 2048 | 0.97 | 0.87 | 1.11 | **0.73** | **PSON-Sub** |
+| 4096 | 2.12 | 1.31 | **1.10** | 3.07 | **PSON** |
 | 8192 | **0.79** | 4.68 | 1.09 | 1.53 | Full-LMS |
 
 **Key findings:**
@@ -884,7 +884,7 @@ We tested arrays up to 8192 elements (matching large-scale phased array systems)
 uv run python experiments/discrete_applications/pson_dynamic_scenarios_test.py
 ```
 
-#### 7.2.2 Holographic Beam Steering (LiDAR) — PSON Wins 80%
+#### 7.2.2 Holographic beam steering (LiDAR): PSON wins 80%
 
 For solid-state LiDAR beam steering with discrete phase control:
 
@@ -898,7 +898,7 @@ For solid-state LiDAR beam steering with discrete phase control:
 
 PSON beats gradient descent + quantization for small-medium arrays. At 64+ elements with fine quantization, continuous optimization + quantization catches up.
 
-#### 7.2.3 Acoustic Beamforming (Ultrasound) — PSON Wins 60%
+#### 7.2.3 Acoustic beamforming (ultrasound): PSON wins 60%
 
 For medical ultrasound and sonar with quantized delays:
 
@@ -924,7 +924,7 @@ PSON dramatically outperforms geometric focusing on linear and large sparse arra
 
 #### 7.2.5 Summary: When to Use PSON for Discrete Phases
 
-| ✅ Use PSON | ❌ Don't Use PSON |
+| Use PSON | Don't Use PSON |
 |-------------|-------------------|
 | Phased array antennas | Fourier optics (use GS) |
 | Beam steering (small-medium arrays) | Very large arrays (use greedy) |
@@ -936,7 +936,7 @@ PSON dramatically outperforms geometric focusing on linear and large sparse arra
 
 ### 7.3 Sparse Path Integral Approximation
 
-This framework suggests a method for sparse path integral approximators—sampling a sparse subset of paths and using PSON-based optimization to learn phase corrections that minimize energy, effectively approximating the full integral.
+This framework suggests a method for sparse path integral approximators by sampling a sparse subset of paths and using PSON-based optimization to learn phase corrections that minimize energy, effectively approximating the full integral.
 
 **How PSON Differs from Classical Path Integral Methods:**
 
@@ -949,8 +949,8 @@ This framework suggests a method for sparse path integral approximators—sampli
 | **Wick Rotation** | t → iτ (imaginary time) | PSON works in real space, no analytic continuation |
 
 **Key Distinction:** Most path integral methods either:
-1. **Sample many random paths** (Monte Carlo) — expensive, high variance
-2. **Focus on classical paths** (Stationary Phase) — misses off-shell contributions
+1. **Sample many random paths** (Monte Carlo); expensive, high variance
+2. **Focus on classical paths** (Stationary Phase); misses off-shell contributions
 
 **PSON is unique:** It *optimizes* a sparse fixed set of paths using precision-scaled orthogonal noise. This is closer to **importance sampling** but with guaranteed descent. Rather than averaging over random samples, PSON finds the optimal phase configuration for a given sparse lattice.
 
@@ -961,7 +961,7 @@ This framework suggests a method for sparse path integral approximators—sampli
 
 ![Sparse Path Integral: MSE vs Number of Paths](results/path_integral/sparse_path_integral_mse_vs_primes.png)
 
-**Figure: PSON vs Random-Phase Baseline.** With random phases (orange), you need ~100 paths to achieve MSE ≈ 0.002. With PSON optimization (blue), you achieve MSE ≈ 0.001 with just 20 paths—a **5× reduction in required paths** for equivalent quality, or **3-8× better MSE** at equal path count.
+**Figure: PSON vs Random-Phase Baseline.** With random phases (orange), you need ~100 paths to achieve MSE ≈ 0.002. With PSON optimization (blue), you achieve MSE ≈ 0.001 with just 20 paths, a **5× reduction in required paths** for equivalent quality, or **3-8× better MSE** at equal path count.
 
 | # Sparse Paths | Random Phase MSE | PSON Optimized MSE | PSON Advantage |
 |----------------|------------------|-------------------|----------------|
@@ -977,7 +977,7 @@ This framework suggests a method for sparse path integral approximators—sampli
 
 ## 8. Conclusion
 
-We have demonstrated that **PSON, originally developed for neuro-symbolic coordination, generalizes effectively to physical optimization problems.** We tested the raw algorithm without domain-specific tuning. For sparse optical coherence, baseline PSON is already near-optimal—momentum provides only +1.2% gain. (For ML applications, momentum provides +76-100% improvement; see Section 6.8.)
+We have demonstrated that **PSON, originally developed for neuro-symbolic coordination, generalizes effectively to physical optimization problems.** We tested the raw algorithm without domain-specific tuning. For sparse optical coherence, baseline PSON is already near-optimal, and momentum provides only +1.2% gain. (For ML applications, momentum provides +76-100% improvement; see Section 6.8.)
 
 **On sparse optical coherence recovery:**
 
@@ -989,19 +989,19 @@ We have demonstrated that **PSON, originally developed for neuro-symbolic coordi
 
 **On discrete phase optimization (Section 7.2):**
 
-- **Phased arrays vs Random Search: 100% win rate (12/12)** — achieves near-perfect beam gain even with 3-4 bit quantization
-- **vs Classical PU-LMS (with initialization advantage): 100% win rate (12/12)** — note: PSON uses steering vector initialization in this test
-- **vs PU-BAA [Shubber 2025] (matched conditions): 3rd place on MSE** — Sequential-LMS and Stochastic-LMS outperform PSON when tested on their home turf (static ETU channel, matched initialization). This is legitimate, well-executed recent research.
-- **Holographic beam steering (LiDAR): 80% win rate (12/15)** — beats gradient descent + quantization on small-medium arrays
-- **Acoustic beamforming (ultrasound): 60% win rate (9/15)** — improvement over geometric focusing
+- **Phased arrays vs Random Search: 100% win rate (12/12)**; achieves near-perfect beam gain even with 3-4 bit quantization
+- **vs Classical PU-LMS (with initialization advantage): 100% win rate (12/12)**; note: PSON uses steering vector initialization in this test
+- **vs PU-BAA [Shubber 2025] (matched conditions): 3rd place on MSE**; Sequential-LMS and Stochastic-LMS outperform PSON when tested on their home turf (static ETU channel, matched initialization). This is legitimate, well-executed recent research.
+- **Holographic beam steering (LiDAR): 80% win rate (12/15)**; beats gradient descent + quantization on small-medium arrays
+- **Acoustic beamforming (ultrasound): 60% win rate (9/15)**; improvement over geometric focusing
 - **Limitations identified:** Loses to domain-specific algorithms (Gerchberg-Saxton for SLM), greedy methods on large separable arrays (RIS at 64+ elements), and well-tuned PU-LMS on static scenarios
 
 **On dynamic beamforming scenarios (Section 7.2.1.2):**
 
-- **Static beamforming (MSE): PSON-Subspace wins 3/3** — Massive advantage (MSE 0.03-0.06 vs LMS's 25-150)
-- **Moving target tracking (radar): PSON wins 2/3 (67%)** — PSON's monotonic descent prevents overshoot
-- **Adaptive jammer nulling: PSON LOSES 0/3** — With matched initialization, Full-LMS wins 3/3. Earlier claims of PSON superiority were due to unequal initialization.
-- **Massive MIMO (256-8192 elements): 50% win rate (3/6)** — PSON-Subspace wins at 1024-2048 elements; standard PSON wins at 4096
+- **Static beamforming (MSE): PSON-Subspace wins 3/3**; massive advantage (MSE 0.03-0.06 vs LMS's 25-150)
+- **Moving target tracking (radar): PSON wins 2/3 (67%)**; PSON's monotonic descent prevents overshoot
+- **Adaptive jammer nulling: PSON LOSES 0/3**; with matched initialization, Full-LMS wins 3/3. Earlier claims of PSON superiority were due to unequal initialization.
+- **Massive MIMO (256-8192 elements): 50% win rate (3/6)**; PSON-Subspace wins at 1024-2048 elements; standard PSON wins at 4096
 - **Key insight:** PSON excels on static MSE and moving target tracking, but **fails on adaptive jammer nulling** due to the "SVD-Jammer Problem" (see Appendix E.9)
 
 While CMA-ES achieves higher visibility on clean continuous optimization tasks, PSON's value lies in its design for **partial observability** and **discrete/non-differentiable** settings. Under degraded observations (noise, quantization, staleness), the CMA-ES advantage drops from -0.41 to -0.04, validating PSON's robustness.
@@ -1012,15 +1012,15 @@ The combination of non-local credit assignment, precision-scaled orthogonal expl
 3. Black-box optimization where only scalar feedback is available
 4. Real-time safe optimization requiring monotonic descent
 
-**Key finding:** PSON is not a universal optimizer—it loses to domain-specific algorithms when they exist, and **loses to LMS on adaptive jammer nulling** when tested with matched initialization. Its strength is handling static MSE optimization, moving target tracking, and **hard discrete landscapes** where standard methods fail.
+**Key finding:** PSON is not a universal optimizer. It loses to domain-specific algorithms when they exist, and **loses to LMS on adaptive jammer nulling** when tested with matched initialization. Its strength is handling static MSE optimization, moving target tracking, and **hard discrete landscapes** where standard methods fail.
 
-**Open problem:** The "SVD-Jammer Problem"—PSON's monotonic descent constraint prevents adaptation to moving adversaries. See Appendix E.9 and `docs/SVD-Jammer-problem.md` for ongoing research.
+**Open problem:** The "SVD-Jammer Problem": PSON's monotonic descent constraint prevents adaptation to moving adversaries. See Appendix E.9 and `docs/SVD-Jammer-problem.md` for ongoing research.
 
 ---
 
 ### Observations on Array Scale
 
-PSON-Subspace shows advantages at 1024-4096 antenna elements—the scale of modern wireless infrastructure:
+PSON-Subspace shows advantages at 1024-4096 antenna elements, which matches the scale of modern wireless infrastructure:
 
 | System | Typical Array Size | PSON Observation |
 |--------|-------------------|------------------|
@@ -1031,7 +1031,7 @@ PSON-Subspace shows advantages at 1024-4096 antenna elements—the scale of mode
 
 **Why This Range Matters:**
 
-At **256-512 elements**, LMS is efficient—gradients are reliable, convergence is fast. This is LMS's home turf.
+At **256-512 elements**, LMS is efficient because gradients are reliable and convergence is fast. This is LMS's home turf.
 
 At **1024-4096 elements**, LMS can become unstable:
 - Gradient estimates become noisy (high variance from many parameters)
@@ -1040,7 +1040,7 @@ At **1024-4096 elements**, LMS can become unstable:
 
 PSON's **monotonic descent guarantee** ensures safe convergence even when gradient estimates are unreliable.
 
-At **8192+ elements**, LMS stabilizes again—more samples average out noise.
+At **8192+ elements**, LMS stabilizes again because more samples average out noise.
 
 **On Adaptive Jammer Nulling:**
 
@@ -1070,7 +1070,7 @@ This work suggests that precision-scaled orthogonal exploration has value for **
 
 ### 9.1 Current Limitations
 
-- **Adaptive jammer nulling:** PSON loses to LMS on moving jammer scenarios (0/3 vs 3/3 with matched initialization). The monotonic descent constraint prevents adaptation to moving adversaries. This is the "SVD-Jammer Problem"—see Appendix E.9.
+- **Adaptive jammer nulling:** PSON loses to LMS on moving jammer scenarios (0/3 vs 3/3 with matched initialization). The monotonic descent constraint prevents adaptation to moving adversaries. This is the "SVD-Jammer Problem"; see Appendix E.9.
 - **Low-intensity regions:** Approximation quality degrades in low-intensity regions of the interference pattern. The optimizer focuses on high-intensity peaks (which dominate MSE), leaving tail regions with residual noise.
 - **Precision proxy:** Using irregularity as precision is a heuristic; curvature-based or SNR-based precision may improve efficiency.
 - **Acceptance rate:** Down-only acceptance can slow early descent; line-search or small-gain capping [Goldman 2025] could smooth progress.
@@ -1083,8 +1083,8 @@ This work suggests that precision-scaled orthogonal exploration has value for **
 This paper presents the **raw PSON algorithm** from the Neuro-Symbolic Homeostat [Goldman 2025], validated on sparse optical coherence without domain-specific tuning.
 
 **On Momentum:** We tested adding momentum (β=0.9) from the full Homeostat framework:
-- **Sparse optical (this domain):** +1.2% improvement (9/20 scenarios), essentially negligible—baseline PSON is already near-optimal
-- **ML problems (Section 6.8):** +76-100% improvement—momentum is transformative for moving landscapes and variable curvature
+- **Sparse optical (this domain):** +1.2% improvement (9/20 scenarios), essentially negligible because baseline PSON is already near-optimal
+- **ML problems (Section 6.8):** +76-100% improvement; momentum materially improves adaptation on moving landscapes and variable curvature
 
 **Conclusion:** For sparse optical coherence, use **baseline PSON** without modifications. Momentum is recommended only for ML-style applications.
 
@@ -1128,7 +1128,7 @@ The current results represent a **lower bound** on PSON's potential. Even in raw
 - **Time-Slicing / Trotter-Suzuki:** Feynman's original discretization approach.
 - **Duru-Kleinert Transformation:** Handling singular potentials in path integrals.
 
-*Note: PSON differs fundamentally from these methods—it optimizes a fixed sparse set of paths rather than sampling or approximating. See Section 7.3 for detailed comparison.*
+*Note: PSON differs fundamentally from these methods; it optimizes a fixed sparse set of paths rather than sampling or approximating. See Section 7.3 for detailed comparison.*
 
 ### Number Theory Connections (for Zeta signal only)
 - **Berry & Keating (1999):** Connections between Riemann zeros and quantum chaos.
@@ -1138,57 +1138,12 @@ The current results represent a **lower bound** on PSON's potential. Even in raw
 
 ## References
 
-```bibtex
-@software{goldman2025homeostat,
-  title        = {Complexity from Constraints: The Neuro-Symbolic Homeostat},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {PSON theoretical framework and stability projectors}
-}
-
-@article{scellier2017equilibrium,
-  title={Equilibrium propagation: Bridging the gap between energy-based models and backpropagation},
-  author={Scellier, Benjamin and Bengio, Yoshua},
-  journal={Frontiers in computational neuroscience},
-  year={2017}
-}
-
-@article{amari1998natural,
-  title={Natural gradient works efficiently in learning},
-  author={Amari, Shun-Ichi},
-  journal={Neural computation},
-  year={1998}
-}
-
-@article{douglas1997adaptive,
-  title={Adaptive filters employing partial updates},
-  author={Douglas, Scott C.},
-  journal={IEEE Transactions on Circuits and Systems II},
-  year={1997}
-}
-
-@book{dogancay2008partial,
-  title={Partial-Update Adaptive Signal Processing: Design Analysis and Implementation},
-  author={Dogancay, Kutluyil},
-  publisher={Academic Press},
-  year={2008},
-  note={Comprehensive reference on M-max, Sequential, Stochastic, and Periodic PU-LMS variants}
-}
-
-@inproceedings{shubber2025pubaa,
-  title={Beamforming Array Antenna: New Innovative Research Using Partial Update Adaptive Algorithms},
-  author={Shubber, Zahraa A. and Jamel, Thamer M. and Nahar, Ali K.},
-  booktitle={AIP Conference Proceedings},
-  volume={3350},
-  number={1},
-  pages={030014},
-  year={2025},
-  organization={AIP Publishing},
-  doi={10.1063/5.0298348},
-  note={First systematic application of PU algorithms to beamforming arrays. Well-executed research; PU-LMS variants outperform PSON on static ETU scenarios.}
-}
-```
+- Goldman, O. (2025). *Complexity from Constraints: The Neuro-Symbolic Homeostat*. Shogu Research Group @ Datamutant.ai (subsidiary of 温心重工業). PSON theoretical framework and stability projectors.
+- Scellier, B., and Bengio, Y. (2017). Equilibrium propagation: Bridging the gap between energy-based models and backpropagation. *Frontiers in Computational Neuroscience*.
+- Amari, S. (1998). Natural gradient works efficiently in learning. *Neural Computation*.
+- Douglas, S. C. (1997). Adaptive filters employing partial updates. *IEEE Transactions on Circuits and Systems II*.
+- Dogancay, K. (2008). *Partial-Update Adaptive Signal Processing: Design Analysis and Implementation*. Academic Press. Comprehensive reference on M-max, Sequential, Stochastic, and Periodic PU-LMS variants.
+- Shubber, Z. A., Jamel, T. M., and Nahar, A. K. (2025). Beamforming Array Antenna: New Innovative Research Using Partial Update Adaptive Algorithms. *AIP Conference Proceedings*, 3350(1), 030014. doi:10.1063/5.0298348. First systematic application of PU algorithms to beamforming arrays; PU-LMS variants outperform PSON on static ETU scenarios.
 
 ---
 
@@ -1325,7 +1280,7 @@ We systematically tested classical variance-reduction and modern ML techniques:
 | **ASPIC Smoothing** | ML/Control | -154% | Designed for sequential decisions |
 | **MPPI Weighting** | ML/Control | -25% | Population-based, adds overhead |
 
-**Key Lesson:** MSE can be misleading. Antithetic variates achieved lower MSE by smoothing toward a symmetric distribution—but the *shape* was wrong. PSON baseline preserves the true distribution shape.
+**Key Lesson:** MSE can be misleading. Antithetic variates achieved lower MSE by smoothing toward a symmetric distribution, but the *shape* was wrong. PSON baseline preserves the true distribution shape.
 
 ### B.4 When to Use PSON for Path Integrals
 
@@ -1400,12 +1355,12 @@ The interference pattern $I(\theta)$ is computed over a grid of observation angl
 | θ Grid Size | Speedup | Energy Error |
 |-------------|---------|--------------|
 | 200 points (baseline) | 1.0× | 0% |
-| 50 points | 4.6× | **12.96%** ⚠️ |
-| 20 points | 7.3× | **23.97%** ❌ |
+| 50 points | 4.6× | **12.96%** (accuracy loss) |
+| 20 points | 7.3× | **23.97%** (fails accuracy target) |
 
 **Why accuracy suffers:** Visibility $V = (I_{max} - I_{min})/(I_{max} + I_{min})$ depends on finding the true maximum and minimum of the interference pattern. With fewer θ samples, we miss the actual peaks/troughs, leading to incorrect energy values.
 
-**Decision:** NOT implemented — accuracy loss would invalidate experimental results. However, an **adaptive** approach (coarse θ grid far from optimum, fine grid near convergence) could preserve accuracy while gaining speed, and is left for future exploration.
+**Decision:** NOT implemented because accuracy loss would invalidate experimental results. However, an **adaptive** approach (coarse θ grid far from optimum, fine grid near convergence) could preserve accuracy while gaining speed, and is left for future exploration.
 
 ### D.3 Future Work (Not Implemented)
 
@@ -1448,7 +1403,7 @@ Standard PSON operates in full parameter space. For an N-element array, each ite
 2. Generates PSON noise: O(N)  
 3. Evaluates candidate: O(N)
 
-At N=1024, this becomes expensive. More critically, **PSON exploration in 1024 dimensions is ineffective** — random noise in 1024 directions rarely finds improvement directions.
+At N=1024, this becomes expensive. More critically, **PSON exploration in 1024 dimensions is ineffective** because random noise in 1024 directions rarely finds improvement directions.
 
 ### E.2 Key Insight: Signal Subspace is Low-Rank
 
@@ -1514,7 +1469,7 @@ w_full = w_full / np.linalg.norm(w_full)
 | Exploration effectiveness | Low (noise spread thin) | High (concentrated in signal subspace) |
 | MSE at N=1024 | 1.14 | **0.63** (35% better) |
 
-**The key speedup is not computational — it's statistical.** 
+**The key speedup is not computational; it is statistical.** 
 
 In 1024 dimensions, random exploration rarely hits useful directions. In 32 dimensions (aligned with the signal), every random direction is potentially useful. PSON's precision-scaled noise becomes effective again.
 
@@ -1535,7 +1490,7 @@ For N=1024, k=32: **Effective 32× reduction in per-iteration cost**, offset by 
 |-------------------|----------------|
 | N > 256 elements | Small arrays (N < 64) |
 | Signal is low-rank (few sources) | Many independent sources |
-| Computational budget is limited | Accuracy is paramount |
+| Computational budget is limited | Accuracy is the priority |
 | Real-time requirements | Offline processing OK |
 
 ### E.7 Results Summary (Large-Scale Arrays)
@@ -1544,12 +1499,12 @@ For N=1024, k=32: **Effective 32× reduction in per-iteration cost**, offset by 
 |------------|----------|------|---------------|--------|
 | 256 | **0.77** | 1.03 | 2.15 | Full-LMS |
 | 512 | **0.88** | 1.06 | 2.78 | Full-LMS |
-| **1024** | 1.97 | 1.10 | **0.67** | **PSON-Sub** ✅ |
-| **2048** | 0.97 | 1.11 | **0.73** | **PSON-Sub** ✅ |
-| **4096** | 2.12 | **1.10** | 3.07 | **PSON** ✅ |
+| **1024** | 1.97 | 1.10 | **0.67** | **PSON-Sub** |
+| **2048** | 0.97 | 1.11 | **0.73** | **PSON-Sub** |
+| **4096** | 2.12 | **1.10** | 3.07 | **PSON** |
 | 8192 | **0.79** | 1.09 | 1.53 | Full-LMS |
 
-**Sweet spot: 1024-4096 elements** — PSON variants win in this range (the typical size for 5G massive MIMO and radar). At 8192, LMS gradient estimates stabilize and recover.
+**Sweet spot: 1024-4096 elements**; PSON variants win in this range (the typical size for 5G massive MIMO and radar). At 8192, LMS gradient estimates stabilize and recover.
 
 ### E.8 Reproducibility
 
@@ -1596,7 +1551,7 @@ Static scenario:                      Moving jammer scenario:
 **Why Standard PSON Also Loses on Jammer:**
 - Standard PSON uses discrete phase quantization
 - Monotonic descent prevents accepting steps that increase MSE
-- But the jammer has moved—MSE increased due to environment change, not bad step
+- But the jammer has moved, so MSE increased due to environment change, not a bad step
 - PSON rejects valid adaptation steps because they "look worse"
 
 **Why LMS Wins on Jammer:**
@@ -1627,8 +1582,8 @@ This work is licensed under a
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 **You are free to:**
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material for any purpose, even commercially
+- **Share:** copy and redistribute the material in any medium or format
+- **Adapt:** remix, transform, and build upon the material for any purpose, even commercially
 
 **Under the following terms:**
-- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. See citation section below.
+- **Attribution:** You must give appropriate credit, provide a link to the license, and indicate if changes were made. See citation section below.

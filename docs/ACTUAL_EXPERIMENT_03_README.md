@@ -1,4 +1,4 @@
-## ACTUAL EXPERIMENT 03 — Tuning zeta_gain, lr, and noise on Prime Gaps
+## ACTUAL EXPERIMENT 03  -  Tuning zeta_gain, lr, and noise on Prime Gaps
 
 ### TL;DR
 - We tune three knobs in the zeta‑coupled vector Homeostat (Experiment 02): `zeta_gain` (ζ strength), `lr` (wormhole step), and `noise` (PSON scale).
@@ -41,9 +41,9 @@ python .\actual_experiment_003.py --steps 200 --w 0.2 --zeta_gains 0.1,0.2,0.3 -
 ```
 
 Artifacts:
-- `actual_experiment_003_results.csv` — full grid results
-- `actual_experiment_003_best_energy.png` — best config energy curves (PSON vs no‑PSON)
-- `actual_experiment_003_summary.json` — best config and run metadata
+- `actual_experiment_003_results.csv`  -  full grid results
+- `actual_experiment_003_best_energy.png`  -  best config energy curves (PSON vs no‑PSON)
+- `actual_experiment_003_summary.json`  -  best config and run metadata
 
 ---
 
@@ -66,7 +66,7 @@ Best config on the default grid:
 
 Interpretation:
 - Prime gaps need exploration to escape poor basins: PSON significantly raises final V (≈0.594 vs ≈0.407 deterministic).  
-- ΔF90 for PSON is higher (more steps) due to rejected proposals under the monotone guard—expected when exploring a rough surface. The score balances this trade‑off.
+- ΔF90 for PSON is higher (more steps) due to rejected proposals under the monotone guard - expected when exploring a rough surface. The score balances this trade‑off.
 
 ---
 
@@ -123,11 +123,11 @@ Do the full refinements after, for polished stats.
 ## Citation
 If you use this repository in your research, please cite it as below.
 
-**Authors:** Oscar Goldman — Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
 
 ```bibtex
 @software{actual_experiment_03_2025,
-  title        = {ACTUAL EXPERIMENT 03 — Tuning zeta\_gain, lr, and noise on Prime Gaps},
+  title        = {ACTUAL EXPERIMENT 03  -  Tuning zeta\_gain, lr, and noise on Prime Gaps},
   author       = {Goldman, Oscar},
   organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
   year         = {2025},

@@ -1,4 +1,4 @@
-## ACTUAL EXPERIMENT 04 — RH Sweep: On‑line (σ=0.5) vs Off‑line (σ=0.6) with Vector Homeostat (Wormhole + PSON)
+## ACTUAL EXPERIMENT 04  -  RH Sweep: On‑line (σ=0.5) vs Off‑line (σ=0.6) with Vector Homeostat (Wormhole + PSON)
 
 ### TL;DR
 - We evaluate sensitivity to the Riemann–Hilbert “critical line” by comparing ζ‑coupled runs at σ=0.5 (on‑line) vs σ=0.6 (off‑line).
@@ -67,10 +67,10 @@ python .\actual_experiment_004.py  # (the script will note fallback if mpmath is
 ```
 
 Artifacts produced:
-- `actual_experiment_004_results.csv` — per‑run metrics (σ, zeta_gain, lr, noise, seed; final_V, ΔF90, accept_rate)
-- `actual_experiment_004_summary.json` — aggregated metrics per σ, grid size, params, and `mpmath` availability
-- `actual_experiment_004_finalV_bar.png` — mean final visibility per σ (bars with standard deviations)
-- `actual_experiment_004_energy_mean.png` — mean energy curves across seeds for the base config (per σ)
+- `actual_experiment_004_results.csv`  -  per‑run metrics (σ, zeta_gain, lr, noise, seed; final_V, ΔF90, accept_rate)
+- `actual_experiment_004_summary.json`  -  aggregated metrics per σ, grid size, params, and `mpmath` availability
+- `actual_experiment_004_finalV_bar.png`  -  mean final visibility per σ (bars with standard deviations)
+- `actual_experiment_004_energy_mean.png`  -  mean energy curves across seeds for the base config (per σ)
 
 ---
 
@@ -101,11 +101,11 @@ Interpretation: Within σ ∈ [0.5, 0.6] under the tuned controller, σ sensitiv
 ## Citation
 If you use this repository in your research, please cite it as below.
 
-**Authors:** Oscar Goldman — Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
 
 ```bibtex
 @software{actual_experiment_04_2025,
-  title        = {ACTUAL EXPERIMENT 04 — RH Sweep: On-line (σ=0.5) vs Off-line (σ=0.6) with Vector Homeostat (Wormhole + PSON)},
+  title        = {ACTUAL EXPERIMENT 04  -  RH Sweep: On-line (σ=0.5) vs Off-line (σ=0.6) with Vector Homeostat (Wormhole + PSON)},
   author       = {Goldman, Oscar},
   organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
   year         = {2025},

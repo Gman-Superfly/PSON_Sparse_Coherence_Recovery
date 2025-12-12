@@ -27,7 +27,7 @@ Each iteration:
 - Baseline: 1 + 200×2 = **401 evals**
 - PSON: 1 + 200×(2 to 3) = **401-601 evals** (depends on acceptance)
 
-**❌ PROBLEM: Asymmetric evaluation usage!**
+** PROBLEM: Asymmetric evaluation usage!**
 
 ---
 
@@ -50,7 +50,7 @@ Each iteration:
 - Budget is checked BEFORE each eval → never exceeds limit
 - Both return final `func_evals` count
 
-**✅ FAIR: Both methods consume same evaluation budget**
+** FAIR: Both methods consume same evaluation budget**
 
 ---
 
@@ -62,7 +62,7 @@ From experiment output:
 "mean_func_evals_pson": 601.0
 ```
 
-**✅ VERIFIED: Both methods used exactly 601 evaluations**
+** VERIFIED: Both methods used exactly 601 evaluations**
 
 ---
 
@@ -92,7 +92,7 @@ This would be **unfair** because PSON gets more compute resources.
 
 ## Conclusion
 
-✅ **The implementation is correct for evaluation-budget fairness.**
+ **The implementation is correct for evaluation-budget fairness.**
 
 Both algorithms:
 - Start from the same initial phases (zeros)
