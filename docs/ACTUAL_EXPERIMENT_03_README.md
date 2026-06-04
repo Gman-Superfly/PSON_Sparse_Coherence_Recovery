@@ -8,17 +8,17 @@
 ---
 
 ## What and why
-Experiment 02 introduced a zeta‑driven phase term and a vector Homeostat (per‑gap phases) with Wormhole updates and PSON exploration. Experiment 03 systematically tunes the controller’s key hyperparameters to:
+Experiment 02 introduced a zeta‑driven phase term and a vector controller (per‑gap phases) with CGBC-style non-local credit and PSON exploration. Experiment 03 systematically tunes the controller’s key hyperparameters to:
 
 - improve coherence recovery (higher final visibility V), and
 - reduce the number of steps to achieve most of the energy drop (lower ΔF90),
 
-on the rougher “prime gaps” landscape where aliasing is strongest. This strengthens the claim that non‑local credit + precision‑aware exploration can efficiently “patch” aliasing‑induced breaks.
+on the rougher prime-gap objective where aliasing is strongest. This tests whether non‑local credit plus precision‑aware exploration improves visibility over the deterministic baseline.
 
 ---
 
 ## Method (tuning setup)
-- Model: same as Experiment 02 (zeta‑coupled optics; per‑gap phases η ∈ ℝ²⁵; Wormhole gradient; PSON with metric‑orthogonal projection; down‑only acceptance).
+- Model: same as Experiment 02 (zeta‑coupled optics; per‑gap phases η ∈ ℝ²⁵; CGBC-style pseudo-gradient; PSON with metric‑orthogonal projection; down‑only acceptance).
 - Grid (default):  
   - `zeta_gain ∈ {0.1, 0.2, 0.3}`  
   - `lr ∈ {0.05, 0.1, 0.15}`  
@@ -71,11 +71,11 @@ Interpretation:
 ---
 
 ## Why tuning these three knobs helps
-- **zeta_gain** adjusts the “shape” and curvature injected by ζ into the phase landscape. Right‑sizing it yields informative guidance without overwhelming the controller.
+- **zeta_gain** adjusts the shape and curvature injected by ζ into the phase objective. Right-sizing it yields informative guidance without overwhelming the controller.
 - **lr** sets deterministic progress speed; too small is slow (high ΔF90), too large causes rejections/oscillations under down‑only acceptance.
 - **noise** (PSON scale) enables safe exploration orthogonal to the gradient; sufficient to escape poorer minima, but not so large that most proposals are rejected.
 
-Together they determine quality (V_final) and efficiency (ΔF90, acceptance) on the primes landscape.
+Together they determine quality (V_final) and efficiency (ΔF90, acceptance) on the prime-gap objective.
 
 ---
 
@@ -88,7 +88,7 @@ Together they determine quality (V_final) and efficiency (ΔF90, acceptance) on 
 
 ## Next steps
 1) Narrow grid around the best config (e.g., zeta_gain ∈ {0.25, 0.3, 0.35}, lr ∈ {0.1, 0.12, 0.15}, noise ∈ {0.02, 0.025, 0.03}).  
-2) Multi‑seed robustness with confidence intervals and effect sizes.  
+2) Multi‑seed stability with confidence intervals and effect sizes.  
 3) Explore `w` (wormhole gain) and alternative precision models.  
 4) Extend to RH sweeps (on‑line vs off‑line zeros) under tuned controller.
 
@@ -99,12 +99,12 @@ NOTES:
 we can proceed with 004 now; refinements can come later.
 What refinements mainly change
 Narrow grid: improves efficiency (lower ΔF90), not the qualitative outcome.
-Multi-seed: gives CIs and robustness; doesn’t alter the mechanism.
+Multi-seed: gives CIs and stability checks; doesn’t alter the mechanism.
 w/precision variants: shift final V and acceptance; unlikely to flip on‑line vs off‑line ordering if params are reasonable.
 Risk if we skip: under/over‑exploration could dampen effect sizes and yield weaker separation, not false positives.
 Recommended path
 Run 004 now with the current best config from 003: zeta_gain=0.3, lr=0.1, noise=0.03, w=0.2.
-Include a quick robustness check inside 004:
+Include a quick stability check inside 004:
 3 seeds (e.g., 41, 42, 43).
 Tiny perturbations around best (±0.05 zeta_gain, ±0.02 lr, ±0.01 noise).
 Do the full refinements after, for polished stats.
@@ -114,25 +114,17 @@ Do the full refinements after, for polished stats.
 ---
 
 ## Alignment with Datamutant rules
-- **Assert/Failsafe**: monotone acceptance with deterministic fallback guarantees non‑increasing energy.  
+- **Assert/Failsafe**: down-only acceptance with deterministic fallback prevents accepted energy increases.  
 - **One function, one purpose**: simulation, visibility, energy, projection, and optimization are cleanly separated in the scripts.  
 - **Observability**: per‑run artifacts and CSV logs enable rapid inspection and comparison.
 
 ---
 
 ## Citation
-If you use this repository in your research, please cite it as below.
+If you use this repository in your research, please cite it. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{actual_experiment_03_2025,
-  title        = {ACTUAL EXPERIMENT 03  -  Tuning zeta\_gain, lr, and noise on Prime Gaps},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Vector Homeostat (Wormhole + PSON); grid tuning with reproducible artifacts}
-}
-```
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
 

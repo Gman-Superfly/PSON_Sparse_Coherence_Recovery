@@ -7,9 +7,9 @@
 
 ## Executive Summary
 
- **The test is fair and correctly validates PSON's 20/20 win rate.**
+ **The test is fair under the stated protocol and reports a 20/20 PSON result.**
 
-We verified that both PSON and the deterministic baseline operate under identical conditions with equal computational budgets. The baseline's failure to improve in 9/20 scenarios (0% acceptance rate) is not a test artifact - it's **evidence of the deterministic descent failure mode** that PSON was designed to solve.
+We verified that both PSON and the deterministic baseline operate under identical conditions with equal computational budgets. The baseline's failure to improve in 9/20 scenarios (0% acceptance rate) is not a test artifact; it is evidence of the deterministic descent failure mode in this protocol.
 
 ---
 
@@ -127,7 +127,7 @@ Both algorithms get the same number of `simulate_fn` calls. If PSON uses more ev
 #### 2. PSON's Fallback is Part of Its Design
 The fallback mechanism is not a separate advantage - it's intrinsic to how PSON works:
 ```python
-# PSON guarantees: never worse than deterministic descent
+# Down-only guard: accepted steps do not increase measured energy
 if exploratory_step improves:
     use exploratory_step  # Exploration succeeded
 else:
@@ -178,7 +178,7 @@ For baseline: `candidate = proposal`, so testing the fallback is redundant (test
 
 For PSON: `candidate = proposal + noise`, so the fallback provides a genuine alternative.
 
-The results remaining identical after the fix **validates that the original test was already fair** - the structural asymmetry had no practical effect because the baseline's candidate and fallback were identical.
+The results remaining identical after the fix support the fairness argument: the structural asymmetry had no practical effect because the baseline's candidate and fallback were identical.
 
 ---
 
@@ -205,7 +205,7 @@ type airtight_experiments_001_summary.json
 
 ## Conclusion
 
-The 20/20 win rate is valid under rigorous fairness criteria:
+The 20/20 result is valid under the stated fairness criteria:
 
 1.  **Equal budget:** Both methods use 601 evaluations
 2.  **Same initialization:** Both start at zero phases
@@ -214,25 +214,19 @@ The 20/20 win rate is valid under rigorous fairness criteria:
 
 The baseline getting stuck (0% acceptance in 9/20 scenarios) is **not a test artifact**. It's evidence that:
 
-- **Deterministic descent fails** on aliased, non-convex landscapes with irregular sampling
-- **PSON's exploration mechanism solves this** by regenerating orthogonal noise each iteration
-- **The improvement is algorithm-dependent**, not budget-dependent
+- **Deterministic descent fails** in these aliased, non-convex test cases with irregular sampling
+- **PSON's exploration mechanism avoids this failure mode in these runs** by regenerating orthogonal noise each iteration
+- **The improvement is algorithm-dependent under this protocol**, not budget-dependent
 
-This validates the paper's core claim: **PSON provides safe exploration that escapes local minima where deterministic descent gets trapped.**
+This supports the paper's scoped claim: under equal evaluation budgets and shared initialization, PSON provides guarded exploration that avoids a deterministic trap observed in these scenarios.
 
 ---
 
 ## Citation
 
-If you use this fairness validation methodology, please cite:
+If you use this fairness validation methodology, please cite the repository. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-```bibtex
-@software{goldman2025sparse_coherence,
-  title        = {Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Fair evaluation validation with equal computational budgets}
-}
-```
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
+
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 

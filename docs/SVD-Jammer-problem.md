@@ -8,7 +8,7 @@
 
 ## Problem Statement
 
-PSON-Subspace achieves excellent performance on **static** beamforming (3/3 wins on MSE), but fails completely on **moving jammer** scenarios (0/3 wins). This document analyzes the root cause and explores potential solutions.
+PSON-Subspace achieves strong performance on **static** beamforming in the recorded test (3/3 wins on MSE), but loses all **moving jammer** scenarios in the same comparison (0/3 wins). This document analyzes the root cause and explores potential solutions.
 
 ---
 
@@ -76,7 +76,7 @@ Can null jammer                  Cannot null jammer
 | PSON | 0.55 | -3 dB |
 | Full-LMS | 97 | **+21 dB** (signal wins) |
 
-PSON-Sub's MSE advantage completely vanishes when the scene changes.
+PSON-Sub's static MSE advantage does not transfer to the moving-jammer case in this test.
 
 ---
 
@@ -276,7 +276,7 @@ A solution should achieve:
 
 - Fair comparison test: `experiments/discrete_applications/pson_vs_lms_fair_comparison.py`
 - Results: `results/fair_comparison/pson_vs_lms_fair_comparison_results.json`
-- Paper section: `Sparse_Coherence_Recovery_via_PSON.md`, Appendix E.9
+- Paper section: `Sparse_Coherence_Recovery_via_PSON_V1.md`, Appendix E.9
 
 ---
 

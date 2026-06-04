@@ -1,34 +1,32 @@
 # Sparse Coherence Recovery via PSON
 
-**Empirical Validation of Precision-Scaled Orthogonal Exploration on Irregular Optical Arrays**
+**Validation of Precision-Scaled Orthogonal Exploration on Irregular Optical Arrays**
 
-[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Authors:** Oscar Goldman, Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業  
+**Authors:** Oscar Goldman
 **Date:** November 2025  
 **Status:** Working code with reproducible experiments
 
 
-## What This Repository Contains
+## What this repository contains
 
 ### Contribution
-Validation that **PSON (Precision-Scaled Orthogonal Noise)** improves optical coherence recovery on **irregular sparse arrays** where deterministic gradient descent fails:
+This repository tests **PSON (Precision-Scaled Orthogonal Noise)** on sparse optical coherence and related discrete phase-control tasks. The strongest result is the fair optical-coherence suite, where PSON improved visibility over the deterministic non-local descent baseline under the stated 601-evaluation budget:
 
-- **20/20 win rate** across 5 signal types × 2 coupling modes × 2 dependency types
-- **Fair comparison:** Equal evaluation budgets (601 simulate_fn calls each)
-- **Statistically significant:** 95% CI [+0.103, +0.185] excludes zero (n=50 runs)
-- **Identifies failure mode:** Deterministic baseline stuck (0% acceptance) in 9/20 scenarios
+- `20/20` scenarios improved across 5 signal types, 2 coupling modes, and 2 dependency types.
+- Both methods used 601 `simulate_fn` calls in the fair comparison mode.
+- The multi-seed validation reported 95% CI `[+0.103, +0.185]` for the mean gain across 50 runs.
+- In 9/20 scenarios the deterministic baseline stayed at 0% acceptance from the zero-phase initialization, work in progress...
 
 ### Results
 
 | Application | PSON Performance | Key Finding |
 |-------------|------------------|-------------|
-| **Optical coherence** | 20/20 wins (+0.03 to +0.16 visibility) | Core validation |
-| **Static beamforming** | PSON-Subspace wins 3/3 (MSE: 0.05 vs 127) | Massive advantage |
-| **Moving target tracking** | PSON wins 2/3 (67%) | Better than LMS |
+| **Optical coherence** | 20/20 scenarios improved (+0.03 to +0.16 visibility) | Tested against deterministic non-local descent with equal budgets |
+| **Static beamforming** | PSON-Subspace wins 3/3 (MSE: 0.05 vs 127) | Reported in the matched-initialization LMS comparison |
+| **Moving target tracking** | PSON wins 2/3 (67%) | Measured in the matched-initialization dynamic test |
 | **Adaptive jammer nulling** | LMS wins 3/3  | **PSON limitation identified** |
-| **Massive MIMO (1024-2048)** | PSON-Subspace wins 2/3 | Scale advantage |
+| **Massive MIMO (1024-2048)** | PSON-Subspace wins 2/3 | Benefit appears in this tested size range |
 
 ### Experimental Suite
 
@@ -54,9 +52,9 @@ See [`docs/`](docs/) for detailed READMEs per experiment.
 
 ---
 
-## The PSON Algorithm
+## The PSON algorithm
 
-**TL;DR:** Safe exploration via orthogonal noise + monotonic descent guards.
+**TL;DR:** Orthogonal noise with a down-only acceptance guard.
 
 ### Core Loop
 ```python
@@ -74,7 +72,7 @@ for iteration in range(steps):
     noise = orthogonal_noise(grad, precision) * noise_scale
     candidate = proposal + noise
     
-    # 5. Down-only acceptance (monotonic descent guarantee)
+    # 5. Down-only acceptance
     if energy(candidate) <= E_cur:
         phases = candidate  # Accept exploration
     elif energy(proposal) <= E_cur:
@@ -84,17 +82,17 @@ for iteration in range(steps):
 
 **Key properties:**
 - **Orthogonal:** `grad ⊙ noise ≈ 0` (doesn't fight descent)
-- **Precision-scaled:** Uncertain parameters explore more
-- **Monotonic:** Energy never increases
+- **Precision-scaled:** Lower-precision parameters explore more
+- **Accepted-step monotonicity:** Under the down-only guard, accepted updates do not increase the measured energy
 - **No local gradients:** Only needs global scalar feedback
 
 See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 4 for full details.
 
 ---
 
-## Paper Highlights
+## Paper highlights
 
-### Main Result: 20/20 Win Rate Under Fair Conditions
+### Main result: 20/20 improved scenarios under fair conditions
 
 | Signal | Coupling | Dependency | Baseline V | PSON V | Gain |
 |--------|----------|------------|------------|--------|------|
@@ -104,7 +102,7 @@ See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 4 for full details
 
 **Average gain:** +0.112 visibility  
 **Evaluation budget:** 601 (equal for both methods)  
-**Fair test validated:** See [`docs/airtight/Fair_Test_Validation.md`](docs/airtight/Fair_Test_Validation.md)
+**Fair test protocol:** See [`docs/airtight/Fair_Test_Validation.md`](docs/airtight/Fair_Test_Validation.md)
 
 ### The Deterministic Descent Failure Mode
 
@@ -113,27 +111,26 @@ In **9/20 scenarios**, deterministic gradient descent achieved **0% acceptance r
 1. Initial gradient points toward energy increase
 2. Deterministic step rejected → system stays at same position
 3. Next iteration: same position, same gradient, same rejected step
-4. **Permanent trap** with no escape mechanism
+4. The deterministic run repeats the same rejected proposal
 
-**PSON solves this** by regenerating orthogonal noise each iteration, providing continuous exploration even when the deterministic gradient is trapped.
+In these runs, PSON avoided this deterministic trap by regenerating orthogonal noise each iteration.
 
 See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 6.1.1 for detailed analysis.
 
-### Where PSON Excels
+### Where PSON helped in the recorded experiments
 
- **Static beamforming:** PSON-Subspace achieves MSE 0.03-0.06 vs LMS's 25-150  
- **Moving target tracking:** 67% win rate vs LMS  
- **Optical coherence:** 100% win rate vs deterministic descent  
- **Massive MIMO (1024-2048 elements):** 25-66% better MSE than LMS
+- **Static beamforming:** PSON-Subspace reported MSE 0.03-0.06 vs LMS's 25-150 in the matched-initialization test.
+- **Moving target tracking:** PSON won 2/3 seeds against LMS variants in the recorded dynamic test.
+- **Optical coherence:** PSON improved all 20 scenarios against deterministic non-local descent under the fair evaluation budget.
+- **Massive MIMO (1024-2048 elements):** PSON-Subspace reported 25-66% lower MSE than LMS in that tested range.
 
 ### Known Limitations
 
- **Adaptive jammer nulling:** LMS wins 3/3 when jammer moves  
+- **Adaptive jammer nulling:** LMS wins 3/3 when the jammer moves.
 - PSON's monotonic constraint prevents adaptation to moving adversaries
 - See [`docs/SVD-Jammer-problem.md`](docs/SVD-Jammer-problem.md) for ongoing research
- **Some Smooth Landscapes, algo is built for noisy landscapes**
-
-*Other limitation but also many wins, study main paper for full report*
+- **Clean continuous optimization:** CMA-ES achieves higher visibility than PSON in the recorded clean baseline comparison.
+- **Domain-specific algorithms:** Gerchberg-Saxton and greedy methods win on some structured optical or RIS tasks.
 
 ---
 
@@ -159,7 +156,7 @@ uv run python .\experiments\airtight_experiments_001.py --fair_evals
 type airtight_experiments_001_summary.json
 ```
 
-**Expected result:** PSON wins **20/20 scenarios** vs deterministic baseline under equal computational budgets.
+**Expected result:** The recorded run improves all 20 scenarios against the deterministic baseline under equal computational budgets.
 
 ---
 
@@ -230,7 +227,7 @@ All experiments save results to `results/` as CSV/JSON + plots.
 
 ```
 PSON_Sparse_Coherence_Recovery/
-├── Sparse_Coherence_Recovery_via_PSON.md  # Main paper (1594 lines)
+├── Sparse_Coherence_Recovery_via_PSON_V1.md  # Main paper
 ├── README.md                               # This file
 ├── LICENSE                                 # MIT License
 ├── pyproject.toml                          # Dependencies (uv)
@@ -240,7 +237,7 @@ PSON_Sparse_Coherence_Recovery/
 │   ├── homeostat_vector_test.py           # Basic PSON loop reference
 │   ├── sparse_path_integral_test.py       # Path integral approximation
 │   │
-│   ├── additional_experiments/            # Baselines, statistics, robustness
+│   ├── additional_experiments/            # Baselines, statistics, degraded observations
 │   │   ├── baseline_comparison_001.py     # vs CMA-ES/SA/Random
 │   │   ├── multi_seed_validation_001.py   # Statistical significance
 │   │   ├── partial_observability_test_001.py  # Noise/quantization
@@ -278,27 +275,10 @@ PSON_Sparse_Coherence_Recovery/
 ---
 
 ## Citation
+work in progress...
 
-If you use this repository in your research, please cite:
+**Authors:** Oscar Goldman @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{goldman2025sparse_coherence,
-  title        = {Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  url          = {https://github.com/yourusername/PSON_Sparse_Coherence_Recovery},
-  note         = {Fair evaluation validation with equal computational budgets}
-}
-
-@software{goldman2025homeostat,
-  title        = {Complexity from Constraints: The Neuro-Symbolic Homeostat},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {PSON theoretical framework and stability projectors}
-}
-```
 
 ---
 
@@ -315,30 +295,13 @@ See [paper](Sparse_Coherence_Recovery_via_PSON_V1.md) Section 10 for complete re
 
 ---
 
-## Contributing
-
-This is research code released for reproducibility. For questions or contributions:
-
-1. **Issues:** Report bugs or unclear documentation
-2. **Pull requests:** Improvements to experiments or documentation welcome
-3. **Research collaboration:** Contact via repository issues
-
----
-
 ## License
 
-MIT License - see [LICENSE](LICENSE) file.
-
+MIT License
 Copyright (c) 2025 Oscar Goldman
 
 ---
 
 ## Acknowledgments
 
-**Shogu Research Group @ Datamutant.ai** subsidiary of 温心重工業
-
-Special thanks for:
-- Fair test validation methodology
-- Deterministic descent failure mode identification
-- Open problem documentation (SVD-Jammer)
-
+Special thanks to ML twitter for being awesome.

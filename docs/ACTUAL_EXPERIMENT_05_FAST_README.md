@@ -28,7 +28,7 @@ The FAST variant:
 - Adds `--progress_every` to print periodic run progress.
 - Produces plots of Final‑V vs σ and mean energy curves across seeds for the base config.
 
-Controller (unchanged): Vector Homeostat with non‑local credit (“Wormhole”), precision‑scaled orthogonal noise (PSON), and down‑only acceptance with deterministic fallback.
+Controller (unchanged): vector optical controller with CGBC-style non‑local credit (wormhole nickname in code), precision‑scaled orthogonal noise (PSON), and down‑only acceptance with deterministic fallback.
 
 ---
 
@@ -110,7 +110,7 @@ Zx_fallback(x) ≈ (0.5/σ) · Σk sin(2π · t_x · ρk)
 This preserves the “structured roughness” we need to stress the controller (multi‑scale, correlated), without doing heavy complex ζ(σ + i t) evaluations.
 Why it exists:
 True ζ via mpmath is expensive; evaluating it at hundreds of screen points for many runs can take hours.
-The fallback keeps the experiment fast while retaining the key property we test (controller robustness on a structured, rough landscape).
+The fallback keeps the experiment fast while retaining the key property we test: controller behavior on a structured, rough objective.
 When it’s used:
 If mpmath is not installed, or you pass --no_mpmath.
 If you want true ζ everywhere:
@@ -123,17 +123,9 @@ The summary JSON includes "mpmath": true/false so you can see which path ran.
 ---
 
 ## Citation
-If you use this repository in your research, please cite it as below.
+If you use this repository in your research, please cite it. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{actual_experiment_05_fast_2025,
-  title        = {ACTUAL EXPERIMENT 05 (FAST)  -  x-Dependent ζ With Caching and Progress Logging},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Zeta-coupled x-dependent modulation with cached Zx; reproducible σ sweeps and summarized artifacts}
-}
-```
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 

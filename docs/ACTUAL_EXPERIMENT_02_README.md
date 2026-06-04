@@ -1,24 +1,24 @@
-## ACTUAL EXPERIMENT 02  -  Zeta‑Coupled Vector Homeostat (Wormhole + PSON)
+## ACTUAL EXPERIMENT 02  -  Zeta‑coupled vector controller (CGBC-style credit + PSON)
 
 ### TL;DR
 - We add a zeta‑driven phase term to the optical interference model and optimize per‑gap phases with a vector Homeostat.
-- Updates combine a non‑local Wormhole gradient (Eq. 3) and precision‑aware orthogonal exploration (PSON) with a down‑only acceptance guard.
+- Updates combine CGBC-style non‑local credit (wormhole nickname in the Homeostat code; Eq. 3) and precision‑aware orthogonal exploration (PSON) with a down‑only acceptance guard.
 - On irregular prime gaps, PSON improves final visibility over a deterministic baseline; on uniform gaps, visibility is already ~1.0.
 
 ---
 
 ## What we are doing and why
-We test whether non‑local credit assignment (Wormhole) plus safe exploration (PSON) can recover coherence in an optical proxy where irregular sampling (primes) introduces aliasing. Unlike Experiment 01 (geometric phase only), Experiment 02 injects structure from number theory by modulating phases with a zeta signal, then lets the Homeostat learn per‑gap phase corrections.
+We test whether CGBC-style non‑local credit plus PSON can improve coherence in an optical proxy where irregular sampling (primes) introduces aliasing. Unlike Experiment 01 (geometric phase only), Experiment 02 injects structure from number theory by modulating phases with a zeta signal, then lets the controller learn per‑gap phase corrections.
 
 Why this matters:
-- The zeta term creates a structured, potentially rough energy landscape (especially with prime gaps).
-- The vector Homeostat provides the mechanism to navigate that landscape and “patch” coherence, mirroring the paper’s non‑local correction story.
+- The zeta term creates a structured, potentially rough objective surface, especially with prime gaps.
+- The vector controller tests whether non-local credit and PSON improve visibility in that setting.
 
 ---
 
 ## Minimal theory
 - Energy: F = (1 − Visibility)². Minimize F → maximize interference visibility.
-- Wormhole (Eq. 3): ∂F/∂η_gate = −w · Δ_benefit. Update a gate based on downstream benefit, independent of its current value.
+- CGBC-style non-local credit (Eq. 3): ∂F/∂η_gate = −w · Δ_benefit. In this optical proxy, Δ_benefit is derived from current energy and gap weights rather than a full gate-benefit coupling.
 - PSON (Eq. 1): Inject noise in the subspace orthogonal to the gradient (with metric M = diag(Λ)), scaled by inverse precision. Accept only if F decreases.
 - Precision/weights: Derived from gap irregularity (proxy for uncertainty/importance). Irregular gaps get lower precision (more exploration) and higher wormhole weight (more credit).
 
@@ -115,18 +115,10 @@ Goal: higher V_final with fewer steps on primes by co‑tuning these three.
 ---
 
 ## Citation
-If you use this repository in your research, please cite it as below.
+If you use this repository in your research, please cite it. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{actual_experiment_02_2025,
-  title        = {ACTUAL EXPERIMENT 02  -  Zeta-Coupled Vector Homeostat (Wormhole + PSON)},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Zeta-coupled phases; precision-orthogonal exploration with down-only acceptance; reproducible results}
-}
-```
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
 

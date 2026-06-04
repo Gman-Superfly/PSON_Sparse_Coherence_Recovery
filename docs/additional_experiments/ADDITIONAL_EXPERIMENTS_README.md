@@ -6,11 +6,11 @@ This document describes the additional experiments for strengthening the paper f
 
 ---
 
-## 1. Baseline Comparison (for IEEE Signal Processing Letters)
+## 1. Baseline comparison
 
 **Script:** `experiments/additional_experiments/baseline_comparison_001.py`
 
-**Purpose:** Compare PSON against standard black-box optimization methods to demonstrate that the gains are not trivially achievable.
+**Purpose:** Compare PSON against standard black-box optimization methods and record where each method wins.
 
 ### Baselines Included
 | Method | Description |
@@ -38,12 +38,12 @@ python .\experiments\baseline_comparison_001.py --no_cma
 - `baseline_comparison_001_summary.json`  -  Summary statistics
 - `baseline_comparison_001_bar.png`  -  Bar chart comparison
 
-### Expected Outcome
-PSON should outperform Random Search and Simulated Annealing significantly, and compete favorably with CMA-ES while using fewer function evaluations.
+### What to report
+Report mean visibility, standard deviation, function evaluations, and the scenarios where PSON loses. In the recorded baseline comparison, CMA-ES reaches higher visibility on clean observations.
 
 ---
 
-## 2. Multi-Seed Validation (for NeurIPS/ICML)
+## 2. Multi-seed validation
 
 **Script:** `experiments/additional_experiments/multi_seed_validation_001.py`
 
@@ -79,14 +79,14 @@ python .\experiments\multi_seed_validation_001.py --signals "turbulence"
 | Metric | Description |
 |--------|-------------|
 | Mean Gain | Average PSON improvement over baseline |
-| Std Gain | Standard deviation (robustness indicator) |
+| Std Gain | Standard deviation across runs |
 | 95% CI | Confidence interval for mean gain |
 | Win Rate | Percentage of runs where PSON > baseline |
 
-### Expected Outcome
-- **Win rate:** Should be >95% (ideally 100%)
-- **95% CI:** Should exclude zero (statistically significant)
-- **Low variance:** Gains should be consistent across seeds
+### What to report
+- **Win rate:** Fraction of seeds where PSON improves over the deterministic baseline
+- **95% CI:** Whether the interval excludes zero
+- **Variance:** Whether gains remain consistent across seeds
 
 ---
 
@@ -94,7 +94,7 @@ python .\experiments\multi_seed_validation_001.py --signals "turbulence"
 
 **Script:** `experiments/additional_experiments/partial_observability_test_001.py`
 
-**Purpose:** Validate PSON's robustness under degraded observation conditions compared to CMA-ES.
+**Purpose:** Test PSON under degraded observation conditions compared to CMA-ES.
 
 ### Degradation Conditions Tested
 | Condition | Description |
@@ -120,8 +120,8 @@ uv run python .\experiments\additional_experiments\partial_observability_test_00
 - `partial_observability_001_summary.json`  -  Summary statistics
 - `partial_observability_001_degradation.png`  -  Comparison plot
 
-### Key Finding
-The performance gap between CMA-ES and PSON closes from **-0.41 to -0.04** as observability degrades, validating PSON's robustness.
+### Key finding
+The performance gap between CMA-ES and PSON closes from **-0.41 to -0.04** as observability degrades in the recorded run.
 
 ---
 
@@ -160,13 +160,13 @@ uv run python .\experiments\additional_experiments\extreme_partial_observability
 ### Key Findings
 | Scenario | Gap (Clean) | Gap (Extreme) | Interpretation |
 |----------|-------------|---------------|----------------|
-| Clean | -0.10 |  -  | CMA-ES dominates |
+| Clean | -0.10 |  -  | CMA-ES is stronger |
 | Binary+Adversarial |  -  | **-0.03** | Nearly tied |
 | Nightmare |  -  | **-0.04** | Gap closed 60% |
 
-- CMA-ES remains superior in most scenarios (it's a state-of-the-art optimizer)
+- CMA-ES remains stronger in most scenarios
 - Under extreme degradation, **PSON achieves up to 40% win rate**
-- PSON's value is **robustness and guarantees**, not raw performance
+- PSON's value in this test is guarded exploration under degraded feedback, not raw clean-observation performance
 
 ---
 
@@ -188,7 +188,7 @@ uv run python .\experiments\additional_experiments\baseline_comparison_001.py
 uv run python .\experiments\additional_experiments\partial_observability_test_001.py
 uv run python .\experiments\additional_experiments\extreme_partial_observability_001.py --budget 40
 
-# Key results: 95% CI, win rate, robustness under degradation
+# Key results: 95% CI, win rate, behavior under degradation
 ```
 
 ### For Demonstrating PSON's Robustness Advantage
@@ -265,13 +265,9 @@ Optional:
 
 ## Citation
 
-If you use these experiments, please cite the main paper:
+If you use these experiments, please cite the main repository. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-```bibtex
-@software{goldman2025sparse_coherence,
-  title  = {Sparse Coherence Recovery via PSON},
-  author = {Goldman, Oscar},
-  year   = {2025}
-}
-```
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
+
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 

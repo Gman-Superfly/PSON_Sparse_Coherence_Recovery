@@ -1,8 +1,8 @@
-## ACTUAL EXPERIMENT 04  -  RH Sweep: On‑line (σ=0.5) vs Off‑line (σ=0.6) with Vector Homeostat (Wormhole + PSON)
+## ACTUAL EXPERIMENT 04  -  RH sweep: on-line (σ=0.5) vs off-line (σ=0.6) with vector controller
 
 ### TL;DR
 - We evaluate sensitivity to the Riemann–Hilbert “critical line” by comparing ζ‑coupled runs at σ=0.5 (on‑line) vs σ=0.6 (off‑line).
-- Controller: Vector Homeostat with non‑local credit (“Wormhole”) and precision‑scaled orthogonal exploration (PSON), down‑only acceptance.
+- Controller: vector optical controller with CGBC-style non‑local credit (wormhole nickname in code) and precision‑scaled orthogonal exploration (PSON), down‑only acceptance.
 - Robustness: 3 seeds and small parameter perturbations around the tuned config from Exp 03.
 - Findings: Final visibility improves monotonically with higher zeta_gain; σ effects are mild in 0.50–0.60. At strong ζ gain, the controller largely compensates σ variation.
 - Artifacts: CSV of all runs, JSON summary, bar plot of mean final visibility per σ, and mean energy curves across seeds.
@@ -10,7 +10,7 @@
 ---
 
 ## What and why
-Experiment 03 tuned the ζ‑coupled controller and identified regimes where PSON materially improves final visibility on the “prime gaps” landscape. In Exp 04 we ask a focused question:
+Experiment 03 tuned the ζ‑coupled controller and identified settings where PSON improves final visibility on the prime-gap objective. In Exp 04 we ask a focused question:
 
 > Does operating “on‑line” (σ=0.5) vs “off‑line” (σ=0.6) change outcomes under the same controller?
 
@@ -39,7 +39,7 @@ If `mpmath` is available, we compute true ζ; otherwise we use a ζ‑like sinus
 ```
 
 ### Controller (vector Homeostat)
-- Non‑local credit (“Wormhole”): `grad_i = −w * benefit * weight_i`, where `benefit = current_energy` and `weight_i` derives from gap irregularity.
+- CGBC-style non‑local credit: `grad_i = −w * benefit * weight_i`, where `benefit = current_energy` and `weight_i` derives from gap irregularity.
 - Exploration (PSON): metric‑orthogonal noise scaled by inverse precision, added to the deterministic proposal.
 - Acceptance: down‑only; if noisy candidate is rejected but deterministic proposal improves energy, accept the deterministic step; else reject.
 
@@ -99,17 +99,9 @@ Interpretation: Within σ ∈ [0.5, 0.6] under the tuned controller, σ sensitiv
 ---
 
 ## Citation
-If you use this repository in your research, please cite it as below.
+If you use this repository in your research, please cite it. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{actual_experiment_04_2025,
-  title        = {ACTUAL EXPERIMENT 04  -  RH Sweep: On-line (σ=0.5) vs Off-line (σ=0.6) with Vector Homeostat (Wormhole + PSON)},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Zeta-coupled per-gap phases; robustness across seeds and perturbations; σ sensitivity}
-}
-```
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 

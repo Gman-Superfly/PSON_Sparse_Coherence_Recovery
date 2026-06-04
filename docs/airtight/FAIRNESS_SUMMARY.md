@@ -15,7 +15,7 @@
 3. **Documented the deterministic descent failure mode**
    - Added section 6.1.1 to paper explaining why baseline gets stuck
    - Identified 9/20 scenarios where baseline achieves 0% acceptance
-   - Explained why PSON's continuous exploration solves this
+   - Explained how PSON's repeated orthogonal exploration avoids this failure mode in the recorded runs
 
 ## Key Results
 
@@ -25,17 +25,17 @@
 - Same scenarios: identical signals/couplings
 - Same structure: candidate + fallback
 
- **Baseline failure mode validated**
+ **Baseline failure mode documented**
 - 9/20 scenarios: 0% acceptance (stuck at initialization)
 - Deterministic gradient points toward energy increase
 - No exploration mechanism → permanent trap
-- PSON escapes via orthogonal noise regeneration
+- PSON escapes in the recorded runs via orthogonal noise regeneration
 
 ## Files Modified
 
 - `experiments/airtight_experiments_001.py`: Added fair evaluation mode
-- `Sparse_Coherence_Recovery_via_PSON.md`: Added section 6.1.1 explaining failure mode
-- `docs/Fair_Test_Validation.md`: Complete fairness analysis document
+- `Sparse_Coherence_Recovery_via_PSON_V1.md`: Added section 6.1.1 explaining failure mode
+- `docs/airtight/Fair_Test_Validation.md`: Complete fairness analysis document
 
 ## Run Fair Test
 
@@ -45,5 +45,5 @@ uv run python .\experiments\airtight_experiments_001.py --fair_evals
 
 ## Conclusion
 
-The test is fair. The 20/20 win rate is valid. The baseline getting stuck is not a bug - it's validation that PSON solves the exploration problem that pure deterministic descent cannot.
+Under the stated protocol, the test uses equal evaluation budgets, shared initialization, and identical scenarios. The 20/20 result is valid for that protocol. The baseline getting stuck is not a bug; it documents a failure mode of this deterministic baseline under the zero-phase initialization.
 

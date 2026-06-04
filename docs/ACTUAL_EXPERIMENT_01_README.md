@@ -1,27 +1,27 @@
-## ACTUAL EXPERIMENT 01  -  Homeostat Wormhole + PSON on Optical Interference
+## ACTUAL EXPERIMENT 01  -  CGBC-style non-local credit + PSON on optical interference
 
 ### TL;DR
-- We implement a dynamic “Homeostat” that optimizes interference visibility in a double‑slit proxy by adjusting phase “gates.”
-- The update law follows the Wormhole gradient from the Homeostat paper (non‑local credit; Eq. 3), plus precision‑aware exploration (PSON) projected orthogonal to the gradient.
+- We implement a vector optical controller that optimizes interference visibility in a double‑slit proxy by adjusting per-gap phases.
+- The update law uses CGBC-style non-local credit (wormhole nickname in the Homeostat code; Eq. 3), plus precision‑aware exploration (PSON) projected orthogonal to the gradient-like signal.
 - In 1D (single global phase), true PSON is not meaningful; we therefore moved to a vector model (one phase per gap) where PSON is valid.
 - Results: On irregular prime gaps, PSON improves final visibility over a deterministic baseline; on uniform gaps, both converge to ~1.0 as expected.
 
 ---
 
 ## Why we’re doing this
-Our broader program explores how “breaks” in a finite‑compute causal lattice (e.g., irregular prime sampling) can be “patched” by non‑local mechanisms (“wormholes”). The Neuro‑Symbolic Homeostat provides a grounded control‑theory mechanism for such non‑local credit assignment while maintaining stability and monotone energy descent.
+This experiment tests whether non-local credit and PSON can improve visibility when irregular prime sampling reduces coherence in a compact optical proxy. The Neuro‑Symbolic Homeostat provides the reference mechanism for counterfactual gate-benefit coupling (CGBC); this optical experiment uses a simplified CGBC-style pseudo-gradient.
 
 This experiment brings that theory into a concrete, reproducible optical proxy:
 - Aliasing mechanism: irregular prime gaps fold phase contributions and reduce fringe visibility.
-- Non‑local patch: a Homeostat adjusts phase “gates” using a gradient independent of the current gate value (Wormhole, Eq. 3) and explores safely with precision‑scaled orthogonal noise (PSON).
+- Non‑local credit: the controller adjusts per-gap phases using a benefit-weighted pseudo-gradient inspired by CGBC Eq. 3 and explores with precision‑scaled orthogonal noise (PSON).
 - Stability: down‑only acceptance (monotone energy), precision‑aware steps.
 
 ---
 
 ## Theory primer (minimal)
 - Energy: We minimize F = (1 − Visibility)^2. Higher visibility ⇒ lower energy.
-- Wormhole (Eq. 3): ∂F/∂η_gate = −w · Δ_benefit. The gradient on a gate is driven by downstream benefit (non‑local), independent of the current η_gate.
-- PSON (Eq. 1): Inject exploration noise δ in the subspace orthogonal to the gradient (with respect to a metric M), scaled by inverse precision. This preserves monotone descent under a down‑only acceptance rule or sufficiently small steps.
+- CGBC-style non-local credit (Eq. 3): ∂F/∂η_gate = −w · Δ_benefit. In this optical proxy, we set Δ_benefit from current energy and gap-derived weights rather than implementing the full gate-benefit coupling.
+- PSON (Eq. 1): Inject exploration noise δ in the subspace orthogonal to the gradient-like signal (with respect to a metric M), scaled by inverse precision. The down‑only acceptance rule prevents accepted energy increases for the measured objective.
 - Small‑gain/monotonicity: We accept a candidate step only if energy decreases; otherwise we back off to a deterministic proposal or reject.
 
 Implication for 1D: In one dimension there is no non‑trivial subspace orthogonal to the gradient; true PSON is therefore degenerate. This motivates a multi‑parameter phase vector.
@@ -41,7 +41,7 @@ Implication for 1D: In one dimension there is no non‑trivial subspace orthogon
 
 ### Objective and updates
 - Energy: F = (1 − V)^2.
-- Wormhole gradient (vector): g_i = −w · Δ_benefit_i. We set Δ_benefit_i ∝ weights_i · current_energy, where weights are derived from gap irregularity (larger weight for more irregular contributors).
+- CGBC-style pseudo-gradient (vector): g_i = −w · Δ_benefit_i. We set Δ_benefit_i ∝ weights_i · current_energy, where weights are derived from gap irregularity (larger weight for more irregular contributors).
 - Precision Λ (diagonal): derived from gap irregularity; stiffer for regular gaps, slacker for irregular ones. Updates scale with Λ.
 - PSON: draw z ~ N(0, I), project metric‑orthogonal to g (metric M = diag(Λ)), then scale by 1/√Λ and a global noise factor. Candidate accepted only if energy decreases; otherwise try deterministic proposal; otherwise reject.
 
@@ -83,17 +83,17 @@ Dependencies: Python 3.12+, NumPy, Matplotlib, SciPy (see repository for setup).
 | Primes   | 0.39746            | 0.53904        | 176            | 186         | 1.00             | 0.678         |
 
 Notes:
-- Uniform gaps: both methods converge to near‑perfect visibility (as expected in a smooth landscape). PSON neither helps nor hurts final V here.
+- Uniform gaps: both methods converge to near‑perfect visibility in this smooth control case. PSON neither helps nor hurts final V here.
 - Prime gaps (irregular): PSON improves final visibility (0.54 vs 0.40), at a modest cost in ΔF90 (slower to 90% of total drop due to exploratory rejections), with a healthy acceptance rate.
 
 Interpretation:
-- In a rough, irregular landscape, orthogonal exploration helps avoid poor basins and ends at a lower energy (higher coherence). This supports the core claim that non‑local corrections plus safe exploration can “patch” aliasing‑induced breaks more effectively than a purely deterministic descent.
+- In this rough, irregular test case, orthogonal exploration helps avoid poor basins and ends at a lower energy (higher coherence). This supports the scoped claim that non-local credit plus guarded exploration can outperform the deterministic baseline in this proxy.
 
 ---
 
 ## What this establishes (and what it doesn’t)
 Established:
-- A faithful implementation of the Homeostat principles in a compact optical proxy: wormhole gradient, precision‑aware orthogonal exploration (PSON), and monotone acceptance.
+- A compact optical proxy for Homeostat-inspired mechanisms: CGBC-style non-local credit, precision‑aware orthogonal exploration (PSON), and down-only acceptance.
 - Clear behavioral difference between smooth (uniform) and rough (primes) regimes, with PSON providing measurable benefit in the latter.
 
 Not yet established:
@@ -104,7 +104,7 @@ Not yet established:
 
 ## Limitations & safeguards
 - 1D PSON is degenerate; use vector phases to enable true orthogonal exploration.
-- Acceptance guard is essential for monotonicity; we also provide deterministic fallback when PSON proposals are rejected.
+- The acceptance guard is what enforces accepted-step monotonicity; we also provide deterministic fallback when PSON proposals are rejected.
 - Precision/weights from gap irregularity are proxies; richer precision models (e.g., curvature estimates, per‑layer SNR) may improve performance.
 
 ---
@@ -112,7 +112,7 @@ Not yet established:
 ## Next steps
 1) Zeta‑coupled optics: modulate phase by Re(ζ(½ + i t)) as documented in the main writeups; ablate geometric vs zeta‑coupled runs.
 2) Parameterization study: compare per‑gap vs per‑layer phases (expressivity vs overfit) with the same PSON/guard machinery.
-3) Statistical robustness: bootstrap confidence intervals for V_final and ΔV across seeds; add effect sizes.
+3) Multi-seed stability: bootstrap confidence intervals for V_final and ΔV across seeds; add effect sizes.
 4) Tuning sweeps: grid over {lr, noise, w}; target ΔF90 improvements without sacrificing V_final under primes.
 
 ---
@@ -126,19 +126,11 @@ Not yet established:
 ---
 
 ## Citation
-If you use this repository in your research, please cite it as below.
+If you use this repository in your research, please cite it. This is ongoing work; we would like to know your opinions and experiments. Thank you.
 
-**Authors:** Oscar Goldman  -  Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業
+**Authors:** Oscar Goldman - Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
-```bibtex
-@software{homeostat_actual_experiment_01_2025,
-  title        = {ACTUAL EXPERIMENT 01  -  Homeostat Wormhole + PSON on Optical Interference},
-  author       = {Goldman, Oscar},
-  organization = {Shogu Research Group @ Datamutant.ai subsidiary of 温心重工業},
-  year         = {2025},
-  note         = {Vector homeostat with PSON and monotone acceptance; reproducible ablation}
-}
-```
+**Reference (author-year format):** Goldman, O. (2025). *Sparse Coherence Recovery via PSON: Empirical Validation on Irregular Optical Arrays*. Software repository. Shogu Research Group @ Datamutant.ai, subsidiary of 温心重工業.
 
 ---
 

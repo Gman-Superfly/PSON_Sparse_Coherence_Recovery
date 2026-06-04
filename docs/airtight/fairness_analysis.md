@@ -57,7 +57,7 @@ This is exactly what our baseline implements. **No stochasticity, no exploration
 
 ### 2. The comparison is: Exploration vs No Exploration
 
-The test validates whether **adding PSON exploration** helps when deterministic descent gets stuck. The answer is: yes, in 20/20 scenarios.
+The test checks whether **adding PSON exploration** helps when deterministic descent gets stuck. In this protocol, the answer is yes in 20/20 scenarios.
 
 ### 3. Both methods have the same budget to find a solution
 
@@ -160,13 +160,13 @@ rng = np.random.default_rng(12345)  # All runs share same signals
 
 The 20/20 win rate demonstrates that PSON's orthogonal exploration + deterministic fallback is effective at escaping local minima that trap pure deterministic descent, even when both methods have the same computational budget.
 
-The baseline getting stuck (0% acceptance) in 9/20 scenarios is **not a bug** - it's evidence that deterministic descent fails on these landscapes, which is exactly what PSON is designed to solve.
+The baseline getting stuck (0% acceptance) in 9/20 scenarios is **not a bug**. It documents a deterministic descent failure mode for these scenarios and this initialization.
 
 ---
 
 ## Recommendation
 
-The current implementation is correct. The paper's claim is validated:
+The current implementation supports the paper's scoped claim:
 
 > "PSON achieves **100% win rate** over deterministic baselines"
 

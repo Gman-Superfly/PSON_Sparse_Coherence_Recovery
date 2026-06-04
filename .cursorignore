@@ -1,6 +1,7 @@
 cosmic peanut microsoft version format.pdf
 cosmic peanuts.pdf
 
-deprecated/
-poetic_interpretations_needs_cleanup/
+/deprecated
 /poetic_interpretations_needs_cleanup
+.venv
+
